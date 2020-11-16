@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val newsListData: Array<NewsListData> = arrayOf<NewsListData>(
             NewsListData(
-                "The Institute Guide to Coordinatio",
+                "The Institute Guide to Coordination",
                 "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
             ),
             NewsListData(
