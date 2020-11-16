@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f3f4fa"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/htiLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="12sp"
+        app:srcCompat="@drawable/htilogo" />
+
+    <carbon.widget.Button
+        android:id="@+id/buLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0d2b4f"
+        android:text="Log Out"
+        android:textColor="#ffff"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        app:carbon_cornerRadius="20dp"
+        app:carbon_elevation="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="18sp"
+        app:layout_constraintStart_toEndOf="@id/htiLogo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
+            android:id="@+id/rvNews"
+            android:background="#f3f4fa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/htiLogo"
+            app:layout_constraintBottom_toBottomOf="parent">
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

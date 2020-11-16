@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f3f4fa"
+    tools:context=".LoginScreen">
+
+    <TextView
+        android:id="@+id/tvHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Help"
+        android:textStyle="bold"
+        android:textColor="#0e1010"
+        android:textSize="15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_margin="8dp"
+        android:id="@+id/tabs"
+        app:tabTextColor="#000"
+        app:tabSelectedTextColor="#000"
+        app:tabIndicatorColor="#00000000"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        tools:background="#0000"
+        app:tabTextAppearance="@style/MineCustomTabText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/htiLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toTopOf="@id/tvID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabs"
+        android:layout_marginTop="12sp"
+        app:srcCompat="@drawable/htilogo" />
+
+    <TextView
+        android:id="@+id/tvID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student ID"
+        android:textColor="#0e1010"
+        android:textSize="15dp"
+        android:layout_marginStart="12dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/etID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/htiLogo"
+    />
+
+    <EditText
+        android:id="@+id/etID"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundedcorner"
+        android:ems="10"
+        android:padding="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="12dp"
+        android:hint="Example: 42017047"
+        android:inputType="textPersonName"
+        android:textColor="#0d2b4f"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@id/tvPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvID"
+        />
+
+    <TextView
+        android:id="@+id/tvPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textColor="#0e1010"
+        android:textSize="15dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/etPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etID"
+        />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundedcorner"
+        android:ems="10"
+        android:padding="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="12dp"
+        android:hint="Password"
+        android:inputType="textPersonName"
+        android:textColor="#0d2b4f"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@id/switch1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPassword"
+        />
+
+    <carbon.widget.Button
+        android:id="@+id/buLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#0d2b4f"
+        android:text="Login"
+        android:textColor="#ffff"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        app:carbon_cornerRadius="25dp"
+        app:carbon_elevation="8dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12.5sp"
+        app:layout_constraintBottom_toTopOf="@id/tvForgot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch1"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvForgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot Your Password?"
+        android:textColor="#0e1010"
+        android:textSize="15dp"
+        android:layout_marginTop="27sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <com.scorpion_a.htigp.utils.TypeWriter
+        android:id="@+id/tvHTI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#0d2b4f"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_marginTop="9sp"
+        app:layout_constraintTop_toBottomOf="@id/tvForgot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <CheckBox
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remember Me"
+        android:theme="@style/SCBSwitch"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="12.5sp"
+        app:layout_constraintBottom_toTopOf="@id/buLogin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPassword"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
