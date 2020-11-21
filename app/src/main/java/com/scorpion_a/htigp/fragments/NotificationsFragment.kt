@@ -1,14 +1,29 @@
-package com.scorpion_a.htigp
+package com.scorpion_a.htigp.fragments
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.scorpion_a.htigp.adapters.NotificationListAdapter
+import com.scorpion_a.htigp.model.NotificationListData
+import com.scorpion_a.htigp.R
+import kotlinx.android.synthetic.main.fragment_notification.view.*
 
-class NotificationActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notification)
+class NotificationsFragment  : Fragment() {
+    lateinit var  recyclerView: RecyclerView
+    lateinit var toolbar: Toolbar
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view=inflater.inflate(R.layout.fragment_notification, container, false)
+        toolbar=view.header.findViewById(R.id.toolbar)
+        toolbar.title="Notifications"
 
         val notificationListData: Array<NotificationListData> = arrayOf<NotificationListData>(
             NotificationListData(
@@ -53,11 +68,16 @@ class NotificationActivity : AppCompatActivity() {
             )
         )
 
-        val recyclerView: RecyclerView = findViewById(R.id.rvNotification)
-        val adapter = NotificationListAdapter(notificationListData)
+        recyclerView = view.findViewById(R.id.rvNotification)
+        val adapter = NotificationListAdapter(
+            notificationListData
+        )
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.adapter = adapter
-
+        return  view
+    }
+    companion object {
+        fun newInstance(): NotificationsFragment = NotificationsFragment()
     }
 }

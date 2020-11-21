@@ -1,4 +1,4 @@
-package com.scorpion_a.htigp;
+package com.scorpion_a.htigp.model;
 
 public class NotificationListData {
     private String notificationTitle;

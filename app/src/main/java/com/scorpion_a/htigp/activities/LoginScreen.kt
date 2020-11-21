@@ -1,4 +1,4 @@
-package com.scorpion_a.htigp
+package com.scorpion_a.htigp.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
 import com.google.android.material.tabs.TabLayout
+import com.scorpion_a.htigp.R
 import kotlinx.android.synthetic.main.activity_login_screen.*
 
 
@@ -17,7 +18,7 @@ class LoginScreen : AppCompatActivity() {
         setContentView(R.layout.activity_login_screen)
 
         buLogin.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -25,16 +26,25 @@ class LoginScreen : AppCompatActivity() {
         tabLayout = findViewById(R.id.tabs)
         tabLayout!!.addTab(tabLayout!!.newTab().setText("English"))
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Arabic"))
-        setTabBG(R.drawable.tab_left_select, R.drawable.tab_right_unselect)
+        setTabBG(
+            R.drawable.tab_left_select,
+            R.drawable.tab_right_unselect
+        )
         tabLayout!!.addOnTabSelectedListener(object:TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab:TabLayout.Tab) {
                 if (tabLayout!!.getSelectedTabPosition() === 0)
                 {
-                    setTabBG(R.drawable.tab_left_select, R.drawable.tab_right_unselect)
+                    setTabBG(
+                        R.drawable.tab_left_select,
+                        R.drawable.tab_right_unselect
+                    )
                 }
                 else
                 {
-                    setTabBG(R.drawable.tab_left_unselect, R.drawable.tab_right_select)
+                    setTabBG(
+                        R.drawable.tab_left_unselect,
+                        R.drawable.tab_right_select
+                    )
                 }
             }
 

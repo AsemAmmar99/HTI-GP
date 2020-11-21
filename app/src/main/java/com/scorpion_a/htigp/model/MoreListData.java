@@ -1,4 +1,4 @@
-package com.scorpion_a.htigp;
+package com.scorpion_a.htigp.model;
 
 public class MoreListData {
     private String moreItemTitle;

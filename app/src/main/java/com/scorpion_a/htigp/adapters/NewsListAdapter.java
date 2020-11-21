@@ -1,12 +1,14 @@
-package com.scorpion_a.htigp;
+package com.scorpion_a.htigp.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.scorpion_a.htigp.model.NewsListData;
+import com.scorpion_a.htigp.R;
 
 public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
     private NewsListData[] newsdata;

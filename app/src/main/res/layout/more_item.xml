@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="More Item"
         android:textSize="18dp"
-        android:textColor="#0e1010"
+        android:textColor="@color/light_black"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +21,7 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="0.5dp"
-        android:background="#0d2b4f"
+        android:background="@color/dark_blue"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

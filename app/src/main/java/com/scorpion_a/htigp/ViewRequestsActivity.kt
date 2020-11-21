@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.scorpion_a.htigp.adapters.ViewRequestsListAdapter
+import com.scorpion_a.htigp.model.ViewRequestsListData
 
 class ViewRequestsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +28,9 @@ class ViewRequestsActivity : AppCompatActivity() {
         )
 
         val recyclerView: RecyclerView = findViewById(R.id.rvViewRequests)
-        val adapter = ViewRequestsListAdapter(viewRequestsListData)
+        val adapter = ViewRequestsListAdapter(
+            viewRequestsListData
+        )
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter

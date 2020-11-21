@@ -1,4 +1,4 @@
-package com.scorpion_a.htigp;
+package com.scorpion_a.htigp.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.scorpion_a.htigp.R;
+import com.scorpion_a.htigp.model.RequestListData;
 
 public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.ViewHolder> {
     private RequestListData[] requestdata;

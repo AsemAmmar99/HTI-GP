@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#ffff"
-    tools:context=".SplashActivity">
+    android:background="@color/white"
+    tools:context=".activities.SplashActivity">
 
     <ImageView
         android:src="@drawable/htilogo"

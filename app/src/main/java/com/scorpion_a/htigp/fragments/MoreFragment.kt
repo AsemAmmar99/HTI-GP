@@ -1,15 +1,26 @@
-package com.scorpion_a.htigp
+package com.scorpion_a.htigp.fragments
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.scorpion_a.htigp.adapters.MoreListAdapter
+import com.scorpion_a.htigp.model.MoreListData
+import com.scorpion_a.htigp.R
 
-class MoreActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_more)
+class MoreFragment  : Fragment() {
 
+    lateinit var recyclerView: RecyclerView
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view= inflater.inflate(R.layout.fragment_more, container, false)
         val moreListData: Array<MoreListData> = arrayOf<MoreListData>(
             MoreListData(
                 "Profile Page"
@@ -40,11 +51,14 @@ class MoreActivity : AppCompatActivity() {
             ),
         )
 
-        val recyclerView: RecyclerView = findViewById(R.id.rvMore)
+        recyclerView = view.findViewById(R.id.rvMore)
         val adapter = MoreListAdapter(moreListData)
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.adapter = adapter
-
+        return view
+    }
+    companion object {
+        fun newInstance(): MoreFragment = MoreFragment()
     }
 }

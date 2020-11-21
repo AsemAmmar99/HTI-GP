@@ -1,25 +1,36 @@
-package com.scorpion_a.htigp
+package com.scorpion_a.htigp.fragments
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.app.ActivityCompat.finishAffinity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_login_screen.*
-import kotlinx.android.synthetic.main.activity_main.*
+import carbon.widget.Button
+import com.scorpion_a.htigp.adapters.NewsListAdapter
+import com.scorpion_a.htigp.model.NewsListData
+import com.scorpion_a.htigp.R
+import com.scorpion_a.htigp.activities.LoginScreen
 
-
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+class HomeFragment : Fragment() {
+    lateinit var buLogout:Button
+    lateinit var recyclerView: RecyclerView
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+     val view=   inflater.inflate(R.layout.fragment_home, container, false)
+        buLogout = view.findViewById(R.id.buLogout)
         buLogout.setOnClickListener {
-            val intent = Intent(this, LoginScreen::class.java)
+            val intent = Intent(view.context, LoginScreen::class.java)
             startActivity(intent)
-            finishAffinity()
+            finishAffinity(view.context as Activity)
         }
-
         val newsListData: Array<NewsListData> = arrayOf<NewsListData>(
             NewsListData(
                 "The Institute Guide to Coordination",
@@ -59,11 +70,16 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        val recyclerView: RecyclerView = findViewById(R.id.rvNews)
+        recyclerView = view.findViewById(R.id.rvNews)
         val adapter = NewsListAdapter(newsListData)
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.adapter = adapter
 
+        return view
     }
+    companion object {
+        fun newInstance(): HomeFragment = HomeFragment()
+    }
+
 }
