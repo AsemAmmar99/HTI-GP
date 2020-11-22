@@ -21,7 +21,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:itemBackground="@color/light_grey"
+        app:itemBackground="@color/light_blue"
         app:itemIconTint="@color/light_black"
         app:itemTextColor="@color/light_black"
         app:menu="@menu/navigation"/>

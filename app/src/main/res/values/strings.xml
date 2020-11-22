@@ -4,4 +4,12 @@
     <string name="notifications">Notifications</string>
     <string name="requests">Requests</string>
     <string name="more">More</string>
+    <string name="edit">Edit</string>
+    <string name="gpa">GPA</string>
+    <string name="units">Units</string>
+    <string name="year">Year</string>
+    <string name="id">ID:</string>
+    <string name="email">Email:</string>
+    <string name="graduated">Graduated:</string>
+    <string name="mobile">Mobile:</string>
 </resources>
