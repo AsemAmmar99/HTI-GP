@@ -12,4 +12,11 @@
     <string name="email">Email:</string>
     <string name="graduated">Graduated:</string>
     <string name="mobile">Mobile:</string>
+    <string name="change_picture">Change Picture</string>
+    <string name="arabic_name">Arabic Name</string>
+    <string name="english_name">English Name</string>
+    <string name="arabic_name_hint">Arabic Name</string>
+    <string name="english_name_hint">English Name</string>
+    <string name="email_hint">Email</string>
+    <string name="mobile_hint">Mobile</string>
 </resources>

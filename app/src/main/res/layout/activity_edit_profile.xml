@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_blue"
+    tools:context=".activities.EditProfileActivity">
+    <include
+        android:id="@+id/header"
+        layout="@layout/main_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/ivProfilePic"
+        android:src="@drawable/avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvChangePic"
+        android:text="@string/change_picture"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivProfilePic"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvArabName"
+        android:text="@string/arabic_name"
+        android:textSize="16dp"
+        android:textColor="@color/light_black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvChangePic"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"/>
+
+    <EditText
+        android:id="@+id/etArabName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundedcorner"
+        android:ems="10"
+        android:padding="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="16dp"
+        android:inputType="textPersonName"
+        android:textColor="@color/dark_blue"
+        android:textSize="12dp"
+        android:text="عاصم السيد عبد الحميد عمار"
+        android:hint="@string/arabic_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvArabName"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvEnglishName"
+        android:text="@string/english_name"
+        android:textSize="16dp"
+        android:textColor="@color/light_black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etArabName"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"/>
+
+    <EditText
+        android:id="@+id/etEnglishName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundedcorner"
+        android:ems="10"
+        android:padding="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="16dp"
+        android:inputType="textPersonName"
+        android:textColor="@color/dark_blue"
+        android:textSize="12dp"
+        android:text="Asem El-Sayed Abdel-Hamid Ammar"
+        android:hint="@string/english_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEnglishName"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvEmail"
+        android:text="Email"
+        android:textSize="16dp"
+        android:textColor="@color/light_black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEnglishName"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"/>
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundedcorner"
+        android:ems="10"
+        android:padding="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="16dp"
+        android:inputType="textPersonName"
+        android:textColor="@color/dark_blue"
+        android:textSize="12dp"
+        android:text="42017047@hti.edu.eg"
+        android:hint="@string/email_hint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEmail"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvMobile"
+        android:text="Mobile"
+        android:textSize="16dp"
+        android:textColor="@color/light_black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEmail"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"/>
+
+    <EditText
+        android:id="@+id/etMobile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundedcorner"
+        android:ems="10"
+        android:padding="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="16dp"
+        android:inputType="phone"
+        android:textColor="@color/dark_blue"
+        android:textSize="12dp"
+        android:text="01117716297"
+        android:hint="@string/mobile_hint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvMobile"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <carbon.widget.Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buSave"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
+        android:text="Save"
+        android:textStyle="bold"
+        android:background="@color/dark_blue"
+        android:textColor="@color/white"
+        app:carbon_cornerRadius="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etMobile" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
