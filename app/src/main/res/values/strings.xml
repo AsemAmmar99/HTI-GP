@@ -19,4 +19,10 @@
     <string name="english_name_hint">English Name</string>
     <string name="email_hint">Email</string>
     <string name="mobile_hint">Mobile</string>
+    <string name="retype_your_new_password">Retype Your New Password</string>
+    <string name="type_your_new_password">Type Your New Password</string>
+    <string name="type_your_current_password">Type Your Current Password</string>
+    <string name="confirm_your_new_password">Confirm Your New Password</string>
+    <string name="your_new_password">Your New Password</string>
+    <string name="your_current_password">Your Current Password</string>
 </resources>
