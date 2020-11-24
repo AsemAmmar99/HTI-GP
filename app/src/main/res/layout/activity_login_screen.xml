@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_grey"
+    android:background="@color/light_blue"
     tools:context=".activities.LoginScreen">
 
     <TextView
@@ -104,7 +104,7 @@
         android:layout_marginStart="13dp"
         android:layout_marginEnd="12dp"
         android:hint="Password"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:textColor="@color/dark_blue"
         android:textSize="12dp"
         app:layout_constraintBottom_toTopOf="@id/switch1"

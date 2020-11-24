@@ -1,21 +1,27 @@
 package com.scorpion_a.htigp.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.scorpion_a.htigp.activities.ProfilePageActivity;
 import com.scorpion_a.htigp.model.MoreListData;
 import com.scorpion_a.htigp.R;
 
 public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHolder> {
     private MoreListData[] moredata;
+    private Context context;
 
     // RecyclerView recyclerView;
-    public MoreListAdapter(MoreListData[] moredata) {
+    public MoreListAdapter(MoreListData[] moredata,Context context) {
         this.moredata = moredata;
+        this.context=context;
     }
 
     @Override
@@ -30,6 +36,18 @@ public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         final MoreListData moreListData = moredata[position];
         holder.tvMore.setText(moredata[position].getmoreItemTitle());
+        holder.clMoreItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (position)
+                {
+                    case 0:
+                        context.startActivity(new Intent(context, ProfilePageActivity.class));
+
+
+                }
+            }
+        });
     }
 
 
@@ -40,11 +58,14 @@ public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvMore;
+        public ConstraintLayout clMoreItem;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.tvMore = itemView.findViewById(R.id.tvMore);
+            this.clMoreItem = itemView.findViewById(R.id.clMoreItem);
+
         }
     }
 }

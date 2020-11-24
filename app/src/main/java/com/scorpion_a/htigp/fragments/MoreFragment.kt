@@ -57,7 +57,7 @@ class MoreFragment  : Fragment() {
         )
 
         recyclerView = view.findViewById(R.id.rvMore)
-        val adapter = MoreListAdapter(moreListData)
+        val adapter = MoreListAdapter(moreListData,view.context)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.adapter = adapter
