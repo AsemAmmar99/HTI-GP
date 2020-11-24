@@ -8,7 +8,7 @@
     </style>
 
     <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
     <style name="SCBSwitch" parent="Theme.AppCompat.Light">

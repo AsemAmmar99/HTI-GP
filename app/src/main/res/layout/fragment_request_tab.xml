@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_grey"
-    tools:context=".RequestActivity">
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical"
+        android:layout_marginTop="25dp"
         android:id="@+id/rvRequest"
         android:background="@color/light_grey"
         app:layout_constraintStart_toStartOf="parent"

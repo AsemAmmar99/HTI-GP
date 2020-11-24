@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/notifications_tab"
-        android:icon="@drawable/notifi_icon"
+        android:icon="@drawable/bell_icon"
         android:title="@string/notifications"/>
 
     <item

@@ -9,6 +9,7 @@ import com.scorpion_a.htigp.R
 import com.scorpion_a.htigp.fragments.HomeFragment
 import com.scorpion_a.htigp.fragments.MoreFragment
 import com.scorpion_a.htigp.fragments.NotificationsFragment
+import com.scorpion_a.htigp.fragments.RequestsFragment
 
 class HomeActivity : AppCompatActivity() {
      lateinit var  bottomNavigation: BottomNavigationView
@@ -36,6 +37,8 @@ class HomeActivity : AppCompatActivity() {
             }
             R.id.requests_tab -> {
 
+                val requestsFragment = RequestsFragment.newInstance()
+                openFragment(requestsFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.more_tab -> {
@@ -48,8 +51,14 @@ class HomeActivity : AppCompatActivity() {
     }
     private fun openFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
+        supportFragmentManager.popBackStack()
         transaction.replace(R.id.container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
     }
 }

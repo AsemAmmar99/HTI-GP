@@ -10,8 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".activities.HomeActivity"/>
-        <activity android:name=".ViewRequestsActivity" />
-        <activity android:name=".RequestActivity" />
+
         <activity android:name=".activities.LoginScreen" />
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
