@@ -134,4 +134,29 @@
             android:layout_marginEnd="30dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/light_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clYear"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:id="@+id/rvPropCardItems"
+            android:nestedScrollingEnabled="false"
+            android:background="@color/light_blue"
+            >
+        </androidx.recyclerview.widget.RecyclerView>
+    </HorizontalScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

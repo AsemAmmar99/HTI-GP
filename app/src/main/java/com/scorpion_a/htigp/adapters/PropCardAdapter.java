@@ -5,23 +5,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.scorpion_a.htigp.R;
+import com.scorpion_a.htigp.model.PropCardData;
 import com.scorpion_a.htigp.model.RegCardData;
 
-public class RegCardAdapter extends RecyclerView.Adapter<RegCardAdapter.ViewHolder> {
-    private RegCardData[] regdata;
+public class PropCardAdapter extends RecyclerView.Adapter<PropCardAdapter.ViewHolder> {
+    private PropCardData[] propdata;
 
     // RecyclerView recyclerView;
-    public RegCardAdapter(RegCardData[] regdata) {
-        this.regdata = regdata;
+    public PropCardAdapter(PropCardData[] propdata) {
+        this.propdata = propdata;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View regCardItem = layoutInflater.inflate(R.layout.reg_card_titles_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(regCardItem);
+        View propCardItem = layoutInflater.inflate(R.layout.prop_card_titles_item, parent, false);
+        ViewHolder viewHolder = new ViewHolder(propCardItem);
         return viewHolder;
     }
 
@@ -39,39 +42,34 @@ public class RegCardAdapter extends RecyclerView.Adapter<RegCardAdapter.ViewHold
             setHeaderBg(holder.tvregNumber);
             setHeaderBg(holder.tvregCode);
             setHeaderBg(holder.tvregSubject);
-            setHeaderBg(holder.tvregGroup);
             setHeaderBg(holder.tvregUnits);
             holder.tvregNumber.setText("N");
             holder.tvregCode.setText("Code");
             holder.tvregSubject.setText("Subject");
-            holder.tvregGroup.setText("Group");
             holder.tvregUnits.setText("Units");
         }else {
-            final RegCardData regCardData = regdata[position-1];
+            final PropCardData propCardData = propdata[position-1];
             setContentBg( holder.tvregNumber);
             setContentBg( holder.tvregCode);
             setContentBg( holder.tvregSubject);
-            setContentBg( holder.tvregGroup);
             setContentBg( holder.tvregUnits);
-            holder.tvregNumber.setText(regCardData.getItemNumber());
-            holder.tvregCode.setText(regCardData.getItemCode());
-            holder.tvregSubject.setText(regCardData.getItemSubject());
-            holder.tvregGroup.setText(regCardData.getItemGroup());
-            holder.tvregUnits.setText(regCardData.getItemUnits());
+            holder.tvregNumber.setText(propCardData.getItemNumber());
+            holder.tvregCode.setText(propCardData.getItemCode());
+            holder.tvregSubject.setText(propCardData.getItemSubject());
+            holder.tvregUnits.setText(propCardData.getItemUnits());
         }
     }
 
 
     @Override
     public int getItemCount() {
-        return regdata.length+ 1;
+        return propdata.length+ 1;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvregNumber;
         public TextView tvregCode;
         public TextView tvregSubject;
-        public TextView tvregGroup;
         public TextView tvregUnits;
 
         public ViewHolder(View itemView) {
@@ -79,7 +77,6 @@ public class RegCardAdapter extends RecyclerView.Adapter<RegCardAdapter.ViewHold
             this.tvregNumber = itemView.findViewById(R.id.tvItemNumber);
             this.tvregCode = itemView.findViewById(R.id.tvItemCode);
             this.tvregSubject = itemView.findViewById(R.id.tvItemSubject);
-            this.tvregGroup = itemView.findViewById(R.id.tvItemGroup);
             this.tvregUnits = itemView.findViewById(R.id.tvItemUnits);
         }
     }

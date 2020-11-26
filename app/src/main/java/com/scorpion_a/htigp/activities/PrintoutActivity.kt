@@ -76,11 +76,6 @@ class PrintoutActivity : AppCompatActivity() {
             )
         )
 
-//        recyclerView = findViewById(R.id.rvRegCardTitles)
-//        var adapter = RegCardAdapter(regCardTitles)
-//        recyclerView.setHasFixedSize(true)
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//        recyclerView.adapter = adapter
 
         recyclerView = findViewById(R.id.rvRegCardItems)
         var adapter = RegCardAdapter(regCardItems)
