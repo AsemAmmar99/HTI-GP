@@ -26,7 +26,7 @@ class MoreFragment  : Fragment() {
                 "Profile Page"
             ),
             MoreListData(
-                "Print Out"
+                "Printout"
             ),
             MoreListData(
                 "Registration Proposal"

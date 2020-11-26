@@ -150,7 +150,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvUnitsResult"
+            android:id="@+id/tvUnitsValue"
             android:textStyle="bold"
             android:textSize="15dp"
             android:textColor="@color/dark_red"
