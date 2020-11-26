@@ -15,8 +15,6 @@
         <activity android:name=".activities.EditProfileActivity" />
         <activity android:name=".activities.ProfilePageActivity" />
         <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".ViewRequestsActivity" />
-        <activity android:name=".RequestActivity" />
         <activity android:name=".activities.LoginScreen" />
         <activity android:name=".activities.SplashActivity">
             <intent-filter>

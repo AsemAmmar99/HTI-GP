@@ -1,17 +1,24 @@
-package com.scorpion_a.htigp
+package com.scorpion_a.htigp.fragments
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.scorpion_a.htigp.R
 import com.scorpion_a.htigp.adapters.RequestListAdapter
 import com.scorpion_a.htigp.model.RequestListData
 
-class RequestActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_request)
-
+class RequestTabFragment : Fragment() {
+    lateinit var  recyclerView: RecyclerView
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view= inflater.inflate(R.layout.fragment_request_tab, container, false)
         val requestListData: Array<RequestListData> = arrayOf<RequestListData>(
             RequestListData(
                 "Arabic Graduation certificate"
@@ -42,12 +49,14 @@ class RequestActivity : AppCompatActivity() {
             ),
         )
 
-        val recyclerView: RecyclerView = findViewById(R.id.rvRequest)
-        val adapter =
-            RequestListAdapter(requestListData)
+        recyclerView = view.findViewById(R.id.rvRequest)
+        val adapter = RequestListAdapter(requestListData)
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false )
         recyclerView.adapter = adapter
-
+        return view
+    }
+    companion object {
+        fun newInstance(): RequestTabFragment = RequestTabFragment()
     }
 }
