@@ -37,7 +37,7 @@ class MoreFragment  : Fragment() {
                 "Registration Proposal"
             ),
             MoreListData(
-                "Test Your Self"
+                "Test Yourself"
             ),
             MoreListData(
                 "Tutorial Page"
