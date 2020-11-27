@@ -27,4 +27,7 @@
     <string name="your_current_password">Your Current Password</string>
     <string name="certificate">Certificate</string>
     <string name="test">Test</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
+    <string name="reply">Reply</string>
 </resources>
