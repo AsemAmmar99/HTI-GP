@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.scorpion_a.htigp.activities.FAQSActivity;
 import com.scorpion_a.htigp.activities.PrintoutActivity;
 import com.scorpion_a.htigp.activities.ProfilePageActivity;
 import com.scorpion_a.htigp.activities.RegProposalActivity;
@@ -55,6 +56,9 @@ public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHo
                         break;
                     case 3:
                         context.startActivity(new Intent(context, TestYourselfActivity.class));
+                        break;
+                    case 5:
+                        context.startActivity(new Intent(context, FAQSActivity.class));
                         break;
                 }
             }

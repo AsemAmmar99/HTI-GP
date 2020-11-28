@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.scorpion_a.htigp.R
 
-class NewsDetailsActivity : AppCompatActivity() {
+class FAQsAnswersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_news_details)
+        setContentView(R.layout.activity_faqs_answers)
     }
 }
