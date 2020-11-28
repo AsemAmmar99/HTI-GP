@@ -50,7 +50,7 @@ class RequestTabFragment : Fragment() {
         )
 
         recyclerView = view.findViewById(R.id.rvRequest)
-        val adapter = RequestListAdapter(requestListData)
+        val adapter = RequestListAdapter(requestListData, context)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false )
         recyclerView.adapter = adapter
