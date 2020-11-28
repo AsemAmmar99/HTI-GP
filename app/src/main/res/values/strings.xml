@@ -45,4 +45,6 @@
     <string name="send_request">Send Request</string>
     <string name="thank_you">Thank you</string>
     <string name="request_sent">Your request has been sent successfully</string>
+    <string name="your_verify_sent">Your verification message to change your Password has been sent to Email: ID@hti.edu.eg. Please check your Email inbox.</string>
+    <string name="attention">Attention!</string>
 </resources>

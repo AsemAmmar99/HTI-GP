@@ -34,6 +34,7 @@
             android:id="@+id/tvNewsDetails"
             android:text="فازالمعهد التكنولوجي العالي بالعاشر من رمضان بالمركز الثاني في مسابقة اليوم العلمي الثاني لكلية الهندسة والتكنولوجيا بجامعة بدر BUC ) ) و الخاصة بكليات الهندسة علي مستوي الجامعات المصرية ."
             android:textColor="@color/light_black"
+            android:scrollbars="vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

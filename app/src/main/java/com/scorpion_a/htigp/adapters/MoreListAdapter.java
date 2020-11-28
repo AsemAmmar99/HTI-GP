@@ -1,5 +1,6 @@
 package com.scorpion_a.htigp.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -10,7 +11,9 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.scorpion_a.htigp.activities.AppTechSupportActivity;
 import com.scorpion_a.htigp.activities.FAQSActivity;
+import com.scorpion_a.htigp.activities.LoginScreen;
 import com.scorpion_a.htigp.activities.PrintoutActivity;
 import com.scorpion_a.htigp.activities.ProfilePageActivity;
 import com.scorpion_a.htigp.activities.RegProposalActivity;
@@ -59,6 +62,13 @@ public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHo
                         break;
                     case 5:
                         context.startActivity(new Intent(context, FAQSActivity.class));
+                        break;
+                    case 6:
+                        context.startActivity(new Intent(context, AppTechSupportActivity.class));
+                        break;
+                    case 7:
+                        context.startActivity(new Intent(context, LoginScreen.class));
+                        ((Activity)context).finish();
                         break;
                 }
             }
