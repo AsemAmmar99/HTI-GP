@@ -31,4 +31,8 @@
     <string name="to">To:</string>
     <string name="reply">Reply</string>
     <string name="yes">Yes</string>
+    <string name="reply_to">Reply To:</string>
+    <string name="type_your_reply_here">Type your reply here..</string>
+    <string name="send">Send</string>
+    <string name="type_you_reply_here">Type you Reply here..</string>
 </resources>
