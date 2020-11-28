@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.TestQuestionsActivity"></activity>
+        <activity android:name=".activities.FAQsAnswersActivity"></activity>
+        <activity android:name=".activities.FAQSActivity" />
+        <activity android:name=".activities.TestQuestionsActivity" />
         <activity android:name=".activities.NewsDetailsActivity" />
         <activity android:name=".activities.NotificationReplyActivity" />
         <activity android:name=".activities.SendRequestActivity" />
