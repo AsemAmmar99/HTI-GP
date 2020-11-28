@@ -35,4 +35,14 @@
     <string name="type_your_reply_here">Type your reply here..</string>
     <string name="send">Send</string>
     <string name="type_you_reply_here">Type you Reply here..</string>
+    <string name="necessary_request">Necessary Request</string>
+    <string name="you_must_pay_first">You must pay at CIB before you can request</string>
+    <string name="name_in_english">Name in English:</string>
+    <string name="name_in_arabic">Name In Arabic:</string>
+    <string name="department">Department:</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="notes_bring_with_you6_photos_4_6_white_background">* Notes: Bring with you6 photos 4 * 6 (white Background)</string>
+    <string name="send_request">Send Request</string>
+    <string name="thank_you">Thank you</string>
+    <string name="request_sent">Your request has been sent successfully</string>
 </resources>
