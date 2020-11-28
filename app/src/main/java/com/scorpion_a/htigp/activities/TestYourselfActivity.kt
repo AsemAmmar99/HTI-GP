@@ -58,7 +58,7 @@ class TestYourselfActivity : AppCompatActivity() {
         )
 
         recyclerView = findViewById(R.id.rvTests)
-        var adapter = TestsListAdapter(testsListData)
+        var adapter = TestsListAdapter(testsListData, this)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
