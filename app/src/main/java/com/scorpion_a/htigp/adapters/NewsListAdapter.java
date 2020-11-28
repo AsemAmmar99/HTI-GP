@@ -1,21 +1,28 @@
 package com.scorpion_a.htigp.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.scorpion_a.htigp.activities.NewsDetailsActivity;
+import com.scorpion_a.htigp.activities.NotificationDetailsActivity;
 import com.scorpion_a.htigp.model.NewsListData;
 import com.scorpion_a.htigp.R;
 
 public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
     private NewsListData[] newsdata;
+    private Context context;
 
     // RecyclerView recyclerView;
-    public NewsListAdapter(NewsListData[] newsdata) {
+    public NewsListAdapter(NewsListData[] newsdata, Context context) {
         this.newsdata = newsdata;
+        this.context = context;
     }
 
     @Override
@@ -31,6 +38,12 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
         final NewsListData myListData = newsdata[position];
         holder.tvTitle.setText(newsdata[position].getnewsTitle());
         holder.tvDesc.setText(newsdata[position].getnewsDesc());
+        holder.clNewsItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, NewsDetailsActivity.class));
+            }
+        });
     }
 
 
@@ -42,11 +55,13 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvTitle;
         public TextView tvDesc;
+        public ConstraintLayout clNewsItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.tvTitle = itemView.findViewById(R.id.tvNewsTitle);
             this.tvDesc = itemView.findViewById(R.id.tvNewsDesc);
+            this.clNewsItem = itemView.findViewById(R.id.clNewsItem);
         }
     }
 }

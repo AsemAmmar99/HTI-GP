@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
         )
 
         recyclerView = view.findViewById(R.id.rvNews)
-        val adapter = NewsListAdapter(newsListData)
+        val adapter = NewsListAdapter(newsListData, context)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.adapter = adapter
