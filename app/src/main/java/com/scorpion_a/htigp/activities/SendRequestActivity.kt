@@ -20,10 +20,10 @@ class SendRequestActivity : AppCompatActivity() {
         toolbar.title="Sending Request .."
 
         buNo.setOnClickListener {
-            finish()
+            onNotPaying(it.context)
         }
         buYes.setOnClickListener {
-            onNotPaying(it.context)
+            startActivity( Intent (this, RequestDataActivity::class.java))
         }
     }
     private fun onNotPaying(context: Context) {
@@ -35,7 +35,6 @@ class SendRequestActivity : AppCompatActivity() {
             .setPositiveButton(
                 android.R.string.ok
             ) { dialog: DialogInterface, which: Int ->
-                startActivity( Intent (context,RequestDataActivity::class.java))
                 dialog.dismiss()
             }
             .show()

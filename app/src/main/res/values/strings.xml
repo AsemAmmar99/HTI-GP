@@ -41,7 +41,7 @@
     <string name="name_in_arabic">Name In Arabic:</string>
     <string name="department">Department:</string>
     <string name="upload_photo">Upload Photo</string>
-    <string name="notes_bring_with_you6_photos_4_6_white_background">* Notes: Bring with you6 photos 4 * 6 (white Background)</string>
+    <string name="notice_bring_with_you6_photos_4_6_white_background">* Notice: Bring with you 6 photos 4 * 6 (white Background)</string>
     <string name="send_request">Send Request</string>
     <string name="thank_you">Thank you</string>
     <string name="request_sent">Your request has been sent successfully</string>
