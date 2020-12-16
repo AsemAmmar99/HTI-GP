@@ -1,22 +1,37 @@
 package com.scorpion_a.htigp.model;
 
 public class ViewRequestsListData {
-    private String viewRequestsTitle;
+    private String viewRequestsNumber;
+    private String viewRequestsDesc;
     private String requestsStatus;
-    public ViewRequestsListData(String viewRequestsTitle, String requestsStatus) {
-        this.viewRequestsTitle = viewRequestsTitle;
+
+    public ViewRequestsListData(String viewRequestsNumber, String viewRequestsDesc, String requestsStatus) {
+        this.viewRequestsNumber = viewRequestsNumber;
+        this.viewRequestsDesc = viewRequestsDesc;
         this.requestsStatus = requestsStatus;
     }
-    public String getviewRequestsTitle() {
-        return viewRequestsTitle;
+
+    public String getViewRequestsNumber() {
+        return viewRequestsNumber;
     }
-    public void setviewRequestsTitle(String viewRequestsTitle) {
-        this.viewRequestsTitle = viewRequestsTitle;
+
+    public void setViewRequestsNumber(String viewRequestsNumber) {
+        this.viewRequestsNumber = viewRequestsNumber;
     }
-    public String getrequestsStatus() {
+
+    public String getViewRequestsDesc() {
+        return viewRequestsDesc;
+    }
+
+    public void setViewRequestsDesc(String viewRequestsDesc) {
+        this.viewRequestsDesc = viewRequestsDesc;
+    }
+
+    public String getRequestsStatus() {
         return requestsStatus;
     }
-    public void setrequestsStatus(String requestsStatus) {
+
+    public void setRequestsStatus(String requestsStatus) {
         this.requestsStatus = requestsStatus;
     }
 }

@@ -31,11 +31,24 @@
         app:carbon_elevation="8dp"
         android:paddingLeft="35dp"
         android:paddingRight="35dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="18sp"
         app:layout_constraintStart_toEndOf="@id/htiLogo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/depName"
+        android:textColor="@color/light_black"
+        android:text="@string/computer_science"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/htiLogo"
+        app:layout_constraintBottom_toTopOf="@id/rvNews"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="10dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

@@ -47,6 +47,9 @@ class RequestTabFragment : Fragment() {
             RequestListData(
                 "English Certificate of study materials"
             ),
+            RequestListData(
+                "Identifying Card"
+            ),
         )
 
         recyclerView = view.findViewById(R.id.rvRequest)

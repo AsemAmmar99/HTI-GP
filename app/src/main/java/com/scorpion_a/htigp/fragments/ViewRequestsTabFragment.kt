@@ -23,16 +23,19 @@ class ViewRequestsTabFragment  : Fragment() {
         val view= inflater.inflate(R.layout.fragment_view_requests_tab, container, false)
         val viewRequestsListData: Array<ViewRequestsListData> = arrayOf<ViewRequestsListData>(
             ViewRequestsListData(
-                "#188148 - Arabic Graduation certificate",
-                "Status: Pending."
+                "188148",
+                "Arabic Graduation certificate",
+                "Pending"
             ),
             ViewRequestsListData(
-                "#188149 - English Graduation certificate",
-                "Status: Accepted."
+                "188149",
+                "English Graduation certificate zzzzzzzzzzzzzzzzzzz",
+                "Done"
             ),
             ViewRequestsListData(
-                "#188160 - Proof of Enrollment",
-                "Status: Missing Requirements."
+                "188160",
+                "Proof of Enrollment",
+                "Missing Requirements"
             )
         )
 

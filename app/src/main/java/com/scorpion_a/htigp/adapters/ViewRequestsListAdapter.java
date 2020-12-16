@@ -29,8 +29,9 @@ public class ViewRequestsListAdapter extends RecyclerView.Adapter<ViewRequestsLi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final ViewRequestsListData viewRequestsListData = requestsdata[position];
-        holder.tvRequestTitle.setText(requestsdata[position].getviewRequestsTitle());
-        holder.tvRequestStatus.setText(requestsdata[position].getrequestsStatus());
+        holder.tvRequestNumber.setText(requestsdata[position].getViewRequestsNumber());
+        holder.tvRequestDescription.setText(requestsdata[position].getViewRequestsDesc());
+        holder.tvRequestStatus.setText(requestsdata[position].getRequestsStatus());
     }
 
 
@@ -40,12 +41,14 @@ public class ViewRequestsListAdapter extends RecyclerView.Adapter<ViewRequestsLi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvRequestTitle;
+        public TextView tvRequestNumber;
+        public TextView tvRequestDescription;
         public TextView tvRequestStatus;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.tvRequestTitle = itemView.findViewById(R.id.tvRequestTitle);
+            this.tvRequestNumber = itemView.findViewById(R.id.tvRequestNumber);
+            this.tvRequestDescription = itemView.findViewById(R.id.tvRequestDesc);
             this.tvRequestStatus = itemView.findViewById(R.id.tvRequestStatus);
         }
     }

@@ -9,12 +9,12 @@
     android:background="@drawable/viewrequestbackground">
 
     <TextView
-        android:id="@+id/tvRequestTitle"
+        android:id="@+id/tvRequestNumberTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Request Title"
+        android:text="@string/request_number"
         android:textColor="@color/light_black"
         android:textStyle="bold"
         android:textSize="14sp"
@@ -23,18 +23,81 @@
         android:layout_marginTop="10dp"/>
 
     <TextView
-        android:id="@+id/tvRequestStatus"
-        android:layout_width="match_parent"
+        android:id="@+id/tvRequestNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvRequestNumberTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="reqNumber"
+        android:textColor="@color/light_black"
+        android:textSize="14sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"/>
+
+    <TextView
+        android:id="@+id/tvRequestDescTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRequestTitle"
-        android:text="Status"
+        app:layout_constraintTop_toBottomOf="@id/tvRequestNumberTitle"
+        android:text="@string/description"
         android:textColor="@color/light_black"
-        android:textSize="10sp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tvRequestDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tvRequestDescTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRequestNumberTitle"
+        android:text="@string/reqdesc"
+        android:textColor="@color/light_black"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="14sp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tvRequestStatusTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRequestDescTitle"
+        android:text="@string/status"
+        android:textColor="@color/light_black"
+        android:textSize="14sp"
+        android:textStyle="bold"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="10dp"
-        android:maxLines="2"
-        android:ellipsize="end"/>
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tvRequestStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvRequestStatusTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvRequestDescTitle"
+        android:text="@string/reqstatus"
+        android:textColor="@color/light_black"
+        android:textSize="14sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,8 @@
 package com.scorpion_a.htigp.activities
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
@@ -16,7 +19,21 @@ class AppTechSupportActivity : AppCompatActivity() {
         toolbar.title="Application Technical Support"
 
         buSend.setOnClickListener {
-            finish()
+            onSend(it.context)
         }
+    }
+
+    private fun onSend(context: Context) {
+        val builder: AlertDialog.Builder
+        builder = AlertDialog.Builder(context)
+        builder.setTitle(getString(R.string.thank))
+            .setMessage(getString(R.string.message_sent))
+            .setCancelable(false)
+            .setPositiveButton(
+                android.R.string.ok
+            ) { dialog: DialogInterface, which: Int ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }

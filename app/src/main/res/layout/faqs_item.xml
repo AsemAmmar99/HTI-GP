@@ -5,10 +5,22 @@
     android:layout_height="wrap_content"
     android:id="@+id/clFAQsItem"
     android:layout_marginBottom="10dp"
-    android:layout_marginEnd="25dp"
     android:layout_marginStart="25dp"
-    android:background="@drawable/roundedcorner"
+    android:background="@color/light_blue"
     android:paddingBottom="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/clFAQText"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/roundedcorner"
+        android:paddingBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivArrow">
+
 
     <TextView
         android:id="@+id/tvFAQs"
@@ -20,5 +32,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivArrow"
+        android:src="@drawable/ic_action_arrow"
+        android:background="@color/light_blue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/clFAQText"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="12dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
