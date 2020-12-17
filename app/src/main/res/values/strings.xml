@@ -49,7 +49,8 @@
     <string name="attention">Attention!</string>
     <string name="computer_science">Computer Science</string>
     <string name="thank">Thank You</string>
-    <string name="message_sent">Your message has been sent to HTI Support Team. We will notify you when they answer.</string>
+    <string name="message_sent">Your message has been sent to Application Technical Support Team. We will notify you when they answer.</string>
+    <string name="hti_message_sent">Your message has been sent to HTI Support. We will notify you when they answer.</string>
     <string name="request_number">Request Number:</string>
     <string name="description">Description:</string>
     <string name="reqdesc">reqDesc</string>
@@ -57,4 +58,6 @@
     <string name="reqstatus">reqStatus</string>
     <string name="tutorials_item">Tutorials Item</string>
     <string name="help">Help</string>
+    <string name="success">Success!</string>
+    <string name="successfully_sent">Your request with number 188148 has been sent successfully. We will notify you how and when you can receive it.</string>
 </resources>

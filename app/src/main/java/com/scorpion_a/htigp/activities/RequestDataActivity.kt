@@ -25,8 +25,8 @@ class RequestDataActivity : AppCompatActivity() {
     private fun onRequestSent(context: Context) {
         val builder: AlertDialog.Builder
         builder = AlertDialog.Builder(context)
-        builder.setTitle(getString(R.string.thank_you))
-            .setMessage(getString(R.string.request_sent))
+        builder.setTitle(getString(R.string.success))
+            .setMessage(getString(R.string.successfully_sent))
             .setCancelable(false)
             .setPositiveButton(
                 android.R.string.ok

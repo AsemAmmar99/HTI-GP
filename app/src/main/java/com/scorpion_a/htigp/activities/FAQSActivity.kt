@@ -1,5 +1,6 @@
 package com.scorpion_a.htigp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
@@ -9,6 +10,9 @@ import com.scorpion_a.htigp.R
 import com.scorpion_a.htigp.adapters.FAQsListAdapter
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import com.scorpion_a.htigp.model.FAQsListData
+import kotlinx.android.synthetic.main.activity_faqs.*
+import kotlinx.android.synthetic.main.activity_login_screen.*
+import kotlinx.android.synthetic.main.activity_profile_page.header
 
 class FAQSActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
@@ -18,6 +22,11 @@ class FAQSActivity : AppCompatActivity() {
         setContentView(R.layout.activity_faqs)
         toolbar=header.findViewById(R.id.toolbar)
             toolbar.title="FAQs"
+
+        tvSupport.setOnClickListener {
+            val intent = Intent(this, SupportActivity::class.java)
+            startActivity(intent)
+        }
 
         val faqsData: Array<FAQsListData> = arrayOf<FAQsListData>(
             FAQsListData(

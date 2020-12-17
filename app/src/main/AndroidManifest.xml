@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.AppTechSupportActivity"></activity>
+        <activity android:name=".activities.SupportActivity"></activity>
+        <activity android:name=".activities.TutorialDetailsActivity" />
+        <activity android:name=".activities.TutorialActivity" />
+        <activity android:name=".activities.AppTechSupportActivity" />
         <activity android:name=".activities.RequestDataActivity" />
         <activity android:name=".activities.NewsDetailsActivity" />
         <activity android:name=".activities.FAQsAnswersActivity" />

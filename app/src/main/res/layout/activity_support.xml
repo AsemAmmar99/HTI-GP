@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_blue"
-    tools:context=".activities.TutorialActivity">
+    tools:context=".activities.SupportActivity">
     <include
         android:id="@+id/header"
         layout="@layout/main_header"
@@ -23,17 +23,40 @@
         app:layout_constraintTop_toBottomOf="@id/header"
         android:layout_marginTop="15dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/etHTIMessage"
+        android:hint="Type your questions here.."
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:ems="14"
+        android:textSize="16dp"
+        android:padding="8dp"
+        android:minLines="10"
+        android:maxLines="16"
         android:scrollbars="vertical"
-        android:layout_marginTop="5dp"
-        android:id="@+id/rvTutorials"
-        android:background="@color/light_blue"
+        android:background="@drawable/roundedcorner2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/htiLogo"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="5dp"/>
+
+    <carbon.widget.Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buSend"
+        android:background="@color/dark_blue"
+        android:text="@string/send"
+        android:textColor="@color/white"
+        app:carbon_cornerRadius="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etHTIMessage"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

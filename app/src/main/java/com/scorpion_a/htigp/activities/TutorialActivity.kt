@@ -38,7 +38,7 @@ class TutorialActivity : AppCompatActivity() {
                 "Notifications"
             ),
             TutorialsListData(
-                "FAQs"
+                "FAQs and Support"
             ),
             TutorialsListData(
                 "Application Technical Support"

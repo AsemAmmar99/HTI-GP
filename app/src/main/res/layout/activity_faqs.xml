@@ -23,11 +23,24 @@
         app:layout_constraintTop_toBottomOf="@id/header"
         android:layout_marginTop="10dp"/>
 
+    <TextView
+        android:id="@+id/tvSupport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Support"
+        android:textStyle="bold"
+        android:textColor="@color/light_black"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@id/rvFAQs"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="15dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="3dp"
         android:id="@+id/rvFAQs"
         android:background="@color/light_blue"
         app:layout_constraintStart_toStartOf="parent"

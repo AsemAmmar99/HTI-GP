@@ -19,9 +19,16 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         bottomNavigation = findViewById(R.id.navigationView)
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        val homeFragment = HomeFragment.newInstance()
-        openFragment(homeFragment)
+        var nav= intent.getIntExtra("menu", 0)
+        if(nav==1){
+            val moreFragment = MoreFragment.newInstance()
+            openFragment(moreFragment)
+            bottomNavigation.menu.findItem(R.id.more_tab).setChecked(true)
 
+        }else {
+            val homeFragment = HomeFragment.newInstance()
+            openFragment(homeFragment)
+        }
     }
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {

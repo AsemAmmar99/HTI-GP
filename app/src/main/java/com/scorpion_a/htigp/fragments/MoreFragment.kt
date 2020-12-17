@@ -43,7 +43,7 @@ class MoreFragment  : Fragment() {
                 "Tutorial Page"
             ),
             MoreListData(
-                "FAQs"
+                "FAQs and Support"
             ),
             MoreListData(
                 "Application Technical Support"

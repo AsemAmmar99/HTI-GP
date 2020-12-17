@@ -4,43 +4,42 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import com.scorpion_a.htigp.R
+import com.scorpion_a.htigp.fragments.MoreFragment
+import kotlinx.android.synthetic.main.activity_app_tech_support.*
+import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
-import kotlinx.android.synthetic.main.activity_send_request.*
 
-class SendRequestActivity : AppCompatActivity() {
+class SupportActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_send_request)
+        setContentView(R.layout.activity_support)
         toolbar=header.findViewById(R.id.toolbar)
-        toolbar.title="Sending Request .."
+        toolbar.title="HTI Support"
 
-        buNo.setOnClickListener {
-            onNotPaying(it.context)
-        }
-        buYes.setOnClickListener {
-            startActivity( Intent (this, RequestDataActivity::class.java))
+        buSend.setOnClickListener {
+            onSend(it.context)
         }
     }
-    private fun onNotPaying(context: Context) {
+
+    private fun onSend(context: Context) {
         val builder: AlertDialog.Builder
         builder = AlertDialog.Builder(context)
-        builder.setTitle(getString(R.string.necessary_request))
-            .setMessage(getString(R.string.you_must_pay_first))
+        builder.setTitle(getString(R.string.thank))
+            .setMessage(getString(R.string.hti_message_sent))
             .setCancelable(false)
             .setPositiveButton(
                 android.R.string.ok
             ) { dialog: DialogInterface, which: Int ->
-                val intent = Intent(this, HomeActivity::class.java)
-                startActivity(intent)
-                finish()
                 dialog.dismiss()
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra("menu", 1)
+                startActivity(intent)
             }
             .show()
     }
-
 }
