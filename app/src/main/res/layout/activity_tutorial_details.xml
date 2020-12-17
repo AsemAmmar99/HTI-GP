@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_blue"
+    tools:context=".activities.TutorialDetailsActivity">
+    <include
+        android:id="@+id/header"
+        layout="@layout/main_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/light_blue"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/light_blue">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:id="@+id/htiLogo"
+                android:src="@drawable/htilogo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvTutorialDetails"
+                android:text="At tutorialrepublic.com you can learn the essentials of web development technologies from the advanced topics, along with real life practice examples and useful so that you can create website or build career in web development. Here you will find, The tutorial section encloses an extensive collection of tutorials and example5 that you can try and test yourself using online HTML editor. You will also find large numbers of demonstrations, tips and techniques covering everything you need to create web pages, lnteractive ToaIs Fractice learning the best way to learn. At Tutorial Republic you will find a number of interactive tools like HTML Editor, SOL Playground. Color Picker, Bootstrap Button Generator and many other tm's that you can play with to extend pure learning, HTML stands for Hyper Text Markup Language. HTML is the basic building block Of World Web, Hypertext is text displayed on a computer or other electronic device with references to other text."
+                android:textColor="@color/light_black"
+                android:scrollbars="vertical"
+                app:layout_constraintTop_toBottomOf="@id/htiLogo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

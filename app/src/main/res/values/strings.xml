@@ -55,4 +55,6 @@
     <string name="reqdesc">reqDesc</string>
     <string name="status">Status:</string>
     <string name="reqstatus">reqStatus</string>
+    <string name="tutorials_item">Tutorials Item</string>
+    <string name="help">Help</string>
 </resources>

@@ -21,6 +21,11 @@ class LoginScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
 
+        tvHelp.setOnClickListener {
+            val intent = Intent(this, TutorialActivity::class.java)
+            startActivity(intent)
+        }
+
         buLogin.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)

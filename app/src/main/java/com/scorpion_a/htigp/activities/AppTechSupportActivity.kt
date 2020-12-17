@@ -3,10 +3,12 @@ package com.scorpion_a.htigp.activities
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import com.scorpion_a.htigp.R
+import com.scorpion_a.htigp.fragments.MoreFragment
 import kotlinx.android.synthetic.main.activity_app_tech_support.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 
@@ -33,6 +35,7 @@ class AppTechSupportActivity : AppCompatActivity() {
                 android.R.string.ok
             ) { dialog: DialogInterface, which: Int ->
                 dialog.dismiss()
+                finish()
             }
             .show()
     }
