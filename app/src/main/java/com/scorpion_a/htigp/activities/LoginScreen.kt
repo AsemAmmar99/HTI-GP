@@ -1,18 +1,29 @@
 package com.scorpion_a.htigp.activities
 
 import android.app.AlertDialog
+import android.app.Service
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
 import com.google.android.material.tabs.TabLayout
 import com.scorpion_a.htigp.R
+import com.scorpion_a.htigp.model.requests.LoginRequests
+import com.scorpion_a.htigp.model.responses.LoginResponse
+import com.scorpion_a.htigp.network.Service.Companion.BaseUrl
 import kotlinx.android.synthetic.main.activity_login_screen.*
 import kotlinx.android.synthetic.main.activity_send_request.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class LoginScreen : AppCompatActivity() {
@@ -21,15 +32,35 @@ class LoginScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
 
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BaseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(com.scorpion_a.htigp.network.Service::class.java)
+        val call = service.getLoginData(LoginRequests( etID.toString(), etPassword.toString(), "samsung"))
+
+
+
         tvHelp.setOnClickListener {
             val intent = Intent(this, TutorialActivity::class.java)
             startActivity(intent)
         }
 
         buLogin.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
+            call.enqueue(object : Callback<LoginResponse> {
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+//                    val intent = Intent(it.context, HomeActivity::class.java)
+//                    startActivity(intent)
+//                    finish()
+                    Log.i("teerst",response.toString())
+
+                }
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Log.i("test",t.toString())
+                }
+            })
+
         }
 
         tvForgot.setOnClickListener {
