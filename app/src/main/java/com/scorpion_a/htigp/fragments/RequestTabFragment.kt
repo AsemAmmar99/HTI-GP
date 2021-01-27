@@ -50,6 +50,9 @@ class RequestTabFragment : Fragment() {
             RequestListData(
                 "Identifying Card"
             ),
+            RequestListData(
+                "Recommendation Letter"
+            ),
         )
 
         recyclerView = view.findViewById(R.id.rvRequest)

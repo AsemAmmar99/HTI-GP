@@ -38,7 +38,7 @@ class LoginScreen : AppCompatActivity() {
             .build()
 
         val service = retrofit.create(com.scorpion_a.htigp.network.Service::class.java)
-        val call = service.getLoginData(LoginRequests( etID.toString(), etPassword.toString(), "samsung"))
+        val call = service.getLoginData(LoginRequests( etID.toString(), etPassword.toString()))
 
 
 
@@ -50,9 +50,9 @@ class LoginScreen : AppCompatActivity() {
         buLogin.setOnClickListener {
             call.enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-//                    val intent = Intent(it.context, HomeActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
+                    val intent = Intent(it.context, HomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
                     Log.i("teerst",response.toString())
 
                 }

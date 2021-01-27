@@ -60,4 +60,5 @@
     <string name="help">Help</string>
     <string name="success">Success!</string>
     <string name="successfully_sent">Your request with number 188148 has been sent successfully. We will notify you how and when you can receive it.</string>
+    <string name="request_information">Request Information:</string>
 </resources>

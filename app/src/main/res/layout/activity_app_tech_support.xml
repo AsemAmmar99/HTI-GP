@@ -32,6 +32,7 @@
         android:inputType="textMultiLine"
         android:ems="14"
         android:textSize="16dp"
+        android:textColor="@color/light_black"
         android:padding="8dp"
         android:minLines="10"
         android:maxLines="16"

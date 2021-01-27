@@ -9,7 +9,7 @@ import retrofit2.http.POST
 
 interface Service {
    companion object {
-    const val BaseUrl = "http://api.jabbarproject.com/api/auth/"
+    const val BaseUrl = "https://hti-project.herokuapp.com/api/"
    }
     @POST("login")
     @Headers("Content-Type: application/json")
