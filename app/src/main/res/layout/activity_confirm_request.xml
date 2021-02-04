@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ConfirmRequestActivity">
+    <include
+        android:id="@+id/header"
+        layout="@layout/main_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/light_blue"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_blue">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvReqInfo"
+                android:text="@string/request_information"
+                android:textColor="@color/light_black"
+                android:textSize="18dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/clReqInfo"
+                android:background="@drawable/roundedcorner2"
+                app:layout_constraintTop_toBottomOf="@+id/tvReqInfo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/tvRequestDescTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="R. Description:"
+                    android:textColor="@color/light_black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/tvRequestDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvRequestDescTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="English Graduation Certificate"
+                    android:textColor="@color/dark_red"
+                    android:textSize="14sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"/>
+
+                <TextView
+                    android:id="@+id/tvRequestCountTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvRequestDescTitle"
+                    android:text="R. Count:"
+                    android:textColor="@color/light_black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/tvRequestCount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/tvRequestCountTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvRequestDescTitle"
+                    android:text="3"
+                    android:textColor="@color/dark_red"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/tvRequestTotalPriceTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvRequestCountTitle"
+                    android:text="R. Total Price:"
+                    android:textColor="@color/light_black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/tvRequestTotalPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvRequestTotalPriceTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvRequestCountTitle"
+                    android:text="90"
+                    android:textColor="@color/dark_red"
+                    android:textSize="14sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/ivLogo"
+                    android:src="@drawable/htilogo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_margin="12dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvHint"
+                android:text="*Hint: You must deliver 6 photos with 4*6 size to the institute and come by yourself to receive your certificate."
+                android:textColor="@color/dark_red"
+                android:textSize="15dp"
+                app:layout_constraintTop_toBottomOf="@id/clReqInfo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvStudInfo"
+                android:text="Student Information:"
+                android:textColor="@color/light_black"
+                android:textSize="18dp"
+                app:layout_constraintTop_toBottomOf="@id/tvHint"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvEditInfo"
+                android:text="Edit"
+                android:textColor="@color/dark_blue"
+                android:textSize="18dp"
+                app:layout_constraintTop_toBottomOf="@id/tvHint"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="15dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/clStudInfo"
+                android:background="@drawable/roundedcorner2"
+                app:layout_constraintTop_toBottomOf="@+id/tvStudInfo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:paddingBottom="5dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvNameInEnglish"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/light_black"
+                    android:text="@string/name_in_english"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tvNameInEnglishValue"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="10dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvNameInEnglishValue"
+                    android:textSize="15dp"
+                    android:textColor="@color/dark_red"
+                    android:text="Asem El-Sayed Abdel-Hamid Ammar"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvNameInEnglish"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvNameInArabic"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/light_black"
+                    android:text="@string/name_in_arabic"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameInEnglish"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameInEnglish"
+                    android:layout_marginTop="15dp"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvNameInArabicValue"
+                    android:textSize="15dp"
+                    android:textColor="@color/dark_red"
+                    android:text="عاصم السيد عبد الحميد عمار"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameInEnglish"
+                    app:layout_constraintStart_toEndOf="@id/tvNameInEnglish"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvId"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/light_black"
+                    android:text="ID:"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameInEnglish"
+                    app:layout_constraintTop_toBottomOf="@id/tvStatus"
+                    android:layout_marginTop="10dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvIdValue"
+                    android:textSize="15dp"
+                    android:textColor="@color/dark_red"
+                    android:text="42017047"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    app:layout_constraintTop_toBottomOf="@id/tvStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvNameInEnglish"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvStatus"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/light_black"
+                    android:text="Status:"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameInEnglish"
+                    app:layout_constraintTop_toBottomOf="@id/tvDepartment"
+                    android:layout_marginTop="10dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvStatusValue"
+                    android:textSize="15dp"
+                    android:textColor="@color/dark_red"
+                    android:text="Student"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    app:layout_constraintTop_toBottomOf="@id/tvDepartment"
+                    app:layout_constraintStart_toEndOf="@id/tvNameInEnglish"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvDepartment"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/light_black"
+                    android:text="Department:"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameInEnglish"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameInArabic"
+                    android:layout_marginTop="10dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvDepartmentValue"
+                    android:textSize="15dp"
+                    android:textColor="@color/dark_red"
+                    android:text="Computer Science"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameInArabicValue"
+                    app:layout_constraintStart_toEndOf="@id/tvNameInEnglish"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="5dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <carbon.widget.Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/buUploadReceipt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/clStudInfo"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:text="Upload The Receipt"
+                android:textColor="@color/white"
+                app:carbon_cornerRadius="15dp"
+                android:background="@color/dark_blue"/>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/ivReceipt"
+                app:layout_constraintTop_toBottomOf="@id/buUploadReceipt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_action_upload_photo"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"/>
+
+            <carbon.widget.Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/buConfirm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivReceipt"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:text="Confirm"
+                android:textColor="@color/white"
+                app:carbon_cornerRadius="15dp"
+                android:background="@color/dark_blue"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
