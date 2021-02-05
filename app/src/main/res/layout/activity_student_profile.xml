@@ -249,7 +249,7 @@
         android:textStyle="bold"
         android:textColor="@color/dark_red"
         android:text="42017047@hti.edu.eg"
-        app:layout_constraintStart_toEndOf="@id/tvEmail"
+        app:layout_constraintStart_toEndOf="@id/tvPhone"
         app:layout_constraintTop_toBottomOf="@id/tvGeneralInfo"
         android:layout_marginTop="11dp"
         android:layout_marginStart="15dp"/>
@@ -321,7 +321,7 @@
         android:textStyle="bold"
         android:textColor="@color/dark_red"
         android:text="Student"
-        app:layout_constraintStart_toEndOf="@id/tvStatus"
+        app:layout_constraintStart_toEndOf="@id/tvPhone"
         app:layout_constraintTop_toBottomOf="@id/tvPhoneValue"
         android:layout_marginTop="13dp"
         android:layout_marginStart="15dp"/>
@@ -357,7 +357,7 @@
         android:textStyle="bold"
         android:textColor="@color/dark_red"
         android:text="42017047"
-        app:layout_constraintStart_toEndOf="@id/tvID"
+        app:layout_constraintStart_toEndOf="@id/tvPhone"
         app:layout_constraintTop_toBottomOf="@id/tvStatusValue"
         android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"/>
