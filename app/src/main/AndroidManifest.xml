@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.NotifyDetailsActivity"></activity>
+        <activity android:name=".activities.StudentProfile"></activity>
+        <activity android:name=".activities.NotifyDetailsActivity" />
         <activity android:name=".activities.ConfirmRequestActivity" />
         <activity android:name=".activities.PendingRequestsActivity" />
         <activity android:name=".activities.SupportActivity" />
