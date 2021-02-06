@@ -19,17 +19,5 @@ class AboutHTIActivity : AppCompatActivity() {
         setContentView(R.layout.activity_about_hti)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title="About HTI"
-
-        tvemail.setOnClickListener {
-            try {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "your_email"))
-                intent.putExtra(Intent.EXTRA_SUBJECT, "your_subject")
-                intent.putExtra(Intent.EXTRA_TEXT, "your_text")
-                startActivity(intent)
-            } catch (e: ActivityNotFoundException) {}
-        }
-
-
-
     }
 }
