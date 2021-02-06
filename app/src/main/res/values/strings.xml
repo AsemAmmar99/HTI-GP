@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HTI GP</string>
+    <string name="app_name">HTI Student</string>
     <string name="home">Home</string>
     <string name="notifications">Notifications</string>
     <string name="requests">Requests</string>
@@ -61,4 +61,14 @@
     <string name="success">Success!</string>
     <string name="successfully_sent">Your request with number 188148 has been sent successfully. We will notify you how and when you can receive it.</string>
     <string name="request_information">Request Information:</string>
+    <string name="please_enter_your_educational_email_id_hti_edu_eg_if_you_graduated_enter_the_email_which_you_verified_and_please_check_your_email">Please enter your educational email (ID@hti.edu.eg), if you graduated enter the email which you verified and please check your email.</string>
+    <string name="please_enter_your_email">Please enter your email</string>
+    <string name="higher_technological_institute">Higher Technological Institute</string>
+    <string name="events">Events</string>
+    <string name="news">News</string>
+    <string name="eg">EG</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
+    <string name="total_price">Total Price</string>
+    <string name="count">Count</string>
 </resources>

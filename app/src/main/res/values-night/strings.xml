@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="please_enter_your_educational_email_id_hti_edu_eg_if_you_graduated_enter_the_email_which_you_verified_and_please_check_your_email">Please enter your educational email (ID@hti.edu.eg), if you graduated enter the email which you verified and please check your email.</string>
+    <string name="please_enter_your_email">Please enter your email</string>
+    <string name="higher_technological_institute">Higher Technological Institute</string>
+    <string name="events">Events</string>
+    <string name="more">More</string>
+    <string name="news">News</string>
+    <string name="eg">EG</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
+    <string name="total_price">Total Price</string>
+    <string name="count">Count</string>
+</resources>

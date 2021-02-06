@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.scorpion_a.htigp">
+    package="com.scorpion_a.studentapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.PendingRequestsActivity"></activity>
+        <activity android:name=".activities.EventsListActivity"></activity>
+        <activity android:name=".activities.PendingRequestsActivity" />
         <activity android:name=".activities.SupportActivity" />
         <activity android:name=".activities.TutorialDetailsActivity" />
         <activity android:name=".activities.TutorialActivity" />

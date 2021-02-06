@@ -147,7 +147,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <com.scorpion_a.htigp.utils.TypeWriter
+    <com.scorpion_a.studentapp.utils.TypeWriter
         android:id="@+id/tvHTI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
