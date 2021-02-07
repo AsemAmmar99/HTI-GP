@@ -21,37 +21,31 @@ class TutorialActivity : AppCompatActivity() {
 
         val tutorialsListData: Array<TutorialsListData> = arrayOf<TutorialsListData>(
             TutorialsListData(
-                "Login"
+                "Login Screen"
             ),
             TutorialsListData(
-                "Home"
+                "Home Screen"
             ),
             TutorialsListData(
-                "Requests"
+                "Events and News"
             ),
             TutorialsListData(
-                "Profile"
+                "Requests Screen"
             ),
             TutorialsListData(
-                "Notifications"
+                "Profile Page"
             ),
             TutorialsListData(
-                "FAQs and Support"
+                "Notifications Screen"
             ),
             TutorialsListData(
-                "Application Technical Support"
+                "FAQs and Support Screen"
             ),
             TutorialsListData(
-                "Tutorial"
+                "My Requests Screen"
             ),
             TutorialsListData(
-                "Test Yourself"
-            ),
-            TutorialsListData(
-                "Printout"
-            ),
-            TutorialsListData(
-                "Registration Proposal"
+                "Test Yourself Screen"
             ),
         )
 
