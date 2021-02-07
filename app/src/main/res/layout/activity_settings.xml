@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.scorpion_a.studentapp.activities.SettingsActivity">
+    <include
+        android:id="@+id/header"
+        layout="@layout/main_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvLanguage"
+        android:text="Language"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_blue"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:background="@color/white"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.8dp"
+        android:id="@+id/vLang"
+        android:background="@color/dark_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLanguage"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvNotifications"
+        android:text="Notifications"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_blue"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/vLang"
+        android:background="@color/white"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.8dp"
+        android:id="@+id/vNotifications"
+        android:background="@color/dark_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNotifications"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvSwitchMode"
+        android:text="Switch Mode"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_blue"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/vNotifications"
+        android:background="@color/white"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.8dp"
+        android:id="@+id/vSwitchMode"
+        android:background="@color/dark_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNotifications"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
