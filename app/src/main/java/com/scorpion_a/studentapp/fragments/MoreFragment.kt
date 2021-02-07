@@ -35,10 +35,16 @@ class MoreFragment  : Fragment() {
                 "Profile Page"
             ),
             MoreListData(
+                "My Requests"
+            ),
+            MoreListData(
                 "Printout"
             ),
             MoreListData(
                 "Registration Proposal"
+            ),
+            MoreListData(
+                "My Results"
             ),
             MoreListData(
                 "Test Yourself"
@@ -50,8 +56,14 @@ class MoreFragment  : Fragment() {
                 "FAQs and Support"
             ),
             MoreListData(
-                "Application Technical Support"
+                "About HTI"
             ),
+            MoreListData(
+                "Settings"
+            ),
+//            MoreListData(
+//                "Application Technical Support"
+//            ),
             MoreListData(
                 "Log Out"
             )

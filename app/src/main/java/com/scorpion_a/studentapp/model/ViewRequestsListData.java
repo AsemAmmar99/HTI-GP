@@ -4,12 +4,8 @@ public class ViewRequestsListData {
     private String viewRequestsNumber;
     private String viewRequestsDesc;
     private String requestsStatus;
-
-    public ViewRequestsListData(String viewRequestsNumber, String viewRequestsDesc, String requestsStatus) {
-        this.viewRequestsNumber = viewRequestsNumber;
-        this.viewRequestsDesc = viewRequestsDesc;
-        this.requestsStatus = requestsStatus;
-    }
+    private String requestsCount;
+    private String requestsTime;
 
     public String getViewRequestsNumber() {
         return viewRequestsNumber;
@@ -33,5 +29,29 @@ public class ViewRequestsListData {
 
     public void setRequestsStatus(String requestsStatus) {
         this.requestsStatus = requestsStatus;
+    }
+
+    public ViewRequestsListData(String viewRequestsNumber, String viewRequestsDesc, String requestsStatus, String requestsCount, String requestsTime) {
+        this.viewRequestsNumber = viewRequestsNumber;
+        this.viewRequestsDesc = viewRequestsDesc;
+        this.requestsStatus = requestsStatus;
+        this.requestsCount = requestsCount;
+        this.requestsTime = requestsTime;
+    }
+
+    public String getRequestsCount() {
+        return requestsCount;
+    }
+
+    public void setRequestsCount(String requestsCount) {
+        this.requestsCount = requestsCount;
+    }
+
+    public String getRequestsTime() {
+        return requestsTime;
+    }
+
+    public void setRequestsTime(String requestsTime) {
+        this.requestsTime = requestsTime;
     }
 }

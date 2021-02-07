@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.scorpion_a.studentapp.activities.NotificationDetailsActivity;
+import com.scorpion_a.studentapp.activities.NotifyDetailsActivity;
 import com.scorpion_a.studentapp.model.NotificationListData;
 import com.scorpion_a.studentapp.R;
 
@@ -41,7 +42,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         holder.clNotificationsItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, NotificationDetailsActivity.class));
+                context.startActivity(new Intent(context, NotifyDetailsActivity.class));
             }
         });
     }

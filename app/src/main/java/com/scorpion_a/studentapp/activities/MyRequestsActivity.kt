@@ -1,24 +1,24 @@
-package com.scorpion_a.studentapp.fragments
+package com.scorpion_a.studentapp.activities
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.ViewRequestsListAdapter
 import com.scorpion_a.studentapp.model.ViewRequestsListData
+import kotlinx.android.synthetic.main.activity_my_requests_page.*
+import kotlinx.android.synthetic.main.fragment_notification.view.*
 
-class ViewRequestsTabFragment  : Fragment() {
+class MyRequestsActivity : AppCompatActivity() {
     lateinit var  recyclerView: RecyclerView
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view= inflater.inflate(R.layout.activity_my_requests_page, container, false)
+    lateinit var toolbar: Toolbar
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_my_requests_page)
+        toolbar=header.findViewById(R.id.toolbar)
+        toolbar.title="My Requests Page"
         val viewRequestsListData: Array<ViewRequestsListData> = arrayOf<ViewRequestsListData>(
             ViewRequestsListData(
                 "188148",
@@ -43,17 +43,12 @@ class ViewRequestsTabFragment  : Fragment() {
             )
         )
 
-        recyclerView= view.findViewById(R.id.rvViewRequests)
+        recyclerView= findViewById(R.id.rvViewRequests)
         val adapter = ViewRequestsListAdapter(
             viewRequestsListData
         )
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(view.context)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
-
-        return view
-    }
-    companion object {
-        fun newInstance(): ViewRequestsTabFragment = ViewRequestsTabFragment()
     }
 }

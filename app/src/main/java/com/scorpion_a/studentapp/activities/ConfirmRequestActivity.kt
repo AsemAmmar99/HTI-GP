@@ -1,4 +1,4 @@
-package com.scorpion_a.htigp.activities
+package com.scorpion_a.studentapp.activities
 
 import android.app.AlertDialog
 import android.content.Context
@@ -7,7 +7,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
-import com.scorpion_a.htigp.R
+import com.scorpion_a.studentapp.R
 import kotlinx.android.synthetic.main.activity_confirm_request.*
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
@@ -20,7 +20,9 @@ class ConfirmRequestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_confirm_request)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title="Confirm Your Request"
-
+        tvRequestDesc.text=intent.getStringExtra("desc");
+        tvRequestCount.text=intent.getStringExtra("count");
+        tvRequestTotalPrice.text=intent.getStringExtra("total");
         buConfirm.setOnClickListener {
             onRequestSent(this)
         }
@@ -35,7 +37,11 @@ class ConfirmRequestActivity : AppCompatActivity() {
             .setPositiveButton(
                 android.R.string.ok
             ) { dialog: DialogInterface, which: Int ->
+//                val intent = Intent(this, HomeActivity::class.java)
+//                startActivity(intent)
+//                finish()
                 val intent = Intent(this, HomeActivity::class.java)
+//                intent.putExtra("menu", 1)
                 startActivity(intent)
                 finish()
                 dialog.dismiss()

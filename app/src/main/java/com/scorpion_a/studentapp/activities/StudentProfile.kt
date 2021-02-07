@@ -1,9 +1,9 @@
-package com.scorpion_a.htigp.activities
+package com.scorpion_a.studentapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
-import com.scorpion_a.htigp.R
+import com.scorpion_a.studentapp.R
 import kotlinx.android.synthetic.main.activity_profile_page.*
 
 class StudentProfile : AppCompatActivity() {

@@ -32,6 +32,8 @@ public class ViewRequestsListAdapter extends RecyclerView.Adapter<ViewRequestsLi
         holder.tvRequestNumber.setText(requestsdata[position].getViewRequestsNumber());
         holder.tvRequestDescription.setText(requestsdata[position].getViewRequestsDesc());
         holder.tvRequestStatus.setText(requestsdata[position].getRequestsStatus());
+        holder.tvRequestCount.setText(requestsdata[position].getRequestsCount());
+        holder.tvRequestTime.setText(requestsdata[position].getRequestsTime());
     }
 
 
@@ -44,12 +46,16 @@ public class ViewRequestsListAdapter extends RecyclerView.Adapter<ViewRequestsLi
         public TextView tvRequestNumber;
         public TextView tvRequestDescription;
         public TextView tvRequestStatus;
+        public TextView tvRequestCount;
+        public TextView tvRequestTime;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.tvRequestNumber = itemView.findViewById(R.id.tvRequestNumber);
             this.tvRequestDescription = itemView.findViewById(R.id.tvRequestDesc);
             this.tvRequestStatus = itemView.findViewById(R.id.tvRequestStatus);
+            this.tvRequestCount = itemView.findViewById(R.id.tvRequestCount);
+            this.tvRequestTime = itemView.findViewById(R.id.tvRequestTime);
         }
     }
 }

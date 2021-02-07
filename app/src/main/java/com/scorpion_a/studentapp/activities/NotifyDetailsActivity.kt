@@ -1,8 +1,8 @@
-package com.scorpion_a.htigp.activities
+package com.scorpion_a.studentapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.scorpion_a.htigp.R
+import com.scorpion_a.studentapp.R
 
 class NotifyDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

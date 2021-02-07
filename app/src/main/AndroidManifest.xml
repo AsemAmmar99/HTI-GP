@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".activities.MyRequestsActivity"></activity>
         <activity android:name=".activities.EventsListActivity"></activity>
         <activity android:name=".activities.PendingRequestsActivity" />
         <activity android:name=".activities.AboutHTIActivity"></activity>
@@ -19,7 +20,6 @@
         <activity android:name=".activities.StudentProfile" />
         <activity android:name=".activities.NotifyDetailsActivity" />
         <activity android:name=".activities.ConfirmRequestActivity" />
-        <activity android:name=".activities.PendingRequestsActivity" />
         <activity android:name=".activities.SupportActivity" />
         <activity android:name=".activities.TutorialDetailsActivity" />
         <activity android:name=".activities.TutorialActivity" />

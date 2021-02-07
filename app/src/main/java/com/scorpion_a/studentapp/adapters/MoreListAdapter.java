@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.scorpion_a.studentapp.activities.AppTechSupportActivity;
 import com.scorpion_a.studentapp.activities.FAQSActivity;
 import com.scorpion_a.studentapp.activities.LoginScreen;
+import com.scorpion_a.studentapp.activities.MyRequestsActivity;
 import com.scorpion_a.studentapp.activities.PrintoutActivity;
 import com.scorpion_a.studentapp.activities.ProfilePageActivity;
 import com.scorpion_a.studentapp.activities.RegProposalActivity;
+import com.scorpion_a.studentapp.activities.StudentProfile;
 import com.scorpion_a.studentapp.activities.TestYourselfActivity;
 import com.scorpion_a.studentapp.activities.TutorialActivity;
 import com.scorpion_a.studentapp.model.MoreListData;
@@ -50,27 +52,32 @@ public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHo
                 switch (position)
                 {
                     case 0:
-                        context.startActivity(new Intent(context, ProfilePageActivity.class));
+                        context.startActivity(new Intent(context, StudentProfile.class));
                         break;
                     case 1:
+                        context.startActivity(new Intent(context, MyRequestsActivity.class));
+                        break;
+
+                    case 2:
                         context.startActivity(new Intent(context, PrintoutActivity.class));
                         break;
-                    case 2:
+
+                    case 3:
                         context.startActivity(new Intent(context, RegProposalActivity.class));
                         break;
-                    case 3:
+                    case 5:
                         context.startActivity(new Intent(context, TestYourselfActivity.class));
                         break;
-                    case 4:
+                    case 6:
                         context.startActivity(new Intent(context, TutorialActivity.class));
                         break;
-                    case 5:
+                    case 7:
                         context.startActivity(new Intent(context, FAQSActivity.class));
                         break;
-                    case 6:
-                        context.startActivity(new Intent(context, AppTechSupportActivity.class));
-                        break;
-                    case 7:
+//                    case 6:
+//                        context.startActivity(new Intent(context, AppTechSupportActivity.class));
+//                        break;
+                    case 10:
                         context.startActivity(new Intent(context, LoginScreen.class));
                         ((Activity)context).finish();
                         break;
