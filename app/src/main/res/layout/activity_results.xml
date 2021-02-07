@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.scorpion_a.studentapp.activities.ResultsActivity">
+    <include
+        android:id="@+id/header"
+        layout="@layout/main_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/ivProfilePic"
+        android:src="@drawable/avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvStudentNameEng"
+        android:textColor="@color/light_black"
+        android:textSize="18dp"
+        android:text="Asem El-Sayed Abdel-Hamid Ammar"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivProfilePic"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvStudentDepartment"
+        android:background="@drawable/roundedcorner"
+        android:textColor="@color/light_black"
+        android:textSize="22dp"
+        android:text="Computer Science"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvStudentNameEng"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/clGPA"
+        android:background="@drawable/roundedcorner2"
+        app:layout_constraintTop_toBottomOf="@id/tvStudentDepartment"
+        app:layout_constraintStart_toEndOf="@id/clUnits"
+        app:layout_constraintEnd_toStartOf="@id/clClassYear"
+
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvGPA"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="@color/light_black"
+            android:text="@string/gpa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvGPAResult"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/dark_red"
+            android:text="2.33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvGPA"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/clUnits"
+        android:background="@drawable/roundedcorner2"
+        app:layout_constraintTop_toBottomOf="@id/tvStudentDepartment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/clGPA"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTotalUnits"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="@color/light_black"
+            android:text="Total Units"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvUnitsValue"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/dark_red"
+            android:text="108"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTotalUnits"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/clClassYear"
+        android:background="@drawable/roundedcorner2"
+        app:layout_constraintTop_toBottomOf="@id/tvStudentDepartment"
+        app:layout_constraintStart_toEndOf="@id/clGPA"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvClassYear"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="@color/light_black"
+            android:text="Class Year"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvYearValue"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/dark_red"
+            android:text="October 2020"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvClassYear"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clGPA"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:id="@+id/rvResultsItems"
+            android:nestedScrollingEnabled="false">
+        </androidx.recyclerview.widget.RecyclerView>
+    </HorizontalScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
