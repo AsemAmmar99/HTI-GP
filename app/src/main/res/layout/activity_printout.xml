@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_blue"
+    android:background="@drawable/background"
     tools:context=".activities.PrintoutActivity">
     <include
         android:id="@+id/header"
@@ -189,7 +189,6 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:background="@color/light_blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clYear"
@@ -201,9 +200,7 @@
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
         android:id="@+id/rvRegCardItems"
-        android:nestedScrollingEnabled="false"
-        android:background="@color/light_blue"
-        >
+        android:nestedScrollingEnabled="false">
     </androidx.recyclerview.widget.RecyclerView>
     </HorizontalScrollView>
 

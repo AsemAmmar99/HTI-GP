@@ -23,7 +23,7 @@ public class ResultsCardAdapter extends RecyclerView.Adapter<ResultsCardAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View ResultsCardItem = layoutInflater.inflate(R.layout.prop_card_titles_item, parent, false);
+        View ResultsCardItem = layoutInflater.inflate(R.layout.results_card_titles_items, parent, false);
         ViewHolder viewHolder = new ViewHolder(ResultsCardItem);
         return viewHolder;
     }
@@ -77,7 +77,7 @@ public class ResultsCardAdapter extends RecyclerView.Adapter<ResultsCardAdapter.
             this.tvregNumber = itemView.findViewById(R.id.tvItemNumber);
             this.tvregCode = itemView.findViewById(R.id.tvItemCode);
             this.tvregSubject = itemView.findViewById(R.id.tvItemSubject);
-            this.tvregUnits = itemView.findViewById(R.id.tvItemUnits);
+            this.tvregUnits = itemView.findViewById(R.id.tvItemGrade);
         }
     }
 }

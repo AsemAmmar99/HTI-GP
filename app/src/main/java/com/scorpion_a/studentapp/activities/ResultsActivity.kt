@@ -60,11 +60,10 @@ class ResultsActivity : AppCompatActivity() {
             )
         )
 
-        recyclerView = findViewById(R.id.rvPropCardItems)
+        recyclerView = findViewById(R.id.rvResultsItems)
         var adapter = ResultsCardAdapter(ResultsCardItems)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
-    }
     }
 }

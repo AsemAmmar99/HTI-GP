@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/light_blue"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -51,7 +50,7 @@
 
     <TextView
         android:id="@+id/tvItemGroup"
-        android:layout_width="60dp"
+        android:layout_width="76dp"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toStartOf="@id/tvItemUnits"
         app:layout_constraintStart_toEndOf="@id/tvItemSubject"
@@ -66,7 +65,7 @@
 
     <TextView
         android:id="@+id/tvItemUnits"
-        android:layout_width="56dp"
+        android:layout_width="74dp"
         android:layout_height="match_parent"
         app:layout_constraintStart_toEndOf="@id/tvItemGroup"
         app:layout_constraintTop_toTopOf="parent"
