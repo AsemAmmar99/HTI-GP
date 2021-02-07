@@ -16,6 +16,7 @@
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.MyRequestsActivity" />
         <activity android:name=".activities.EventsListActivity" />
+        <activity android:name=".activities.RequestTutorialActivity"></activity>
         <activity android:name=".activities.PendingRequestsActivity" />
         <activity android:name=".activities.AboutHTIActivity" />
         <activity android:name=".activities.StudentEditProfile" />

@@ -1,22 +1,31 @@
 package com.scorpion_a.studentapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.activities.RequestTutorialActivity
+import com.scorpion_a.studentapp.activities.SupportActivity
 import com.scorpion_a.studentapp.adapters.RequestListAdapter
 import com.scorpion_a.studentapp.model.RequestListData
 import kotlinx.android.synthetic.main.fragment_notification.view.*
+import kotlinx.android.synthetic.main.fragment_notification.view.header
+import kotlinx.android.synthetic.main.fragment_requests_page.*
+import kotlinx.android.synthetic.main.fragment_requests_page.view.*
 
 class RequestsPageFragment : Fragment() {
     lateinit var toolbar: Toolbar
     var tabLayout: TabLayout?= null
+    lateinit var tvToturial: TextView
+
     lateinit var  recyclerView: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,7 +68,7 @@ class RequestsPageFragment : Fragment() {
             ),
             RequestListData(
                 "Recommendation Letter","40"
-            ),
+            )
         )
 
         recyclerView = view.findViewById(R.id.rvRequest)
@@ -68,6 +77,11 @@ class RequestsPageFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(view.context,
             LinearLayoutManager.VERTICAL,false )
         recyclerView.adapter = adapter
+        tvToturial=view.findViewById(R.id.request_tutorial)
+        tvToturial.setOnClickListener {
+            val intent = Intent(context, RequestTutorialActivity::class.java)
+            startActivity(intent)
+        }
         return view
     }
     companion object {

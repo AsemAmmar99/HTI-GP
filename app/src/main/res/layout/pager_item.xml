@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:carbon_cornerRadius="10dp"
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/tvPoint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="1.'sad;fj'ad;kn"
+        android:textStyle="bold"
+        android:textSize="14dp"
+        android:textColor="@color/light_black"
+        />
+
+    <TextView
+        android:id="@+id/tvPointValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPoint"
+        android:layout_marginTop="5dp"
+        android:text="1.'sad;fj'ad;kn"
+        android:textSize="14dp"
+        android:textColor="@color/light_black"
+        />
+
+    <carbon.widget.ImageView
+        android:id="@+id/ivExample"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPointValue"
+        android:layout_marginTop="10dp"
+        />
+</carbon.widget.ConstraintLayout>
