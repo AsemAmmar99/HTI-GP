@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.scorpion_a.studentapp.activities.AboutHTIActivity;
 import com.scorpion_a.studentapp.activities.AppTechSupportActivity;
 import com.scorpion_a.studentapp.activities.FAQSActivity;
 import com.scorpion_a.studentapp.activities.LoginScreen;
@@ -78,6 +79,10 @@ public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHo
                         break;
                     case 7:
                         context.startActivity(new Intent(context, FAQSActivity.class));
+                        break;
+
+                    case 8:
+                        context.startActivity(new Intent(context, AboutHTIActivity.class));
                         break;
                     case 9:
                         context.startActivity(new Intent(context, SettingsActivity.class));
