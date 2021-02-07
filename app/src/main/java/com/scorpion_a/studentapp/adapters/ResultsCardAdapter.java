@@ -5,23 +5,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import androidx.recyclerview.widget.RecyclerView;
-import com.scorpion_a.studentapp.R;
-import com.scorpion_a.studentapp.model.RegCardData;
 
-public class RegCardAdapter extends RecyclerView.Adapter<RegCardAdapter.ViewHolder> {
-    private RegCardData[] regdata;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.scorpion_a.studentapp.R;
+import com.scorpion_a.studentapp.model.PropCardData;
+import com.scorpion_a.studentapp.model.ResultsCardData;
+
+public class ResultsCardAdapter extends RecyclerView.Adapter<ResultsCardAdapter.ViewHolder> {
+    private ResultsCardData[] resultsdata;
 
     // RecyclerView recyclerView;
-    public RegCardAdapter(RegCardData[] regdata) {
-        this.regdata = regdata;
+    public ResultsCardAdapter(ResultsCardData[] resultsdata) {
+        this.resultsdata = resultsdata;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View regCardItem = layoutInflater.inflate(R.layout.reg_card_titles_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(regCardItem);
+        View ResultsCardItem = layoutInflater.inflate(R.layout.prop_card_titles_item, parent, false);
+        ViewHolder viewHolder = new ViewHolder(ResultsCardItem);
         return viewHolder;
     }
 
@@ -39,39 +42,34 @@ public class RegCardAdapter extends RecyclerView.Adapter<RegCardAdapter.ViewHold
             setHeaderBg(holder.tvregNumber);
             setHeaderBg(holder.tvregCode);
             setHeaderBg(holder.tvregSubject);
-            setHeaderBg(holder.tvregGroup);
             setHeaderBg(holder.tvregUnits);
             holder.tvregNumber.setText("N");
             holder.tvregCode.setText("S.Code");
             holder.tvregSubject.setText("S.Name");
-            holder.tvregGroup.setText("S.Group");
-            holder.tvregUnits.setText("S.Units");
+            holder.tvregUnits.setText("Grade");
         }else {
-            final RegCardData regCardData = regdata[position-1];
+            final ResultsCardData ResultsCardData = resultsdata[position-1];
             setContentBg( holder.tvregNumber);
             setContentBg( holder.tvregCode);
             setContentBg( holder.tvregSubject);
-            setContentBg( holder.tvregGroup);
             setContentBg( holder.tvregUnits);
-            holder.tvregNumber.setText(regCardData.getItemNumber());
-            holder.tvregCode.setText(regCardData.getItemCode());
-            holder.tvregSubject.setText(regCardData.getItemSubject());
-            holder.tvregGroup.setText(regCardData.getItemGroup());
-            holder.tvregUnits.setText(regCardData.getItemUnits());
+            holder.tvregNumber.setText(ResultsCardData.getItemNumber());
+            holder.tvregCode.setText(ResultsCardData.getItemCode());
+            holder.tvregSubject.setText(ResultsCardData.getItemSubject());
+            holder.tvregUnits.setText(ResultsCardData.getItemGrade());
         }
     }
 
 
     @Override
     public int getItemCount() {
-        return regdata.length+ 1;
+        return resultsdata.length+ 1;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvregNumber;
         public TextView tvregCode;
         public TextView tvregSubject;
-        public TextView tvregGroup;
         public TextView tvregUnits;
 
         public ViewHolder(View itemView) {
@@ -79,7 +77,6 @@ public class RegCardAdapter extends RecyclerView.Adapter<RegCardAdapter.ViewHold
             this.tvregNumber = itemView.findViewById(R.id.tvItemNumber);
             this.tvregCode = itemView.findViewById(R.id.tvItemCode);
             this.tvregSubject = itemView.findViewById(R.id.tvItemSubject);
-            this.tvregGroup = itemView.findViewById(R.id.tvItemGroup);
             this.tvregUnits = itemView.findViewById(R.id.tvItemUnits);
         }
     }

@@ -18,6 +18,7 @@ import com.scorpion_a.studentapp.activities.MyRequestsActivity;
 import com.scorpion_a.studentapp.activities.PrintoutActivity;
 import com.scorpion_a.studentapp.activities.ProfilePageActivity;
 import com.scorpion_a.studentapp.activities.RegProposalActivity;
+import com.scorpion_a.studentapp.activities.ResultsActivity;
 import com.scorpion_a.studentapp.activities.SettingsActivity;
 import com.scorpion_a.studentapp.activities.StudentProfile;
 import com.scorpion_a.studentapp.activities.TestYourselfActivity;
@@ -65,6 +66,9 @@ public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHo
 
                     case 3:
                         context.startActivity(new Intent(context, RegProposalActivity.class));
+                        break;
+                    case 4:
+                        context.startActivity(new Intent(context, ResultsActivity.class));
                         break;
                     case 5:
                         context.startActivity(new Intent(context, TestYourselfActivity.class));

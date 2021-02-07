@@ -43,9 +43,9 @@ public class PropCardAdapter extends RecyclerView.Adapter<PropCardAdapter.ViewHo
             setHeaderBg(holder.tvregSubject);
             setHeaderBg(holder.tvregUnits);
             holder.tvregNumber.setText("N");
-            holder.tvregCode.setText("Code");
-            holder.tvregSubject.setText("Subject");
-            holder.tvregUnits.setText("Units");
+            holder.tvregCode.setText("SCode");
+            holder.tvregSubject.setText("S.Name");
+            holder.tvregUnits.setText("S.Units");
         }else {
             final PropCardData propCardData = propdata[position-1];
             setContentBg( holder.tvregNumber);
