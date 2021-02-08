@@ -84,14 +84,33 @@ public class RequestInfoFragment extends BottomSheetDialogFragment {
                 if (etcount.getText().toString().equals("")||etcount.getText().toString().equals(null)) {
                     alerting();
                 }else {
-                    startActivity(new Intent(getContext(), ConfirmRequestActivity.class)
-                            .putExtra("desc", rDesc)
-                            .putExtra("count", rCount)
-                            .putExtra("total", rTotal));
-                    dialog.dismiss();
+                    alertingNot();
                 }
             }
         });
+    }
+    public void alertingNot(){
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.attention))
+                .setMessage("CIB Account: 100011938528. Did you pay and have the Receipt?")
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(getContext(), ConfirmRequestActivity.class)
+                                        .putExtra("desc", rDesc)
+                                        .putExtra("count", rCount)
+                                        .putExtra("total", rTotal));
+                                dialog.dismiss();
+                            }
+                        })
+                .setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                .create();
+        alertDialog.show();
     }
 
 

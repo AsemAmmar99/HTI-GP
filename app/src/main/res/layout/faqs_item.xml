@@ -6,7 +6,6 @@
     android:id="@+id/clFAQsItem"
     android:layout_marginBottom="10dp"
     android:layout_marginStart="25dp"
-    android:background="@color/light_blue"
     android:paddingBottom="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout

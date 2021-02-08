@@ -1,9 +1,11 @@
 package com.scorpion_a.studentapp.activities
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
@@ -119,18 +121,18 @@ class LoginScreen : AppCompatActivity() {
         }
     }
     private fun onForgot(context: Context) {
-//        val builder: AlertDialog.Builder
-//        builder = AlertDialog.Builder(context)
-//        builder.setTitle(getString(R.string.attention))
-//            .setMessage(getString(R.string.your_verify_sent))
-//            .setCancelable(false)
-//            .setPositiveButton(
-//                android.R.string.ok
-//            ) { dialog: DialogInterface, which: Int ->
-//                dialog.dismiss()
-//            }
-//            .show()
-        val bottomSheetDialog: ResetPasswordFragment = ResetPasswordFragment.newInstance()
-        bottomSheetDialog.show(supportFragmentManager, "Bottom Sheet Dialog Fragment")
+        val builder: AlertDialog.Builder
+        builder = AlertDialog.Builder(context)
+        builder.setTitle(getString(R.string.attention))
+            .setMessage("Please, Communicate with Students Affairs.")
+            .setCancelable(false)
+            .setPositiveButton(
+                android.R.string.ok
+            ) { dialog: DialogInterface, which: Int ->
+                dialog.dismiss()
+            }
+            .show()
+//        val bottomSheetDialog: ResetPasswordFragment = ResetPasswordFragment.newInstance()
+//        bottomSheetDialog.show(supportFragmentManager, "Bottom Sheet Dialog Fragment")
     }
 }
