@@ -30,6 +30,7 @@ public class RequestInfoFragment extends BottomSheetDialogFragment {
         super.onCreate(savedInstanceState);
     }
 
+
     public void alerting(){
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
         alertDialog.setTitle(getString(R.string.attention));

@@ -1,5 +1,7 @@
 package com.scorpion_a.studentapp.activities
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -11,6 +13,9 @@ import com.scorpion_a.studentapp.fragments.RequestInfoFragment
 import com.scorpion_a.studentapp.fragments.TableFragment
 import com.scorpion_a.studentapp.model.PropCardData
 import kotlinx.android.synthetic.main.activity_profile_page.*
+import kotlinx.android.synthetic.main.activity_profile_page.clGPA
+import kotlinx.android.synthetic.main.activity_profile_page.header
+import kotlinx.android.synthetic.main.activity_reg_proposal.*
 
 class RegProposalActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
@@ -20,6 +25,13 @@ class RegProposalActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reg_proposal)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title="Registration Proposal"
+
+        tvGoRegister.setOnClickListener {
+            val uriUrl = Uri.parse("http://www.hti.edu.eg/ar/student-registration-instructions.aspx")
+            val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
+            startActivity(launchBrowser)
+        }
+
         clGPA.setOnClickListener {
 
 //                context.startActivity(new Intent(context, SendRequestActivity.class));
