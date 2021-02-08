@@ -1,12 +1,14 @@
 package com.scorpion_a.studentapp.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.PropCardAdapter
+import com.scorpion_a.studentapp.fragments.RequestInfoFragment
+import com.scorpion_a.studentapp.fragments.TableFragment
 import com.scorpion_a.studentapp.model.PropCardData
 import kotlinx.android.synthetic.main.activity_profile_page.*
 
@@ -18,6 +20,15 @@ class RegProposalActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reg_proposal)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title="Registration Proposal"
+        clGPA.setOnClickListener {
+
+//                context.startActivity(new Intent(context, SendRequestActivity.class));
+            val tableFragment = TableFragment.newInstance()
+            tableFragment.show(
+                supportFragmentManager,
+                "Bottom Sheet Dialog Fragment"
+            )
+        }
 
         val propCardItems: Array<PropCardData> = arrayOf<PropCardData>(
             PropCardData(
