@@ -1,8 +1,10 @@
 package com.scorpion_a.studentapp.activities
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
@@ -124,10 +126,24 @@ class LoginScreen : AppCompatActivity() {
         val builder: AlertDialog.Builder
         builder = AlertDialog.Builder(context)
         builder.setTitle(getString(R.string.attention))
-            .setMessage("Please, Communicate with Students Affairs.")
+            .setMessage("Please send your ID to (info@hti.edu.eg), your password will be sent within 24 work hours after sending your email.")
             .setCancelable(false)
             .setPositiveButton(
-                android.R.string.ok
+                "Send Email"
+            ) { dialog: DialogInterface, which: Int ->
+                try {
+                    val intent =
+                        Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "info@hti.edu.eg"))
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Question")
+
+                    startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    //TODO smth
+                }
+                finish()
+                dialog.dismiss()
+            } .setNegativeButton(
+                "Ok"
             ) { dialog: DialogInterface, which: Int ->
                 dialog.dismiss()
             }

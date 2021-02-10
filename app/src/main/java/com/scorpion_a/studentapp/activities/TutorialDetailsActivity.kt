@@ -21,7 +21,7 @@ class TutorialDetailsActivity : AppCompatActivity() {
             tvTutorialDetails.text =
                 "- The Login page is the main and the first page that will appear to you in this Application, you can change your Language form English to Arabic and From Arabic to English by turning the switch on or off and you can go to Help Page (User Assistant Page) to help you to use the Application.\n\n" +
                         "- You can Login into your Profile by using the ID and the Password as the same ID and the Password of the WebSite, you can save the ID and the Password by pressing the Remeber me button and if you logged out and login again you will see them in the specific text fields.\n\n" +
-                        "- If you forget your password, you can change it by pressing the Forget Password Button and will send a verification link to your education account if you a student but if you a graduated Student the link will be sent to your email which you verified it in the application."
+                        "- If you forget your password, you can change it by pressing (Forgot Your Password?) button. It will appear to you an alert to send an email to (info@hti.edu.eg). Send your id, and the password will be sent to you within 24 work hours after sending your email."
         }else if(txt.equals("Home Screen")){
             tvTutorialDetails.text =
                 "- Home page is the main page after logging successfully, The Department will appear in the top of the page, and in the bottom you can see the BottomNavigationBar which you can use to navigate between your main pages that you can use  (Requests, Notification, More page).\n\n" +
