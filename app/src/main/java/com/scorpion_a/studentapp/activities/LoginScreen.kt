@@ -3,14 +3,25 @@ package com.scorpion_a.studentapp.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
 import com.google.android.material.tabs.TabLayout
+import com.google.gson.GsonBuilder
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.fragments.ResetPasswordFragment
+import com.scorpion_a.studentapp.model.requests.LoginRequests
+import com.scorpion_a.studentapp.model.responses.LoginResponse
+import com.scorpion_a.studentapp.network.Service
+import com.scorpion_a.studentapp.network.Service.Companion.BaseUrl
 import kotlinx.android.synthetic.main.activity_login_screen.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class LoginScreen : AppCompatActivity() {
@@ -18,8 +29,48 @@ class LoginScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
 
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BaseUrl)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
 
+        val service = retrofit.create(Service::class.java)
+
+        val call = service.getLoginData(LoginRequests(etID.text.trim().toString(),etPassword.text.trim().toString()))
+        buLogin.setOnClickListener {
+            call.enqueue(object : Callback<LoginResponse> {
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+//                    val intent = Intent(it.context, HomeActivity::class.java)
+//                    startActivity(intent)
+//                    finish()
+                    Log.i("request",call.request().toString())
+//                    val intent = Intent(it.context, HomeActivity::class.java)
+//                    startActivity(intent)
+//                    finish()
+                    Log.i("etID.text.toString()",etID.text.toString())
+                    buLogin.setText(etID.text.toString())
+
+                    // Catching Responses From Retrofit
+                    Log.d("TAG", "onResponseisSuccessful: "+response.isSuccessful());
+                    Log.d("TAG", "onResponsebody: "+response.body());
+                    Log.d("TAG", "onResponseerrorBody: "+response.errorBody());
+                    Log.d("TAG", "onResponsemessage: "+response.message());
+                    Log.d("TAG", "onResponsecode: "+response.code());
+                    Log.d("TAG", "onResponseheaders: "+response.headers());
+                    Log.d("TAG", "onResponseraw: "+response.raw());
+                    Log.d("TAG", "onResponsetoString: "+response.toString());
+
+                }
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Log.i("test",t.toString())
+                }
+            })
+
+        }
 
 
         tvHelp.setOnClickListener {
@@ -27,11 +78,9 @@ class LoginScreen : AppCompatActivity() {
             startActivity(intent)
         }
 
-        buLogin.setOnClickListener {
-            val intent = Intent(it.context, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+//        buLogin.setOnClickListener {
+//
+//        }
 
         tvForgot.setOnClickListener {
             onForgot(it.context)

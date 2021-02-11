@@ -1,5 +1,5 @@
 package com.scorpion_a.studentapp.model.requests
 
-data class LoginRequests(
-     var user_code: String,var password: String
+class LoginRequests(
+     var user_id: String,var password: String
 )
