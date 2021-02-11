@@ -39,12 +39,12 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventsListAdapter.Vi
         holder.tvTitle.setText(eventsdata[position].getEventsTitle());
         holder.tvDesc.setText(eventsdata[position].getEventsDesc());
         holder.tvData.setText(eventsdata[position].getEventsDate());
-//        holder.clNewsItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                context.startActivity(new Intent(context, NewsDetailsActivity.class));
-//            }
-//        });
+        holder.clEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, NewsDetailsActivity.class));
+            }
+        });
     }
 
 
@@ -57,6 +57,7 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventsListAdapter.Vi
         public TextView tvTitle;
         public TextView tvDesc;
         public TextView tvData;
+        public ConstraintLayout clEvents;
 
 //        public ConstraintLayout clNewsItem;
 
@@ -65,7 +66,7 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventsListAdapter.Vi
             this.tvTitle = itemView.findViewById(R.id.tvEventsTitle);
             this.tvDesc = itemView.findViewById(R.id.tvEventsDesc);
             this.tvData = itemView.findViewById(R.id.tvEventDate);
-//            this.clNewsItem = itemView.findViewById(R.id.clNewsItem);
+            this.clEvents = itemView.findViewById(R.id.clEventsItem);
         }
     }
 }

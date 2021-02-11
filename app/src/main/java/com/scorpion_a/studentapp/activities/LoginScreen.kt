@@ -1,10 +1,14 @@
 package com.scorpion_a.studentapp.activities
 
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
@@ -168,18 +172,32 @@ class LoginScreen : AppCompatActivity() {
         }
     }
     private fun onForgot(context: Context) {
-//        val builder: AlertDialog.Builder
-//        builder = AlertDialog.Builder(context)
-//        builder.setTitle(getString(R.string.attention))
-//            .setMessage(getString(R.string.your_verify_sent))
-//            .setCancelable(false)
-//            .setPositiveButton(
-//                android.R.string.ok
-//            ) { dialog: DialogInterface, which: Int ->
-//                dialog.dismiss()
-//            }
-//            .show()
-        val bottomSheetDialog: ResetPasswordFragment = ResetPasswordFragment.newInstance()
-        bottomSheetDialog.show(supportFragmentManager, "Bottom Sheet Dialog Fragment")
+        val builder: AlertDialog.Builder
+        builder = AlertDialog.Builder(context)
+        builder.setTitle(getString(R.string.attention))
+            .setMessage("Please send your ID to (info@hti.edu.eg), your password will be sent within 24 work hours after sending your email.")
+            .setCancelable(false)
+            .setPositiveButton(
+                "Send Email"
+            ) { dialog: DialogInterface, which: Int ->
+                try {
+                    val intent =
+                        Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "info@hti.edu.eg"))
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Question")
+
+                    startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    //TODO smth
+                }
+                finish()
+                dialog.dismiss()
+            } .setNegativeButton(
+                "Ok"
+            ) { dialog: DialogInterface, which: Int ->
+                dialog.dismiss()
+            }
+            .show()
+//        val bottomSheetDialog: ResetPasswordFragment = ResetPasswordFragment.newInstance()
+//        bottomSheetDialog.show(supportFragmentManager, "Bottom Sheet Dialog Fragment")
     }
 }

@@ -4,8 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_blue"
+    android:background="@drawable/background"
     tools:context=".activities.NewsDetailsActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvNewsTitle"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="The Institute Guide to Coordination."
+        android:textColor="@color/light_black"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <ImageView
         android:layout_width="200dp"
@@ -14,8 +29,22 @@
         android:src="@drawable/htilogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNewsTitle"
         android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvNewsDate"
+        android:text="05:00PM, 02/09/2020"
+        android:textColor="@color/light_black"
+        android:textStyle="bold"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintTop_toBottomOf="@id/htiLogo"
+        app:layout_constraintBottom_toTopOf="@id/clNewsDetails"
+        android:layout_marginBottom="5dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,7 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/tvNewsDetails"
-            android:text="فازالمعهد التكنولوجي العالي بالعاشر من رمضان بالمركز الثاني في مسابقة اليوم العلمي الثاني لكلية الهندسة والتكنولوجيا بجامعة بدر BUC ) ) و الخاصة بكليات الهندسة علي مستوي الجامعات المصرية ."
+            android:text="فازالمعهد التكنولوجي العالي بالعاشر من رمضان بالمركز الثاني في مسابقة اليوم العلمي الثاني لكلية الهندسة والتكنولوجيا بجامعة بدر BUC ) ) و الخاصة بكليات الهندسة علي مستوي الجامعات المصرية."
             android:textColor="@color/light_black"
             android:scrollbars="vertical"
             app:layout_constraintTop_toTopOf="parent"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_blue">
+    android:background="@drawable/background">
     <include
         android:id="@+id/header"
         layout="@layout/main_header"
@@ -18,7 +18,6 @@
         android:layout_height="0dp"
         android:scrollbars="vertical"
         android:id="@+id/rvViewRequests"
-        android:background="@color/light_blue"
         app:layout_constraintStart_toStartOf="parent"
 app:layout_constraintTop_toBottomOf="@+id/header"
         app:layout_constraintBottom_toBottomOf="parent">

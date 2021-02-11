@@ -362,17 +362,17 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvEditPass"
-        android:padding="10dp"
-        android:text="Edit Your Password"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:textColor="@color/dark_blue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvIDValue" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/tvEditPass"-->
+<!--        android:padding="10dp"-->
+<!--        android:text="Edit Your Password"-->
+<!--        android:textSize="18dp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="@color/dark_blue"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tvIDValue" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

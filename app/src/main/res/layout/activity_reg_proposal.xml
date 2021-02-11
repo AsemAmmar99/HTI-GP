@@ -202,11 +202,12 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:id="@+id/svProp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDepends"
         android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/tvGoRegister">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="wrap_content"
@@ -216,5 +217,21 @@
             android:nestedScrollingEnabled="false">
         </androidx.recyclerview.widget.RecyclerView>
     </HorizontalScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:id="@+id/tvGoRegister"
+        android:textSize="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_blue"
+        android:text="Go to Registration Page"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/svProp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

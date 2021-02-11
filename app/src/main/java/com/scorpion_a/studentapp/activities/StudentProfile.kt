@@ -26,10 +26,10 @@ class StudentProfile : AppCompatActivity() {
             startActivity(intent)
         }
 
-        tvEditPass.setOnClickListener {
-            val intent = Intent(this, EditPasswordActivity::class.java)
-            startActivity(intent)
-        }
+//        tvEditPass.setOnClickListener {
+//            val intent = Intent(this, EditPasswordActivity::class.java)
+//            startActivity(intent)
+//        }
         ivProfilePict.setOnClickListener{
             ImagePicker.with(this)
                 .crop()	    			//Crop image(Optional), Check Customization for more option

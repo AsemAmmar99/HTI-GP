@@ -38,12 +38,12 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
         holder.tvTitle.setText(newsdata[position].getNewsTitle());
         holder.tvDesc.setText(newsdata[position].getNewsDesc());
         holder.tvDate.setText(newsdata[position].getNewsDate());
-//        holder.clNewsItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                context.startActivity(new Intent(context, NewsDetailsActivity.class));
-//            }
-//        });
+        holder.clNewsItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, NewsDetailsActivity.class));
+            }
+        });
     }
 
 
