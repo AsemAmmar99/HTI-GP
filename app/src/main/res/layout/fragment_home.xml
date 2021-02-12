@@ -45,7 +45,7 @@
             android:id="@+id/tvDepartment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Department: Computer Science"
+            tools:text="Department: Computer Science"
             android:textColor="@color/light_black"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"

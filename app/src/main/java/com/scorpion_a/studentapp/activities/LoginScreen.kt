@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
@@ -20,6 +21,7 @@ import com.scorpion_a.studentapp.model.requests.LoginRequests
 import com.scorpion_a.studentapp.model.responses.LoginResponse
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.network.Service.Companion.BaseUrl
+import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import kotlinx.android.synthetic.main.activity_login_screen.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,35 +46,49 @@ class LoginScreen : AppCompatActivity() {
 
         val service = retrofit.create(Service::class.java)
 
-        val call = service.getLoginData(LoginRequests(etID.text.trim().toString(),etPassword.text.trim().toString()))
         buLogin.setOnClickListener {
-            call.enqueue(object : Callback<LoginResponse> {
-                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-//                    val intent = Intent(it.context, HomeActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
-                    Log.i("request",call.request().toString())
-//                    val intent = Intent(it.context, HomeActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
-                    Log.i("etID.text.toString()",etID.text.toString())
-                    buLogin.setText(etID.text.toString())
+            if (etID.text.trim().toString().isEmpty()) {
+                Toast.makeText(this, "Please enter id", Toast.LENGTH_SHORT).show()
+            }else if(etPassword.text.trim().toString().isEmpty()){
+                Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show()
+            }else {
+                val call = service.getLoginData(
+                    LoginRequests(
+                        Integer.valueOf(etID.text.trim().toString()),
+                        etPassword.text.trim().toString()
+                    )
+                )
+                call.enqueue(object : Callback<LoginResponse> {
+                    override fun onResponse(
+                        call: Call<LoginResponse>,
+                        response: Response<LoginResponse>
+                    ) {
+                        if (response.isSuccessful()){
+                            Log.i("call", response.body().token.toString())
+                            SharedPreferenceClass.saveString(it.context,"TOKEN",response.body().token.toString())
+                            val intent = Intent(it.context, HomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }else{
+                            Toast.makeText(baseContext, "Something went wrong, please check your data", Toast.LENGTH_SHORT).show()
+                        }
+                        // Catching Responses From Retrofit
+                        Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
+                        Log.d("TAG", "onResponsebody: " + response.body());
+                        Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
+                        Log.d("TAG", "onResponsemessage: " + response.message());
+                        Log.d("TAG", "onResponsecode: " + response.code());
+                        Log.d("TAG", "onResponseheaders: " + response.headers());
+                        Log.d("TAG", "onResponseraw: " + response.raw());
+                        Log.d("TAG", "onResponsetoString: " + response.toString());
 
-                    // Catching Responses From Retrofit
-                    Log.d("TAG", "onResponseisSuccessful: "+response.isSuccessful());
-                    Log.d("TAG", "onResponsebody: "+response.body());
-                    Log.d("TAG", "onResponseerrorBody: "+response.errorBody());
-                    Log.d("TAG", "onResponsemessage: "+response.message());
-                    Log.d("TAG", "onResponsecode: "+response.code());
-                    Log.d("TAG", "onResponseheaders: "+response.headers());
-                    Log.d("TAG", "onResponseraw: "+response.raw());
-                    Log.d("TAG", "onResponsetoString: "+response.toString());
+                    }
 
-                }
-                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    Log.i("test",t.toString())
-                }
-            })
+                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                        Log.i("test", t.toString())
+                    }
+                })
+            }
 
         }
 
@@ -81,10 +97,6 @@ class LoginScreen : AppCompatActivity() {
             val intent = Intent(this, TutorialActivity::class.java)
             startActivity(intent)
         }
-
-//        buLogin.setOnClickListener {
-//
-//        }
 
         tvForgot.setOnClickListener {
             onForgot(it.context)

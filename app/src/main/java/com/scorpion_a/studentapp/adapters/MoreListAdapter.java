@@ -26,6 +26,7 @@ import com.scorpion_a.studentapp.activities.TestYourselfActivity;
 import com.scorpion_a.studentapp.activities.TutorialActivity;
 import com.scorpion_a.studentapp.model.MoreListData;
 import com.scorpion_a.studentapp.R;
+import com.scorpion_a.studentapp.utils.SharedPreferenceClass;
 
 public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHolder> {
     private MoreListData[] moredata;
@@ -91,6 +92,7 @@ public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHo
 //                        context.startActivity(new Intent(context, AppTechSupportActivity.class));
 //                        break;
                     case 10:
+                        SharedPreferenceClass.clearSharedPrefrences(context);
                         context.startActivity(new Intent(context, LoginScreen.class));
                         ((Activity)context).finish();
                         break;

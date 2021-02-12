@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 
 class SplashActivity : AppCompatActivity() {
 
@@ -21,9 +22,14 @@ class SplashActivity : AppCompatActivity() {
         //4second splash time
         Handler().postDelayed({
             //start main activity
-            startActivity(Intent(this@SplashActivity, LoginScreen::class.java))
+            if (SharedPreferenceClass.loadString(this,"TOKEN").isEmpty()) {
+                startActivity(Intent(this@SplashActivity, LoginScreen::class.java))
+                finish()
+            }else{
+                startActivity(Intent(this@SplashActivity, HomeActivity::class.java))
+                finish()
+            }
             //finish this activity
-            finish()
         },2000)
 
     }
