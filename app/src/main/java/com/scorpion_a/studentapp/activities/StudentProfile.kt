@@ -47,6 +47,8 @@ class StudentProfile : AppCompatActivity() {
 
 
         val call = client.getUserData()
+        progressBarProfile.visibility = View.VISIBLE
+        clProfilePage.visibility = View.INVISIBLE
         call.enqueue(object : Callback<UserDataResponce> {
             override fun onResponse(
                 call: Call<UserDataResponce>,
@@ -63,7 +65,11 @@ class StudentProfile : AppCompatActivity() {
                     Picasso.with(baseContext).load(response.body().data?.image_path).into(ivProfilePict);
                     tvEmailValueProfile.text=response.body().data?.email
                     tvIDValueProfile.text=response.body().data?.user_id
+                    progressBarProfile.visibility = View.GONE
+                    clProfilePage.visibility = View.VISIBLE
                 }else{
+                    progressBarProfile.visibility = View.GONE
+                    clProfilePage.visibility = View.VISIBLE
                     Toast.makeText(baseContext, "Something went wrong, please check your data", Toast.LENGTH_SHORT).show()
                 }
                 // Catching Responses From Retrofit

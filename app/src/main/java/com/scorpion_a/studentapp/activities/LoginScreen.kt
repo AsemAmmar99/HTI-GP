@@ -7,12 +7,15 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import com.google.android.material.tabs.TabLayout
 import com.google.gson.GsonBuilder
 import com.scorpion_a.studentapp.R
@@ -35,6 +38,7 @@ class LoginScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
+
         val gson = GsonBuilder()
             .setLenient()
             .create()
@@ -48,9 +52,9 @@ class LoginScreen : AppCompatActivity() {
 
         buLogin.setOnClickListener {
             if (etID.text.trim().toString().isEmpty()) {
-                Toast.makeText(this, "Please enter id", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter your id", Toast.LENGTH_SHORT).show()
             }else if(etPassword.text.trim().toString().isEmpty()){
-                Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show()
             }else {
                 val call = service.getLoginData(
                     LoginRequests(
@@ -58,6 +62,8 @@ class LoginScreen : AppCompatActivity() {
                         etPassword.text.trim().toString()
                     )
                 )
+                progressBarLogin.visibility = View.VISIBLE
+                clLogin.visibility = View.INVISIBLE
                 call.enqueue(object : Callback<LoginResponse> {
                     override fun onResponse(
                         call: Call<LoginResponse>,
@@ -66,10 +72,13 @@ class LoginScreen : AppCompatActivity() {
                         if (response.isSuccessful()){
                             Log.i("call", response.body().token.toString())
                             SharedPreferenceClass.saveString(it.context,"TOKEN",response.body().token.toString())
+                            progressBarLogin.visibility = View.GONE
                             val intent = Intent(it.context, HomeActivity::class.java)
                             startActivity(intent)
                             finish()
                         }else{
+                            progressBarLogin.visibility = View.GONE
+                            clLogin.visibility = View.VISIBLE
                             Toast.makeText(baseContext, "Something went wrong, please check your data", Toast.LENGTH_SHORT).show()
                         }
                         // Catching Responses From Retrofit
