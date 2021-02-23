@@ -17,12 +17,14 @@ import com.scorpion_a.studentapp.activities.SendRequestActivity;
 import com.scorpion_a.studentapp.fragments.RequestInfoFragment;
 import com.scorpion_a.studentapp.model.RequestListData;
 
+import java.util.List;
+
 public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.ViewHolder> {
-    private RequestListData[] requestdata;
+    private List<RequestListData> requestdata;
     private Context context;
 
     // RecyclerView recyclerView;
-    public RequestListAdapter(RequestListData[] requestdata, Context context) {
+    public RequestListAdapter(List<RequestListData> requestdata, Context context) {
         this.requestdata = requestdata;
         this.context = context;
     }
@@ -37,17 +39,18 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final RequestListData requestListData = requestdata[position];
-        holder.tvRequest.setText(requestdata[position].getRequestTitle());
-        holder.tvPrice.setText(requestdata[position].getRequestPrice());
+        final RequestListData requestListData = requestdata.get(position);
+        holder.tvRequest.setText(requestListData.getName());
+        holder.tvPrice.setText(requestListData.getPrice());
         holder.clRequestItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                context.startActivity(new Intent(context, SendRequestActivity.class));
                 RequestInfoFragment requestInfoFragment= RequestInfoFragment.newInstance();
                 Bundle bundle= new Bundle();
-                bundle.putString("title", requestdata[position].getRequestTitle());
-                bundle.putString("price", requestdata[position].getRequestPrice());
+                bundle.putString("title", requestListData.getName());
+                bundle.putString("id", requestListData.getId());
+                bundle.putString("price", requestListData.getPrice());
                 requestInfoFragment.setArguments(bundle);
                 requestInfoFragment.show(((AppCompatActivity) context).getSupportFragmentManager(),
                         "Bottom Sheet Dialog Fragment");
@@ -58,7 +61,7 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
 
     @Override
     public int getItemCount() {
-        return requestdata.length;
+        return requestdata.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

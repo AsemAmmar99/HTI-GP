@@ -19,47 +19,47 @@ class RequestTabFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view= inflater.inflate(R.layout.fragment_request_tab, container, false)
-        val requestListData: Array<RequestListData> = arrayOf<RequestListData>(
-            RequestListData(
-                "Arabic Graduation certificate","30"
-            ),
-            RequestListData(
-                "English Graduation certificate","50"
-            ),
-            RequestListData(
-                "Arab equivalent certificate","70"
-            ),
-            RequestListData(
-                "Certificate of good conduct","100"
-            ),
-            RequestListData(
-                "Arabic estimate statement","30"
-            ),
-            RequestListData(
-                "Arabic Graduation certificate","20"
-            ),
-            RequestListData(
-                "English statement of estimates","30"
-            ),
-            RequestListData(
-                "Proof of enrollment","50"
-            ),
-            RequestListData(
-                "English Certificate of study materials","40"
-            ),
-            RequestListData(
-                "Identifying Card","30"
-            ),
-            RequestListData(
-                "Recommendation Letter","40"
-            ),
-        )
-
-        recyclerView = view.findViewById(R.id.rvRequest)
-        val adapter = RequestListAdapter(requestListData, context)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false )
-        recyclerView.adapter = adapter
+//        val requestListData: Array<RequestListData> = arrayOf<RequestListData>(
+//            RequestListData(
+//                "Arabic Graduation certificate","30"
+//            ),
+//            RequestListData(
+//                "English Graduation certificate","50"
+//            ),
+//            RequestListData(
+//                "Arab equivalent certificate","70"
+//            ),
+//            RequestListData(
+//                "Certificate of good conduct","100"
+//            ),
+//            RequestListData(
+//                "Arabic estimate statement","30"
+//            ),
+//            RequestListData(
+//                "Arabic Graduation certificate","20"
+//            ),
+//            RequestListData(
+//                "English statement of estimates","30"
+//            ),
+//            RequestListData(
+//                "Proof of enrollment","50"
+//            ),
+//            RequestListData(
+//                "English Certificate of study materials","40"
+//            ),
+//            RequestListData(
+//                "Identifying Card","30"
+//            ),
+//            RequestListData(
+//                "Recommendation Letter","40"
+//            ),
+//        )
+//
+//        recyclerView = view.findViewById(R.id.rvRequest)
+//        val adapter = RequestListAdapter(requestListData, context)
+//        recyclerView.setHasFixedSize(true)
+//        recyclerView.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false )
+//        recyclerView.adapter = adapter
         return view
     }
     companion object {

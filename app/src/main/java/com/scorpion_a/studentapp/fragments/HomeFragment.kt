@@ -23,6 +23,7 @@ import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_requests_page.view.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -54,6 +55,8 @@ class HomeFragment : Fragment() {
 
 
         val call = client.getUserData()
+        view.progressBarHome.visibility = View.VISIBLE
+        view.clHome.visibility = View.INVISIBLE
         call.enqueue(object : Callback<UserDataResponce> {
             override fun onResponse(
                 call: Call<UserDataResponce>,
@@ -62,7 +65,11 @@ class HomeFragment : Fragment() {
 
                 if (response.isSuccessful()){
                     tvDepartment.text="Department: " + response.body().data?.department
+                    view.progressBarHome.visibility = View.GONE
+                    view.clHome.visibility = View.VISIBLE
                 }else{
+                    view.progressBarHome.visibility = View.GONE
+                    view.clHome.visibility = View.VISIBLE
                     Toast.makeText(context, "Something went wrong, please check your data", Toast.LENGTH_SHORT).show()
                 }
                 // Catching Responses From Retrofit

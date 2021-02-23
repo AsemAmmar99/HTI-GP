@@ -1,57 +1,37 @@
 package com.scorpion_a.studentapp.model;
 
 public class ViewRequestsListData {
-    private String viewRequestsNumber;
-    private String viewRequestsDesc;
-    private String requestsStatus;
-    private String requestsCount;
-    private String requestsTime;
+    private String id;
+    private String name;
+    private String price;
 
-    public String getViewRequestsNumber() {
-        return viewRequestsNumber;
+    public ViewRequestsListData(String id, String name, String price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
     }
 
-    public void setViewRequestsNumber(String viewRequestsNumber) {
-        this.viewRequestsNumber = viewRequestsNumber;
+    public String getId() {
+        return id;
     }
 
-    public String getViewRequestsDesc() {
-        return viewRequestsDesc;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setViewRequestsDesc(String viewRequestsDesc) {
-        this.viewRequestsDesc = viewRequestsDesc;
+    public String getName() {
+        return name;
     }
 
-    public String getRequestsStatus() {
-        return requestsStatus;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setRequestsStatus(String requestsStatus) {
-        this.requestsStatus = requestsStatus;
+    public String getPrice() {
+        return price;
     }
 
-    public ViewRequestsListData(String viewRequestsNumber, String viewRequestsDesc, String requestsStatus, String requestsCount, String requestsTime) {
-        this.viewRequestsNumber = viewRequestsNumber;
-        this.viewRequestsDesc = viewRequestsDesc;
-        this.requestsStatus = requestsStatus;
-        this.requestsCount = requestsCount;
-        this.requestsTime = requestsTime;
-    }
-
-    public String getRequestsCount() {
-        return requestsCount;
-    }
-
-    public void setRequestsCount(String requestsCount) {
-        this.requestsCount = requestsCount;
-    }
-
-    public String getRequestsTime() {
-        return requestsTime;
-    }
-
-    public void setRequestsTime(String requestsTime) {
-        this.requestsTime = requestsTime;
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

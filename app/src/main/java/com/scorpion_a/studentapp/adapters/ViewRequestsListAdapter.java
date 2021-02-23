@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.scorpion_a.studentapp.R;
 import com.scorpion_a.studentapp.model.ViewRequestsListData;
 
+import java.util.List;
+
 public class ViewRequestsListAdapter extends RecyclerView.Adapter<ViewRequestsListAdapter.ViewHolder> {
-    private ViewRequestsListData[] requestsdata;
+    private List< ViewRequestsListData> requestsdata;
 
     // RecyclerView recyclerView;
-    public ViewRequestsListAdapter(ViewRequestsListData[] requestsdata) {
+    public ViewRequestsListAdapter(List< ViewRequestsListData> requestsdata) {
         this.requestsdata = requestsdata;
     }
 
@@ -28,18 +30,18 @@ public class ViewRequestsListAdapter extends RecyclerView.Adapter<ViewRequestsLi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final ViewRequestsListData viewRequestsListData = requestsdata[position];
-        holder.tvRequestNumber.setText(requestsdata[position].getViewRequestsNumber());
-        holder.tvRequestDescription.setText(requestsdata[position].getViewRequestsDesc());
-        holder.tvRequestStatus.setText(requestsdata[position].getRequestsStatus());
-        holder.tvRequestCount.setText(requestsdata[position].getRequestsCount());
-        holder.tvRequestTime.setText(requestsdata[position].getRequestsTime());
+        final ViewRequestsListData viewRequestsListData = requestsdata.get(position);
+        holder.tvRequestNumber.setText(viewRequestsListData.getId());
+        holder.tvRequestDescription.setText(viewRequestsListData.getName());
+        holder.tvRequestStatus.setText(viewRequestsListData.getPrice());
+//        holder.tvRequestCount.setText(requestsdata[position].getRequestsCount());
+//        holder.tvRequestTime.setText(requestsdata[position].getRequestsTime());
     }
 
 
     @Override
     public int getItemCount() {
-        return requestsdata.length;
+        return requestsdata.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

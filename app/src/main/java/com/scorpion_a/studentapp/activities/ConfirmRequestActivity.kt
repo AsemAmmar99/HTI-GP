@@ -7,19 +7,34 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.model.requests.RequestRequests
+import com.scorpion_a.studentapp.model.responses.LoginResponse
+import com.scorpion_a.studentapp.model.responses.SubmitRequestResponse
+import com.scorpion_a.studentapp.network.Service
+import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import kotlinx.android.synthetic.main.activity_confirm_request.*
+import kotlinx.android.synthetic.main.activity_login_screen.*
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 import kotlinx.android.synthetic.main.activity_request_data.*
 import kotlinx.android.synthetic.main.activity_student_profile.*
+import okhttp3.OkHttpClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 
 class ConfirmRequestActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
+    var rCount:Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_request)
@@ -28,8 +43,51 @@ class ConfirmRequestActivity : AppCompatActivity() {
         tvRequestDesc.text=intent.getStringExtra("desc");
         tvRequestCount.text=intent.getStringExtra("count");
         tvRequestTotalPrice.text=intent.getStringExtra("total");
+        rCount=intent.getStringExtra("count").toString().toInt()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Service.BaseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(OkHttpClient.Builder().addInterceptor { chain ->
+                val request = chain.request().newBuilder().addHeader("Authorization", "Bearer ${SharedPreferenceClass.loadString(this,"TOKEN")}").build()
+                chain.proceed(request)
+            }.build())
+            .build()
+
+        val client = retrofit.create(Service::class.java)
+        val call = client.submitRequest(RequestRequests(intent.getStringExtra("id"),rCount))
+
+
         buConfirm.setOnClickListener {
-            onRequestSent(this)
+            call.enqueue(object : Callback<SubmitRequestResponse> {
+                override fun onResponse(
+                    call: Call<SubmitRequestResponse>?,
+                    response: Response<SubmitRequestResponse>?
+                ) {
+                  if( response!!.isSuccessful()){
+                      Log.d("TAG", "response.body().data.id" + response.body().data.id);
+
+                      onRequestSent(it.context  ,response.body().data.id)
+                  }
+
+                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
+                    Log.d("TAG", "onResponsebody: " + response.body());
+                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
+                    Log.d("TAG", "onResponsemessage: " + response.message());
+                    Log.d("TAG", "onResponsecode: " + response.code());
+                    Log.d("TAG", "onResponseheaders: " + response.headers());
+                    Log.d("TAG", "onResponseraw: " + response.raw());
+                    Log.d("TAG", "onResponsetoString: " + response.toString());
+                }
+
+
+                override fun onFailure(call: Call<SubmitRequestResponse>?, t: Throwable?) {
+                    Log.i("test", t.toString())
+
+                }
+
+            })
+
         }
         buUploadReceipt.setOnClickListener{
             ImagePicker.with(this)
@@ -38,6 +96,7 @@ class ConfirmRequestActivity : AppCompatActivity() {
                 .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
                 .start()
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -58,11 +117,11 @@ class ConfirmRequestActivity : AppCompatActivity() {
             Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
         }
     }
-    private fun onRequestSent(context: Context) {
+    private fun onRequestSent(context: Context,rId:String) {
         val builder: AlertDialog.Builder
         builder = AlertDialog.Builder(context)
         builder.setTitle(getString(R.string.thank))
-            .setMessage(getString(R.string.r_successfully_sent))
+            .setMessage("Your request with number "+rId+" has been sent successfully. Go to My Requests screen to check your request status.")
             .setCancelable(false)
             .setPositiveButton(
                 android.R.string.ok

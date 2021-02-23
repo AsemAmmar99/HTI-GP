@@ -19,37 +19,37 @@ class ViewRequestsTabFragment  : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view= inflater.inflate(R.layout.activity_my_requests_page, container, false)
-        val viewRequestsListData: Array<ViewRequestsListData> = arrayOf<ViewRequestsListData>(
-            ViewRequestsListData(
-                "188148",
-                "Arabic Graduation certificate",
-                "Pending",
-                "2",
-                "4:00PM 4/4/2021"
-            ),
-            ViewRequestsListData(
-                "188149",
-                "English Graduation certificate zzzzzzzzzzzzzzzzzzz",
-                "Done",
-                "2",
-                "4:00PM 4/4/2021"
-            ),
-            ViewRequestsListData(
-                "188160",
-                "Proof of Enrollment",
-                "Missing Requirements",
-                "2",
-                "4:00PM 4/4/2021"
-            )
-        )
-
-        recyclerView= view.findViewById(R.id.rvViewRequests)
-        val adapter = ViewRequestsListAdapter(
-            viewRequestsListData
-        )
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(view.context)
-        recyclerView.adapter = adapter
+//        val viewRequestsListData: Array<ViewRequestsListData> = arrayOf<ViewRequestsListData>(
+//            ViewRequestsListData(
+//                "188148",
+//                "Arabic Graduation certificate",
+//                "Pending",
+//                "2",
+//                "4:00PM 4/4/2021"
+//            ),
+//            ViewRequestsListData(
+//                "188149",
+//                "English Graduation certificate zzzzzzzzzzzzzzzzzzz",
+//                "Done",
+//                "2",
+//                "4:00PM 4/4/2021"
+//            ),
+//            ViewRequestsListData(
+//                "188160",
+//                "Proof of Enrollment",
+//                "Missing Requirements",
+//                "2",
+//                "4:00PM 4/4/2021"
+//            )
+//        )
+//
+//        recyclerView= view.findViewById(R.id.rvViewRequests)
+//        val adapter = ViewRequestsListAdapter(
+//            viewRequestsListData
+//        )
+//        recyclerView.setHasFixedSize(true)
+//        recyclerView.layoutManager = LinearLayoutManager(view.context)
+//        recyclerView.adapter = adapter
 
         return view
     }

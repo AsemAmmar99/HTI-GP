@@ -20,6 +20,7 @@ public class RequestInfoFragment extends BottomSheetDialogFragment {
     String rDesc;
     String rCount;
     String rTotal;
+    String rId;
     public static RequestInfoFragment newInstance() {
         RequestInfoFragment fragment = new RequestInfoFragment();
         return fragment;
@@ -52,6 +53,7 @@ public class RequestInfoFragment extends BottomSheetDialogFragment {
         ((View) contentView.getParent()).setBackgroundColor(getResources().getColor(android.R.color.transparent));
         String title= getArguments().getString("title");
         String price= getArguments().getString("price");
+        rId= getArguments().getString("id");
         TextView tvTitle=contentView.findViewById(R.id.tvRequestNameValue);
         TextView tvPrice=contentView.findViewById(R.id.tvRequestPriceValue);
         Button send=contentView.findViewById(R.id.buSendRequest);
@@ -69,7 +71,9 @@ public class RequestInfoFragment extends BottomSheetDialogFragment {
             public void onClick(View v) {
                 if (etcount.getText().toString().equals("")||etcount.getText().toString().equals(null)) {}else{
                     int count = Integer.parseInt(etcount.getText().toString());
-                    int servicePrice = Integer.parseInt(price);
+                    float servicePrices = Float.parseFloat(price);
+                    int servicePrice = (int) servicePrices;
+
                     String result = String.valueOf(count * servicePrice);
                     tvTotalcount.setText(result);
                     rCount=etcount.getText().toString();
@@ -99,7 +103,8 @@ public class RequestInfoFragment extends BottomSheetDialogFragment {
                                 startActivity(new Intent(getContext(), ConfirmRequestActivity.class)
                                         .putExtra("desc", rDesc)
                                         .putExtra("count", rCount)
-                                        .putExtra("total", rTotal));
+                                        .putExtra("total", rTotal)
+                                        .putExtra("id", rId));
                                 dialog.dismiss();
                             }
                         })

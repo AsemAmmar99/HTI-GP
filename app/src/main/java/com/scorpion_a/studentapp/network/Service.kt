@@ -2,8 +2,8 @@ package com.scorpion_a.studentapp.network
 
 import android.content.Context
 import com.scorpion_a.studentapp.model.requests.LoginRequests
-import com.scorpion_a.studentapp.model.responses.LoginResponse
-import com.scorpion_a.studentapp.model.responses.UserDataResponce
+import com.scorpion_a.studentapp.model.requests.RequestRequests
+import com.scorpion_a.studentapp.model.responses.*
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import retrofit2.Call
 import retrofit2.http.*
@@ -24,9 +24,20 @@ interface Service {
 
     @GET("user")
     fun getUserData(
-//        @Header("Authorization") auth:String
     ):Call<UserDataResponce>
-//    @Field("token") token:String
 
+    @GET("requests")
+    @Headers("Accept: application/json", "Content-Type: application/json"/*,"Locale: ar"*/)
+    fun getRequestsData(
+    ):Call<MyRequestsResponse>
+
+    @GET("request-types")
+    @Headers("Accept: application/json", "Content-Type: application/json"/*,"Locale: ar"*/)
+    fun getRequestsTypesData(
+    ):Call<RequestsResponse>
+
+    @POST("requests")
+    @Headers("Accept: application/json", "Content-Type: application/json")
+    fun submitRequest(@Body request: RequestRequests): Call<SubmitRequestResponse>
 
 }
