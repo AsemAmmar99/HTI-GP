@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/etHTIMessage"
-        android:hint="Type your questions here.."
+        android:hint="@string/type_your_questions_here"
         android:gravity="top"
         android:inputType="textMultiLine"
         android:ems="14"

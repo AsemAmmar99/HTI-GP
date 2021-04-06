@@ -27,43 +27,43 @@ class MoreFragment  : Fragment() {
     ): View? {
         val view= inflater.inflate(R.layout.fragment_more, container, false)
         toolbar=view.header.findViewById(R.id.toolbar)
-        toolbar.title="Menu"
+        toolbar.title= getString(R.string.menu)
         val moreListData: Array<MoreListData> = arrayOf<MoreListData>(
             MoreListData(
-                "Profile Page"
+                getString(R.string.profile_page)
             ),
             MoreListData(
-                "My Requests"
+                getString(R.string.my_requests)
             ),
             MoreListData(
-                "Printout"
+                getString(R.string.printout)
             ),
             MoreListData(
-                "Registration Proposal"
+                getString(R.string.proposal)
             ),
             MoreListData(
-                "My Results"
+                getString(R.string.my_results)
             ),
             MoreListData(
-                "Test Yourself"
+                getString(R.string.test_yourself)
             ),
             MoreListData(
-                "Tutorial Page"
+                getString(R.string.tutorials)
             ),
             MoreListData(
-                "FAQs and Support"
+                getString(R.string.faqs_and_support)
             ),
             MoreListData(
-                "About HTI"
+                getString(R.string.about_hti)
             ),
             MoreListData(
-                "Settings"
+                getString(R.string.settings)
             ),
 //            MoreListData(
 //                "Application Technical Support"
 //            ),
             MoreListData(
-                "Log Out"
+                getString(R.string.logout)
             )
         )
 
@@ -79,7 +79,4 @@ class MoreFragment  : Fragment() {
     companion object {
         fun newInstance(): MoreFragment = MoreFragment()
     }
-
-
-
 }

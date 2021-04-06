@@ -41,11 +41,11 @@ public class RegCardAdapter extends RecyclerView.Adapter<RegCardAdapter.ViewHold
             setHeaderBg(holder.tvregSubject);
             setHeaderBg(holder.tvregGroup);
             setHeaderBg(holder.tvregUnits);
-            holder.tvregNumber.setText("N");
-            holder.tvregCode.setText("S.Code");
-            holder.tvregSubject.setText("S.Name");
-            holder.tvregGroup.setText("S.Group");
-            holder.tvregUnits.setText("S.Units");
+            holder.tvregNumber.setText(R.string.nump);
+            holder.tvregCode.setText(R.string.scodep);
+            holder.tvregSubject.setText(R.string.snamep);
+            holder.tvregGroup.setText(R.string.sgroupp);
+            holder.tvregUnits.setText(R.string.sunitp);
         }else {
             final RegCardData regCardData = regdata[position-1];
             setContentBg( holder.tvregNumber);

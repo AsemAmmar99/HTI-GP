@@ -24,20 +24,36 @@ import com.scorpion_a.studentapp.model.requests.LoginRequests
 import com.scorpion_a.studentapp.model.responses.LoginResponse
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.network.Service.Companion.BaseUrl
+import com.scorpion_a.studentapp.utils.Lang
+import com.scorpion_a.studentapp.utils.Lang.Companion.loadLocate
+import com.scorpion_a.studentapp.utils.Lang.Companion.setLocate
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import kotlinx.android.synthetic.main.activity_login_screen.*
+import kotlinx.android.synthetic.main.activity_settings.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 
 class LoginScreen : AppCompatActivity() {
     var tabLayout: TabLayout? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
+
+        lang.setOnClickListener {
+            if(lang.text == "English") {
+                setLocate("en", it.context)
+                recreate()
+            }else if(lang.text == "العربية") {
+                setLocate("ar", it.context)
+                recreate()
+            }
+        }
 
         val gson = GsonBuilder()
             .setLenient()
@@ -52,9 +68,9 @@ class LoginScreen : AppCompatActivity() {
 
         buLogin.setOnClickListener {
             if (etID.text.trim().toString().isEmpty()) {
-                Toast.makeText(this, "Please enter your id", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.please_id), Toast.LENGTH_SHORT).show()
             }else if(etPassword.text.trim().toString().isEmpty()){
-                Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.please_password), Toast.LENGTH_SHORT).show()
             }else {
                 val call = service.getLoginData(
                     LoginRequests(
@@ -79,7 +95,7 @@ class LoginScreen : AppCompatActivity() {
                         }else{
                             progressBarLogin.visibility = View.GONE
                             clLogin.visibility = View.VISIBLE
-                            Toast.makeText(baseContext, "Something went wrong, please check your data", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(baseContext, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
                         }
                         // Catching Responses From Retrofit
                         Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
@@ -113,41 +129,41 @@ class LoginScreen : AppCompatActivity() {
 
 
 
-        tabLayout = findViewById(R.id.tabs)
-        tabLayout!!.addTab(tabLayout!!.newTab().setText("English"))
-        tabLayout!!.addTab(tabLayout!!.newTab().setText("Arabic"))
-        setTabBG(
-            R.drawable.tab_left_select,
-            R.drawable.tab_right_unselect
-        )
+//        tabLayout = findViewById(R.id.tabs)
+//        tabLayout!!.addTab(tabLayout!!.newTab().setText("English"))
+//        tabLayout!!.addTab(tabLayout!!.newTab().setText("العربية"))
+//        setTabBG(
+//            R.drawable.tab_left_select,
+//            R.drawable.tab_right_unselect
+//        )
 
 
-        tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                if (tabLayout!!.getSelectedTabPosition() === 0) {
-                    setTabBG(
-                        R.drawable.tab_left_select,
-                        R.drawable.tab_right_unselect
-                    )
-                } else {
-                    setTabBG(
-                        R.drawable.tab_left_unselect,
-                        R.drawable.tab_right_select
-                    )
-                }
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-        })
+//        tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+//            override fun onTabSelected(tab: TabLayout.Tab) {
+//                if (tabLayout!!.getSelectedTabPosition() === 0) {
+//                    setTabBG(
+//                        R.drawable.tab_left_select,
+//                        R.drawable.tab_right_unselect
+//                    )
+//                } else {
+//                    setTabBG(
+//                        R.drawable.tab_left_unselect,
+//                        R.drawable.tab_right_select
+//                    )
+//                }
+//            }
+//
+//            override fun onTabUnselected(tab: TabLayout.Tab?) {
+//            }
+//
+//            override fun onTabReselected(tab: TabLayout.Tab?) {
+//            }
+//        })
 
 
         tvHTI.setText("")
         tvHTI.setCharacterDelay(80)
-        tvHTI.animateText("Higher Technological Institute")
+        tvHTI.animateText(getString(R.string.higher_technological_institute))
 
     }
 
@@ -196,10 +212,10 @@ class LoginScreen : AppCompatActivity() {
         val builder: AlertDialog.Builder
         builder = AlertDialog.Builder(context)
         builder.setTitle(getString(R.string.attention))
-            .setMessage("Please send your ID to (info@hti.edu.eg), your password will be sent within 24 work hours after sending your email.")
+            .setMessage(getString(R.string.please_send_id))
             .setCancelable(false)
             .setPositiveButton(
-                "Send Email"
+                getString(R.string.send_email)
             ) { dialog: DialogInterface, which: Int ->
                 try {
                     val intent =
@@ -213,7 +229,7 @@ class LoginScreen : AppCompatActivity() {
                 finish()
                 dialog.dismiss()
             } .setNegativeButton(
-                "Ok"
+                getString(R.string.ok)
             ) { dialog: DialogInterface, which: Int ->
                 dialog.dismiss()
             }

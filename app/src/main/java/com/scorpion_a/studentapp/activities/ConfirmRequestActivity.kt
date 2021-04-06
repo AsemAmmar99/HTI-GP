@@ -39,11 +39,16 @@ class ConfirmRequestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_request)
         toolbar=header.findViewById(R.id.toolbar)
-        toolbar.title="Confirm Your Request"
+        toolbar.title=getString(R.string.confirm_request)
         tvRequestDesc.text=intent.getStringExtra("desc");
         tvRequestCount.text=intent.getStringExtra("count");
         tvRequestTotalPrice.text=intent.getStringExtra("total");
         rCount=intent.getStringExtra("count").toString().toInt()
+
+        tvEditInfo.setOnClickListener {
+            val intent = Intent(it.context, StudentEditProfile::class.java)
+            startActivity(intent)
+        }
 
         val retrofit = Retrofit.Builder()
             .baseUrl(Service.BaseUrl)
@@ -59,6 +64,8 @@ class ConfirmRequestActivity : AppCompatActivity() {
 
 
         buConfirm.setOnClickListener {
+            progressBarConfirm.visibility = View.VISIBLE
+            clConfirmRequest.visibility = View.INVISIBLE
             call.enqueue(object : Callback<SubmitRequestResponse> {
                 override fun onResponse(
                     call: Call<SubmitRequestResponse>?,
@@ -66,8 +73,13 @@ class ConfirmRequestActivity : AppCompatActivity() {
                 ) {
                   if( response!!.isSuccessful()){
                       Log.d("TAG", "response.body().data.id" + response.body().data.id);
-
+                      progressBarConfirm.visibility = View.GONE
+                      clConfirmRequest.visibility = View.VISIBLE
                       onRequestSent(it.context  ,response.body().data.id)
+                  }else{
+                      progressBarConfirm.visibility = View.GONE
+                      clConfirmRequest.visibility = View.VISIBLE
+                      Toast.makeText(baseContext, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
                   }
 
                     Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
@@ -114,14 +126,14 @@ class ConfirmRequestActivity : AppCompatActivity() {
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.task_cancelled), Toast.LENGTH_SHORT).show()
         }
     }
     private fun onRequestSent(context: Context,rId:String) {
         val builder: AlertDialog.Builder
         builder = AlertDialog.Builder(context)
         builder.setTitle(getString(R.string.thank))
-            .setMessage("Your request with number "+rId+" has been sent successfully. Go to My Requests screen to check your request status.")
+            .setMessage(getString(R.string.yrequest_number)+rId+getString(R.string.succes_done))
             .setCancelable(false)
             .setPositiveButton(
                 android.R.string.ok

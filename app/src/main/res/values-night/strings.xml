@@ -7,8 +7,8 @@
     <string name="more">More</string>
     <string name="news">News</string>
     <string name="eg">EG</string>
-    <string name="name">Name</string>
-    <string name="price">Price</string>
+    <string name="name">Name:</string>
+    <string name="price">Price:</string>
     <string name="total_price">Total Price</string>
     <string name="count_">Count:</string>
     <string name="plz_fill">Please fill the text field of the count at least 1 copy and press total price button to know the money you will pay in CIB account</string>

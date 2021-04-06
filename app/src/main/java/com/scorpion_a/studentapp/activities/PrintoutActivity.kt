@@ -17,7 +17,7 @@ class PrintoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_printout)
         toolbar=header.findViewById(R.id.toolbar)
-        toolbar.title="Printout"
+        toolbar.title= getString(R.string.printout)
 
 //        val regCardTitles: Array<RegCardData> = arrayOf<RegCardData>(
 //            RegCardData(

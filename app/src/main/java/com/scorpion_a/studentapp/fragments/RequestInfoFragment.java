@@ -36,7 +36,7 @@ public class RequestInfoFragment extends BottomSheetDialogFragment {
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
         alertDialog.setTitle(getString(R.string.attention));
         alertDialog.setMessage(getString(R.string.plz_fill));
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -96,8 +96,8 @@ public class RequestInfoFragment extends BottomSheetDialogFragment {
     public void alertingNot(){
         AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                 .setTitle(getString(R.string.attention))
-                .setMessage("CIB Account: 100011938528. Did you pay and have the Receipt?")
-                .setPositiveButton("Yes",
+                .setMessage(R.string.cib_account)
+                .setPositiveButton(getString(R.string.yes),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 startActivity(new Intent(getContext(), ConfirmRequestActivity.class)
@@ -108,7 +108,7 @@ public class RequestInfoFragment extends BottomSheetDialogFragment {
                                 dialog.dismiss();
                             }
                         })
-                .setNegativeButton("No",
+                .setNegativeButton(R.string.no,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();

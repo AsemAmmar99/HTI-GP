@@ -19,7 +19,7 @@ class FAQSActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_faqs)
         toolbar=header.findViewById(R.id.toolbar)
-            toolbar.title="FAQs"
+            toolbar.title=getString(R.string.faqss)
 
         tvSupport.setOnClickListener {
             val intent = Intent(this, SupportActivity::class.java)

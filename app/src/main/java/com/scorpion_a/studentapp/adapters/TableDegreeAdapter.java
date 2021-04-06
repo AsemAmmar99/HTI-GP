@@ -42,8 +42,8 @@ private ArrayList<TableListData> tableListData = new  ArrayList<TableListData>()
             setHeaderBg(holder.tvItemGpa);
             setHeaderBg(holder.tvItemUnits);
 
-            holder.tvItemGpa.setText("GPA");
-            holder.tvItemUnits.setText("Allowed Units");
+            holder.tvItemGpa.setText(R.string.gpa);
+            holder.tvItemUnits.setText(R.string.allowed_units);
 
         }else {
             final TableListData tableListDataList = tableListData.get(position - 1);

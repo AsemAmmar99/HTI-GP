@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import com.scorpion_a.studentapp.R
 import kotlinx.android.synthetic.main.activity_profile_page.*
+import kotlinx.android.synthetic.main.activity_profile_page.header
+import kotlinx.android.synthetic.main.activity_student_edit_profile.*
 
 class StudentEditProfile : AppCompatActivity() {
     lateinit var toolbar: Toolbar
@@ -12,6 +14,10 @@ class StudentEditProfile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_edit_profile)
         toolbar=header.findViewById(R.id.toolbar)
-        toolbar.title="Editing Profile"
+        toolbar.title=getString(R.string.editing_profile)
+
+        buSave.setOnClickListener {
+            finish()
+        }
     }
 }

@@ -19,7 +19,7 @@ class ResultsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_results)
         toolbar=header.findViewById(R.id.toolbar)
-        toolbar.title="My Results"
+        toolbar.title= getString(R.string.my_results)
 
         val ResultsCardItems: Array<ResultsCardData> = arrayOf<ResultsCardData>(
             ResultsCardData(

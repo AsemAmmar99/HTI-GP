@@ -35,11 +35,11 @@ public class TableFragment extends BottomSheetDialogFragment {
         ((View) contentView.getParent()).setBackgroundColor(getResources().getColor(android.R.color.transparent));
         RecyclerView recyclerView;
         ArrayList<TableListData> tableListData = new  ArrayList<TableListData>();
-        tableListData.add(new TableListData("From 2.0 to 4.0","20"));
-        tableListData.add(new TableListData("From 1.5 to 2.0","18"));
-        tableListData.add(new TableListData("From 1.0 to 1.5","16"));
-        tableListData.add(new TableListData("From 0.5 to 1.0","14"));
-        tableListData.add(new TableListData("Lower than 0.5","12"));
+        tableListData.add(new TableListData(getString(R.string.f2t4),"20"));
+        tableListData.add(new TableListData(getString(R.string.f15t2),"18"));
+        tableListData.add(new TableListData(getString(R.string.f1t15),"16"));
+        tableListData.add(new TableListData(getString(R.string.f5t1),"14"));
+        tableListData.add(new TableListData(getString(R.string.lt5),"12"));
 
         recyclerView =contentView. findViewById(R.id.rvGpaItems);
         TableDegreeAdapter adapter = new TableDegreeAdapter(tableListData);

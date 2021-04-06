@@ -57,6 +57,7 @@
         app:layout_constraintStart_toEndOf="@id/tvItemSubject"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:text="Grade"
         android:textColor="@color/light_black"
         android:textSize="14sp"

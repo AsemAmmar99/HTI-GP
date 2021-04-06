@@ -17,7 +17,7 @@ class SupportActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_support)
         toolbar=header.findViewById(R.id.toolbar)
-        toolbar.title="HTI Support"
+        toolbar.title=getString(R.string.htisupport)
 
         buSend.setOnClickListener {
             onSend(it.context)

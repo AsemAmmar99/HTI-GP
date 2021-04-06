@@ -32,7 +32,7 @@ class StudentProfile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_profile)
         toolbar=header.findViewById(R.id.toolbar)
-        toolbar.title="Profile Page"
+        toolbar.title= getString(R.string.profile_page)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(Service.BaseUrl)
@@ -70,7 +70,7 @@ class StudentProfile : AppCompatActivity() {
                 }else{
                     progressBarProfile.visibility = View.GONE
                     clProfilePage.visibility = View.VISIBLE
-                    Toast.makeText(baseContext, "Something went wrong, please check your data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
                 }
                 // Catching Responses From Retrofit
 

@@ -22,7 +22,7 @@ class AboutHTIActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_hti)
         toolbar=header.findViewById(R.id.toolbar)
-        toolbar.title="About HTI"
+        toolbar.title= getString(R.string.about_hti)
 
         tvPhoneValue.setOnClickListener {
 

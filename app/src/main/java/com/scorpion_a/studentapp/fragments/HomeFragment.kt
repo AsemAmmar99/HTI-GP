@@ -64,9 +64,11 @@ class HomeFragment : Fragment() {
             ) {
 
                 if (response.isSuccessful()){
-                    tvDepartment.text="Department: " + response.body().data?.department
-                    view.progressBarHome.visibility = View.GONE
-                    view.clHome.visibility = View.VISIBLE
+                    if (tvDepartment != null) {
+                            tvDepartment.text="Department: " + response.body().data?.department
+                            view.progressBarHome.visibility = View.GONE
+                            view.clHome.visibility = View.VISIBLE
+                        }
                 }else{
                     view.progressBarHome.visibility = View.GONE
                     view.clHome.visibility = View.VISIBLE

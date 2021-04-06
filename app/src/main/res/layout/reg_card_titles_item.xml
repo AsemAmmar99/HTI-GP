@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="N"
+        android:text="@string/n"
         android:textColor="@color/light_black"
         android:textSize="14sp"
        />
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/table_content_cell_bg"
-        android:text="Code"
+        android:text="@string/code"
         android:textColor="@color/light_black"
         android:textSize="14sp" />
 
@@ -43,20 +43,20 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:background="@drawable/table_content_cell_bg"
-        android:text="Subject"
+        android:text="@string/subject"
         android:textColor="@color/light_black"
         android:textSize="14sp"
       />
 
     <TextView
         android:id="@+id/tvItemGroup"
-        android:layout_width="76dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toStartOf="@id/tvItemUnits"
         app:layout_constraintStart_toEndOf="@id/tvItemSubject"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Group"
+        android:text="@string/group"
         android:textColor="@color/light_black"
         android:textSize="14sp"
         android:background="@drawable/table_content_cell_bg"
@@ -65,12 +65,13 @@
 
     <TextView
         android:id="@+id/tvItemUnits"
-        android:layout_width="74dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         app:layout_constraintStart_toEndOf="@id/tvItemGroup"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Units"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/units"
         android:textColor="@color/light_black"
         android:textSize="14sp"
         android:background="@drawable/table_content_cell_bg"

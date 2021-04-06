@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".activities.TestQuestionsActivity">
+
     <include
         android:id="@+id/header"
         layout="@layout/main_header"
@@ -42,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buFalse"
-            android:text="False"
+            android:text="@string/falseq"
             android:background="@color/dark_blue"
             android:textColor="@color/white"
             app:carbon_cornerRadius="15dp"
@@ -57,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buTrue"
-            android:text="True"
+            android:text="@string/trueq"
             android:background="@color/dark_blue"
             android:textColor="@color/white"
             app:carbon_cornerRadius="15dp"

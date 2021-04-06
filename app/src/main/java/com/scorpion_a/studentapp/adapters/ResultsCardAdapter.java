@@ -43,10 +43,10 @@ public class ResultsCardAdapter extends RecyclerView.Adapter<ResultsCardAdapter.
             setHeaderBg(holder.tvregCode);
             setHeaderBg(holder.tvregSubject);
             setHeaderBg(holder.tvregUnits);
-            holder.tvregNumber.setText("N");
-            holder.tvregCode.setText("S.Code");
-            holder.tvregSubject.setText("S.Name");
-            holder.tvregUnits.setText("Grade");
+            holder.tvregNumber.setText(R.string.nump);
+            holder.tvregCode.setText(R.string.scodep);
+            holder.tvregSubject.setText(R.string.snamep);
+            holder.tvregUnits.setText(R.string.sgrade);
         }else {
             final ResultsCardData ResultsCardData = resultsdata[position-1];
             setContentBg( holder.tvregNumber);

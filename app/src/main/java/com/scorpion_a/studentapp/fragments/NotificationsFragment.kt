@@ -23,7 +23,7 @@ class NotificationsFragment  : Fragment() {
     ): View? {
         val view=inflater.inflate(R.layout.fragment_notification, container, false)
         toolbar=view.header.findViewById(R.id.toolbar)
-        toolbar.title="Notifications"
+        toolbar.title= getString(R.string.notifications)
 
         val notificationListData: Array<NotificationListData> = arrayOf<NotificationListData>(
             NotificationListData(

@@ -24,7 +24,7 @@ class RegProposalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reg_proposal)
         toolbar=header.findViewById(R.id.toolbar)
-        toolbar.title="Registration Proposal"
+        toolbar.title= getString(R.string.proposal)
 
         tvGoRegister.setOnClickListener {
             val uriUrl = Uri.parse("http://www.hti.edu.eg/ar/student-registration-instructions.aspx")

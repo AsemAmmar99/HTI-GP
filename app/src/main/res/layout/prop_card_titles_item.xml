@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="25dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -15,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="N"
+        android:text="@string/nump"
         android:textColor="@color/light_black"
         android:textSize="14sp"
         />
@@ -29,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/table_content_cell_bg"
-        android:text="Code"
+        android:text="@string/scodep"
         android:textColor="@color/light_black"
         android:textSize="14sp" />
 
@@ -44,7 +43,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:background="@drawable/table_content_cell_bg"
-        android:text="Subject"
+        android:text="@string/snamep"
         android:textColor="@color/light_black"
         android:textSize="14sp"
         />
@@ -52,12 +51,13 @@
 
     <TextView
         android:id="@+id/tvItemUnits"
-        android:layout_width="68dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         app:layout_constraintStart_toEndOf="@id/tvItemSubject"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Units"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/units"
         android:textColor="@color/light_black"
         android:textSize="14sp"
         android:background="@drawable/table_content_cell_bg"

@@ -17,7 +17,7 @@ class TutorialActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
         toolbar=header.findViewById(R.id.toolbar)
-        toolbar.title="Tutorials Page"
+        toolbar.title= getString(R.string.tutorials)
 
         val tutorialsListData: Array<TutorialsListData> = arrayOf<TutorialsListData>(
             TutorialsListData(

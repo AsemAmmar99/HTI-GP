@@ -6,12 +6,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDelegate
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.utils.Lang
+import com.scorpion_a.studentapp.utils.MyPreferences
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 
 class SplashActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        Lang.loadLocate(this)
+        checkTheme()
         super.onCreate(savedInstanceState)
         //hiding title bar of this activity
         window.requestFeature(Window.FEATURE_NO_TITLE)
@@ -33,4 +37,25 @@ class SplashActivity : AppCompatActivity() {
         },2000)
 
     }
+
+    private fun checkTheme() {
+
+        try {
+            when (MyPreferences(this).darkMode) {
+                0 -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    delegate.applyDayNight()
+                }
+                1 -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    delegate.applyDayNight()
+                }
+                2 -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                    delegate.applyDayNight()
+                }
+            }
+        }catch (ex: Exception){}
+    }
+
 }

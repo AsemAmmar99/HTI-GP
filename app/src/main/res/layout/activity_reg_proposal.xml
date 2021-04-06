@@ -59,7 +59,8 @@
         app:layout_constraintTop_toBottomOf="@id/tvStudentDepartment"
         app:layout_constraintStart_toEndOf="@id/clUnits"
         app:layout_constraintEnd_toStartOf="@id/clClassYear"
-
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
         android:layout_marginTop="12dp">
 
         <TextView
@@ -73,9 +74,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"/>
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -113,13 +112,13 @@
             android:textStyle="bold"
             android:textSize="16dp"
             android:textColor="@color/light_black"
-            android:text="Total Units"
+            android:text="@string/total_units"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"/>
+            android:layout_marginStart="10dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -147,6 +146,8 @@
         app:layout_constraintTop_toBottomOf="@id/tvStudentDepartment"
         app:layout_constraintStart_toEndOf="@id/clGPA"
         app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="12dp">
 
@@ -157,13 +158,11 @@
             android:textStyle="bold"
             android:textSize="16dp"
             android:textColor="@color/light_black"
-            android:text="Allowed Units"
+            android:text="@string/allowed_units"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"/>
+            android:layout_marginTop="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -189,7 +188,7 @@
         android:id="@+id/tvDepends"
         android:textSize="16dp"
         android:textColor="@color/light_black"
-        android:text="* Registration Proposal depends on subjects that you had already finished."
+        android:text="@string/registration_proposal_depends_on_subjects_that_you_had_already_finished"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
@@ -228,7 +227,7 @@
         android:paddingBottom="10dp"
         android:textStyle="bold"
         android:textColor="@color/dark_blue"
-        android:text="Go to Registration Page"
+        android:text="@string/go_to_registration_page"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

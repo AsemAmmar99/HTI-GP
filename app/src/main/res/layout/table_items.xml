@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="GPA"
+        android:text="@string/gpa"
         android:textColor="@color/light_black"
         android:textSize="14sp"
         />
@@ -24,11 +24,12 @@
         android:id="@+id/tvItemUnits"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvItemGpa"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/table_content_cell_bg"
-        android:text="Allowed Units"
+        android:text="@string/allowed_units"
         android:textColor="@color/light_black"
         android:textSize="14sp" />
 

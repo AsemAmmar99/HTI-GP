@@ -17,7 +17,7 @@ class TestYourselfActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_your_self)
         toolbar=header.findViewById(R.id.toolbar)
-        toolbar.title="Test Yourself"
+        toolbar.title= getString(R.string.test_yourself)
 
         val testsListData: Array<TestsListData> = arrayOf<TestsListData>(
             TestsListData(

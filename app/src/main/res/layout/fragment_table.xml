@@ -13,7 +13,7 @@
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This table shows relation between GPA and Allowed Units you can register"
+        android:text="@string/this_table_shows_relation_between_gpa_and_allowed_units_you_can_register"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="13dp"

@@ -23,9 +23,9 @@ class EventsListActivity : AppCompatActivity() {
         toolbar=header.findViewById(R.id.toolbar)
         var more= intent.getStringExtra("More")
         if (more.equals("Events")){
-            toolbar.title="Events Page"}
+            toolbar.title=getString(R.string.events_page)}
         if (more.equals("News")){
-            toolbar.title="News Page"
+            toolbar.title=getString(R.string.news_page)
         }
 
             val eventsListData: Array<NewsListData> = arrayOf<NewsListData>(

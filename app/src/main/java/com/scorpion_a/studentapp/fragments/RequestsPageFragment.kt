@@ -47,7 +47,7 @@ class RequestsPageFragment : Fragment() {
     ): View? {
         val view= inflater.inflate(R.layout.fragment_requests_page, container, false)
         toolbar=view.header.findViewById(R.id.toolbar)
-        toolbar.title="Requests Page"
+        toolbar.title=getString(R.string.request_page)
 
 
 //        val requestListData: Array<RequestListData> = arrayOf<RequestListData>(
@@ -123,7 +123,7 @@ class RequestsPageFragment : Fragment() {
                     view.clRequests.visibility = View.VISIBLE
                     Toast.makeText(
                         context,
-                        "Something went wrong, please check your data",
+                        getString(R.string.went_wrong),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

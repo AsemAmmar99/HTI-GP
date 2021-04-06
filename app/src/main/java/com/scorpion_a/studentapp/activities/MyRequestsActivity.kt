@@ -34,7 +34,7 @@ class MyRequestsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_requests_page)
         toolbar=header.findViewById(R.id.toolbar)
-        toolbar.title="My Requests Page"
+        toolbar.title=getString(R.string.my_requests_page)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(Service.BaseUrl)
