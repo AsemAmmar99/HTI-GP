@@ -11,7 +11,7 @@
   <ProgressBar
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:id="@+id/progressBarHome"
+      android:id="@+id/progressBarSHome"
       android:gravity="center"
       android:visibility="gone"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -22,7 +22,7 @@
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:id="@+id/clHome">
+      android:id="@+id/clSHome">
 
     <TextView
         android:id="@+id/tvHti"
@@ -62,7 +62,7 @@
           android:id="@+id/tvStaffDepartment"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Department: Employee"
+          tools:text="Department: Employee"
           android:textColor="@color/light_black"
           android:textStyle="bold"
           app:layout_constraintTop_toTopOf="parent"

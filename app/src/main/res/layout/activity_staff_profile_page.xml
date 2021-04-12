@@ -10,7 +10,7 @@
     <ProgressBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBarProfile"
+        android:id="@+id/progressBarSProfile"
         android:gravity="center"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,7 +21,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/clProfilePage">
+        android:id="@+id/clSProfilePage">
 
         <include
             android:id="@+id/header"
@@ -47,7 +47,7 @@
             android:background="@drawable/roundedcorner"
             android:textColor="@color/light_black"
             android:textSize="22dp"
-            android:text="Computer Science"
+            tools:text="Computer Science"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
             android:id="@+id/tvStaffNameEngProfile"
             android:textColor="@color/light_black"
             android:textSize="14dp"
-            android:text="Asem El-Sayed Abdel-Hamid Ammar"
+            tools:text="Asem El-Sayed Abdel-Hamid Ammar"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/staffEngNameTitle"
             app:layout_constraintEnd_toEndOf="parent"
@@ -112,8 +112,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/tvStaffNameArabic"
             android:textColor="@color/light_black"
-            android:textSize="18dp"
-            android:text="عاصم السيد عبد الحميد عمار"
+            android:textSize="14dp"
+            tools:text="عاصم السيد عبد الحميد عمار"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/staffArabNameTitle"
             app:layout_constraintEnd_toEndOf="parent"

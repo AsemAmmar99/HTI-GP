@@ -7,6 +7,23 @@
     android:background="@drawable/background"
     tools:context="com.scorpion_a.studentapp.activities.SupervisorHomeActivity">
 
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBarSuperHome"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/clSuperHome">
+
+
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -61,5 +78,7 @@
             android:nestedScrollingEnabled="false">
         </androidx.recyclerview.widget.RecyclerView>
     </HorizontalScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

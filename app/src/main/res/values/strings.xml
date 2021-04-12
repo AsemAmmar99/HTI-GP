@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HTI Student</string>
+    <string name="app_name">HTI</string>
     <string name="home">Home</string>
     <string name="notifications">Notifications</string>
     <string name="requests">Requests</string>
@@ -224,4 +224,8 @@
     <string name="dark">Dark</string>
     <string name="system_default">System default</string>
     <string name="loginlang">العربية</string>
+    <string name="peyan">Please enter your Arabic name.</string>
+    <string name="peyen">Please enter your English name.</string>
+    <string name="peye">Please enter your Email.</string>
+    <string name="peypn">Please enter your Phone Number.</string>
 </resources>

@@ -21,6 +21,7 @@ import com.scorpion_a.studentapp.activities.RegProposalActivity;
 import com.scorpion_a.studentapp.activities.ResultsActivity;
 import com.scorpion_a.studentapp.activities.SettingsActivity;
 import com.scorpion_a.studentapp.activities.StaffProfilePageActivity;
+import com.scorpion_a.studentapp.activities.StaffSettingsActivity;
 import com.scorpion_a.studentapp.activities.StudentProfile;
 import com.scorpion_a.studentapp.activities.TestYourselfActivity;
 import com.scorpion_a.studentapp.activities.TutorialActivity;
@@ -59,7 +60,7 @@ public class StaffMenuListAdapter extends RecyclerView.Adapter<StaffMenuListAdap
                         context.startActivity(new Intent(context, StaffProfilePageActivity.class));
                         break;
                     case 1:
-                        context.startActivity(new Intent(context, SettingsActivity.class));
+                        context.startActivity(new Intent(context, StaffSettingsActivity.class));
                         break;
 //                    case 6:
 //                        context.startActivity(new Intent(context, AppTechSupportActivity.class));

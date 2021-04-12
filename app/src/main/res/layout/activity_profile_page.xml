@@ -250,7 +250,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvEmail"
+            android:id="@+id/tvaefhtEmail"
             android:textSize="16dp"
             android:textStyle="bold"
             android:textColor="@color/light_black"
@@ -269,7 +269,7 @@
             android:textColor="@color/dark_red"
             android:text="42017047@hti.edu.eg"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvEmail"
+            app:layout_constraintTop_toBottomOf="@id/tvaefhtEmail"
             android:layout_marginTop="5dp"
             android:layout_marginStart="13dp"/>
 

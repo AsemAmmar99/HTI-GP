@@ -30,7 +30,7 @@ class StaffMenuFragment : Fragment() {
                 getString(R.string.profile_page)
             ),
             StaffMenuListData(
-                getString(R.string.profile_page)
+                getString(R.string.settings)
             ),
 //            MoreListData(
 //                "Application Technical Support"

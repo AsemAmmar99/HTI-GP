@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.fragments.*
+import com.scorpion_a.studentapp.utils.Lang
 
 class StaffHomeActivity : AppCompatActivity() {
     lateinit var  bottomNavigation: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
+        Lang.loadLocate(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_staff_home)
         bottomNavigation = findViewById(R.id.navigationView)

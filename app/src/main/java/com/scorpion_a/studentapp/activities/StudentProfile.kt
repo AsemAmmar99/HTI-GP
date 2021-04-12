@@ -57,12 +57,12 @@ class StudentProfile : AppCompatActivity() {
 
                 if (response.isSuccessful()){
 //                    tvDepartment.text="Department: " + response.body().data?.department
-                    tvStudentDepartment.text=response.body().data?.name
+                    tvStudentDepartment.text=response.body().data?.department
                     tvGPAResultProfile.text=response.body().data?.gpa
                     tvUnitsValueProfile.text=response.body().data?.number_of_units
-                    tvStudentNameArabic.visibility=View.INVISIBLE
-                    tvStudentNameEngProfile.text=response.body().data?.name
-                    Picasso.with(baseContext).load(response.body().data?.image_path).into(ivProfilePict);
+                    tvStudentNameArabic.text=response.body().data?.name?.ar
+                    tvStudentNameEngProfile.text=response.body().data?.name?.en
+                    Picasso.with(baseContext).load(response.body().data?.image_path).into(ivProfilePict)
                     tvEmailValueProfile.text=response.body().data?.email
                     tvIDValueProfile.text=response.body().data?.user_id
                     progressBarProfile.visibility = View.GONE
@@ -92,7 +92,12 @@ class StudentProfile : AppCompatActivity() {
 
         ivEdit.setOnClickListener {
             val intent = Intent(this, StudentEditProfile::class.java)
+            intent.putExtra("ar", tvStudentNameArabic.text.toString())
+            intent.putExtra("en", tvStudentNameEngProfile.text.toString())
+            intent.putExtra("email", tvEmailValueProfile.text.toString())
+            intent.putExtra("phone", tvPhoneValue.text.toString())
             startActivity(intent)
+            finish()
         }
 
         ivProfilePict.setOnClickListener{

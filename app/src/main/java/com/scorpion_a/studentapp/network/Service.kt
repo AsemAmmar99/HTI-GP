@@ -3,6 +3,7 @@ package com.scorpion_a.studentapp.network
 import android.content.Context
 import com.scorpion_a.studentapp.model.requests.LoginRequests
 import com.scorpion_a.studentapp.model.requests.RequestRequests
+import com.scorpion_a.studentapp.model.requests.UpdateUserRequests
 import com.scorpion_a.studentapp.model.responses.*
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import retrofit2.Call
@@ -39,5 +40,9 @@ interface Service {
     @POST("requests")
     @Headers("Accept: application/json", "Content-Type: application/json")
     fun submitRequest(@Body request: RequestRequests): Call<SubmitRequestResponse>
+
+    @PUT("user")
+    @Headers("Accept: application/json", "Content-Type: application/json")
+    fun updateUser(@Body request: UpdateUserRequests): Call<UserDataResponce>
 
 }

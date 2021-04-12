@@ -7,13 +7,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/htilogo"
+        android:icon="@mipmap/playstore"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.SupervisorHomeActivity"></activity>
+        <activity android:name=".activities.StaffSettingsActivity"></activity>
+        <activity android:name=".activities.SupervisorHomeActivity" />
         <activity android:name=".activities.RejectReasonActivity" />
         <activity android:name=".activities.RejectedRequestsDetailsActivity" />
         <activity android:name=".activities.AcceptedRequestsDetailsActivity" />

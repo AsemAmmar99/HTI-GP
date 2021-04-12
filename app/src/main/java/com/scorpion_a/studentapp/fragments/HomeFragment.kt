@@ -72,7 +72,7 @@ class HomeFragment : Fragment() {
                 }else{
                     view.progressBarHome.visibility = View.GONE
                     view.clHome.visibility = View.VISIBLE
-                    Toast.makeText(context, "Something went wrong, please check your data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
                 }
                 // Catching Responses From Retrofit
 

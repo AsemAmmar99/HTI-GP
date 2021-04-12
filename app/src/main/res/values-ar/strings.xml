@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HTI Student</string>
+    <string name="app_name">HTI</string>
     <string name="home">الرئيسية</string>
     <string name="notifications">الاشعارات</string>
     <string name="requests">الطلبات</string>
@@ -225,4 +225,8 @@
     <string name="dark">داكن</string>
     <string name="system_default">النظام الافتراضي</string>
     <string name="loginlang">English</string>
+    <string name="peyan">من فضلك أدخل اسمك بالعربية.</string>
+    <string name="peyen">من فضلك أدخل اسمك بالانجليزية.</string>
+    <string name="peye">من فضلك أدخل بريدك الالكتروني.</string>
+    <string name="peypn">من فضلك أدخل رقم هاتفك.</string>
 </resources>

@@ -22,14 +22,18 @@ import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.fragments.ResetPasswordFragment
 import com.scorpion_a.studentapp.model.requests.LoginRequests
 import com.scorpion_a.studentapp.model.responses.LoginResponse
+import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.network.Service.Companion.BaseUrl
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Lang.Companion.loadLocate
 import com.scorpion_a.studentapp.utils.Lang.Companion.setLocate
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_login_screen.*
 import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.activity_student_profile.*
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,6 +68,7 @@ class LoginScreen : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
+
         val service = retrofit.create(Service::class.java)
 
         buLogin.setOnClickListener {
@@ -89,9 +94,7 @@ class LoginScreen : AppCompatActivity() {
                             Log.i("call", response.body().token.toString())
                             SharedPreferenceClass.saveString(it.context,"TOKEN",response.body().token.toString())
                             progressBarLogin.visibility = View.GONE
-                            val intent = Intent(it.context, HomeActivity::class.java)
-                            startActivity(intent)
-                            finish()
+                            getUser()
                         }else{
                             progressBarLogin.visibility = View.GONE
                             clLogin.visibility = View.VISIBLE
@@ -119,13 +122,15 @@ class LoginScreen : AppCompatActivity() {
 
 
         tvHelp.setOnClickListener {
-            val intent = Intent(this, TutorialActivity::class.java)
+            val intent = Intent(this, AboutHTIActivity::class.java)
             startActivity(intent)
         }
 
         tvForgot.setOnClickListener {
             onForgot(it.context)
         }
+
+
 
 
 
@@ -164,6 +169,69 @@ class LoginScreen : AppCompatActivity() {
         tvHTI.setText("")
         tvHTI.setCharacterDelay(80)
         tvHTI.animateText(getString(R.string.higher_technological_institute))
+
+    }
+    fun getUser(){
+
+        val retrofitUser = Retrofit.Builder()
+            .baseUrl(Service.BaseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(OkHttpClient.Builder().addInterceptor { chain ->
+                val request = chain.request().newBuilder().addHeader("Authorization", "Bearer ${SharedPreferenceClass.loadString(this,"TOKEN")}").build()
+                chain.proceed(request)
+            }.build())
+            .build()
+
+        val clientUser = retrofitUser.create(Service::class.java)
+
+
+        val call = clientUser.getUserData()
+        progressBarLogin.visibility = View.VISIBLE
+        clLogin.visibility = View.INVISIBLE
+        call.enqueue(object : Callback<UserDataResponce> {
+            override fun onResponse(
+                call: Call<UserDataResponce>,
+                response: Response<UserDataResponce>
+            ) {
+
+                if (response.isSuccessful()){
+                    var account_type= response.body().data?.account_type
+                    progressBarLogin.visibility = View.GONE
+                    if(account_type == "student"){
+                        startActivity(Intent(this@LoginScreen, HomeActivity::class.java))
+                        finish()
+                    }else if (account_type == "employee"){
+                        startActivity(Intent(this@LoginScreen, StaffHomeActivity::class.java))
+                        finish()
+                    }else if (account_type == "supervisor"){
+                        startActivity(Intent(this@LoginScreen, SupervisorHomeActivity::class.java))
+                        finish()
+                    }else{
+                        startActivity(Intent(this@LoginScreen, HomeActivity::class.java))
+                        finish()
+                    }
+                }else{
+                    progressBarLogin.visibility = View.GONE
+                    Toast.makeText(baseContext, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
+                }
+                // Catching Responses From Retrofit
+
+                Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
+                Log.d("TAG", "onResponsebody: " + response.body());
+                Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
+                Log.d("TAG", "onResponsemessage: " + response.message());
+                Log.d("TAG", "onResponsecode: " + response.code());
+                Log.d("TAG", "onResponseheaders: " + response.headers());
+                Log.d("TAG", "onResponseraw: " + response.raw());
+                Log.d("TAG", "onResponsetoString: " + response.toString());
+
+            }
+
+            override fun onFailure(call: Call<UserDataResponce>?, t: Throwable?) {
+                Log.i("test", t.toString())
+            }
+        })
+
 
     }
 
