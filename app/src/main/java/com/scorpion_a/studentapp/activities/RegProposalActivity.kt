@@ -32,15 +32,15 @@ class RegProposalActivity : AppCompatActivity() {
             startActivity(launchBrowser)
         }
 
-        clGPA.setOnClickListener {
-
-//                context.startActivity(new Intent(context, SendRequestActivity.class));
-            val tableFragment = TableFragment.newInstance()
-            tableFragment.show(
-                supportFragmentManager,
-                "Bottom Sheet Dialog Fragment"
-            )
-        }
+//        clGPA.setOnClickListener {
+//
+////                context.startActivity(new Intent(context, SendRequestActivity.class));
+//            val tableFragment = TableFragment.newInstance()
+//            tableFragment.show(
+//                supportFragmentManager,
+//                "Bottom Sheet Dialog Fragment"
+//            )
+//        }
 
         val propCardItems: Array<PropCardData> = arrayOf<PropCardData>(
             PropCardData(

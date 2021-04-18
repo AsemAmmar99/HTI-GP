@@ -1,53 +1,46 @@
 package com.scorpion_a.studentapp.activities
 
-import android.content.ActivityNotFoundException
-import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
+import android.content.*
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
-import androidx.core.view.isVisible
 import com.google.android.material.tabs.TabLayout
 import com.google.gson.GsonBuilder
 import com.scorpion_a.studentapp.R
-import com.scorpion_a.studentapp.fragments.ResetPasswordFragment
 import com.scorpion_a.studentapp.model.requests.LoginRequests
 import com.scorpion_a.studentapp.model.responses.LoginResponse
 import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.network.Service.Companion.BaseUrl
-import com.scorpion_a.studentapp.utils.Lang
-import com.scorpion_a.studentapp.utils.Lang.Companion.loadLocate
 import com.scorpion_a.studentapp.utils.Lang.Companion.setLocate
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_login_screen.*
-import kotlinx.android.synthetic.main.activity_settings.*
-import kotlinx.android.synthetic.main.activity_student_profile.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 
 
 class LoginScreen : AppCompatActivity() {
     var tabLayout: TabLayout? = null
-
+    var MY_PREFS = "SharedPreferences"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
+
+        val mySharedPreferences: SharedPreferences = getSharedPreferences(MY_PREFS, 0)
+        etID.setText(mySharedPreferences.getString("userid",""))
+        etPassword.setText(mySharedPreferences.getString("userpassword",""))
+        switch1.isChecked = mySharedPreferences.getBoolean("usercheck", false)
 
         lang.setOnClickListener {
             if(lang.text == "English") {
@@ -88,27 +81,36 @@ class LoginScreen : AppCompatActivity() {
                 call.enqueue(object : Callback<LoginResponse> {
                     override fun onResponse(
                         call: Call<LoginResponse>,
-                        response: Response<LoginResponse>
+                        response: Response<LoginResponse>,
                     ) {
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful) {
                             Log.i("call", response.body().token.toString())
-                            SharedPreferenceClass.saveString(it.context,"TOKEN",response.body().token.toString())
+                            SharedPreferenceClass.saveString(it.context,
+                                "TOKEN",
+                                response.body().token.toString())
                             progressBarLogin.visibility = View.GONE
+                            if(switch1.isChecked()){
+                                RememberMe()
+                            }else{
+                                clearRememberMe()
+                            }
                             getUser()
-                        }else{
+                        } else {
                             progressBarLogin.visibility = View.GONE
                             clLogin.visibility = View.VISIBLE
-                            Toast.makeText(baseContext, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(baseContext,
+                                getString(R.string.went_wrong),
+                                Toast.LENGTH_SHORT).show()
                         }
                         // Catching Responses From Retrofit
-                        Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
-                        Log.d("TAG", "onResponsebody: " + response.body());
-                        Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
-                        Log.d("TAG", "onResponsemessage: " + response.message());
-                        Log.d("TAG", "onResponsecode: " + response.code());
-                        Log.d("TAG", "onResponseheaders: " + response.headers());
-                        Log.d("TAG", "onResponseraw: " + response.raw());
-                        Log.d("TAG", "onResponsetoString: " + response.toString());
+                        Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
+                        Log.d("TAG", "onResponsebody: " + response.body())
+                        Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
+                        Log.d("TAG", "onResponsemessage: " + response.message())
+                        Log.d("TAG", "onResponsecode: " + response.code())
+                        Log.d("TAG", "onResponseheaders: " + response.headers())
+                        Log.d("TAG", "onResponseraw: " + response.raw())
+                        Log.d("TAG", "onResponsetoString: " + response.toString())
 
                     }
 
@@ -166,18 +168,37 @@ class LoginScreen : AppCompatActivity() {
 //        })
 
 
-        tvHTI.setText("")
+        tvHTI.text = ""
         tvHTI.setCharacterDelay(80)
         tvHTI.animateText(getString(R.string.higher_technological_institute))
 
     }
+
+    fun RememberMe() {
+        val mySharedPreferences: SharedPreferences = getSharedPreferences(MY_PREFS, 0)
+        val editor: SharedPreferences.Editor = mySharedPreferences.edit()
+        editor.putString("userid", etID.text.toString())
+        editor.putString("userpassword", etPassword.text.toString())
+        editor.putBoolean("usercheck", switch1.isChecked)
+        editor.apply()
+    }
+
+    fun clearRememberMe() {
+        val mySharedPreferences: SharedPreferences = getSharedPreferences(MY_PREFS, 0)
+        mySharedPreferences.edit().clear().apply()
+    }
+
     fun getUser(){
 
         val retrofitUser = Retrofit.Builder()
             .baseUrl(Service.BaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(OkHttpClient.Builder().addInterceptor { chain ->
-                val request = chain.request().newBuilder().addHeader("Authorization", "Bearer ${SharedPreferenceClass.loadString(this,"TOKEN")}").build()
+                val request = chain.request().newBuilder().addHeader("Authorization", "Bearer ${
+                    SharedPreferenceClass.loadString(
+                        this,
+                        "TOKEN")
+                }").build()
                 chain.proceed(request)
             }.build())
             .build()
@@ -191,39 +212,40 @@ class LoginScreen : AppCompatActivity() {
         call.enqueue(object : Callback<UserDataResponce> {
             override fun onResponse(
                 call: Call<UserDataResponce>,
-                response: Response<UserDataResponce>
+                response: Response<UserDataResponce>,
             ) {
 
-                if (response.isSuccessful()){
-                    var account_type= response.body().data?.account_type
+                if (response.isSuccessful) {
+                    var account_type = response.body().data?.account_type
                     progressBarLogin.visibility = View.GONE
-                    if(account_type == "student"){
+                    if (account_type == "student") {
                         startActivity(Intent(this@LoginScreen, HomeActivity::class.java))
                         finish()
-                    }else if (account_type == "employee"){
+                    } else if (account_type == "employee") {
                         startActivity(Intent(this@LoginScreen, StaffHomeActivity::class.java))
                         finish()
-                    }else if (account_type == "supervisor"){
+                    } else if (account_type == "supervisor") {
                         startActivity(Intent(this@LoginScreen, SupervisorHomeActivity::class.java))
                         finish()
-                    }else{
+                    } else {
                         startActivity(Intent(this@LoginScreen, HomeActivity::class.java))
                         finish()
                     }
-                }else{
+                } else {
                     progressBarLogin.visibility = View.GONE
-                    Toast.makeText(baseContext, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, getString(R.string.went_wrong), Toast.LENGTH_SHORT)
+                        .show()
                 }
                 // Catching Responses From Retrofit
 
-                Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
-                Log.d("TAG", "onResponsebody: " + response.body());
-                Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
-                Log.d("TAG", "onResponsemessage: " + response.message());
-                Log.d("TAG", "onResponsecode: " + response.code());
-                Log.d("TAG", "onResponseheaders: " + response.headers());
-                Log.d("TAG", "onResponseraw: " + response.raw());
-                Log.d("TAG", "onResponsetoString: " + response.toString());
+                Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
+                Log.d("TAG", "onResponsebody: " + response.body())
+                Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
+                Log.d("TAG", "onResponsemessage: " + response.message())
+                Log.d("TAG", "onResponsecode: " + response.code())
+                Log.d("TAG", "onResponseheaders: " + response.headers())
+                Log.d("TAG", "onResponseraw: " + response.raw())
+                Log.d("TAG", "onResponsetoString: " + response.toString())
 
             }
 
@@ -241,13 +263,13 @@ class LoginScreen : AppCompatActivity() {
             val tabView1 = tabStrip.getChildAt(0)
             val tabView2 = tabStrip.getChildAt(1)
             if (tabView1 != null) {
-                val paddingStart = tabView1.getPaddingStart()
-                val paddingTop = tabView1.getPaddingTop()
-                val paddingEnd = tabView1.getPaddingEnd()
-                val paddingBottom = tabView1.getPaddingBottom()
+                val paddingStart = tabView1.paddingStart
+                val paddingTop = tabView1.paddingTop
+                val paddingEnd = tabView1.paddingEnd
+                val paddingBottom = tabView1.paddingBottom
                 ViewCompat.setBackground(
                     tabView1,
-                    AppCompatResources.getDrawable(tabView1.getContext(), tab1)
+                    AppCompatResources.getDrawable(tabView1.context, tab1)
                 )
                 ViewCompat.setPaddingRelative(
                     tabView1,
@@ -258,13 +280,13 @@ class LoginScreen : AppCompatActivity() {
                 )
             }
             if (tabView2 != null) {
-                val paddingStart = tabView2.getPaddingStart()
-                val paddingTop = tabView2.getPaddingTop()
-                val paddingEnd = tabView2.getPaddingEnd()
-                val paddingBottom = tabView2.getPaddingBottom()
+                val paddingStart = tabView2.paddingStart
+                val paddingTop = tabView2.paddingTop
+                val paddingEnd = tabView2.paddingEnd
+                val paddingBottom = tabView2.paddingBottom
                 ViewCompat.setBackground(
                     tabView2,
-                    AppCompatResources.getDrawable(tabView2.getContext(), tab2)
+                    AppCompatResources.getDrawable(tabView2.context, tab2)
                 )
                 ViewCompat.setPaddingRelative(
                     tabView2,
