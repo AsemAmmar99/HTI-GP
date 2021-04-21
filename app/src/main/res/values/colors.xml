@@ -11,4 +11,5 @@
     <color name="light_blue">#f3f4fa</color>
     <color name="dark_red">#da1111</color>
     <color name="dark_grey">#A9AABA</color>
+    <color name="alert">#cdcee1</color>
 </resources>

@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.StaffRequestsListAdapter
 import com.scorpion_a.studentapp.model.StaffRequestsListData
+import com.scorpion_a.studentapp.utils.Lang
+import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_accepted_requests.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 
@@ -14,6 +16,8 @@ class AcceptedRequestsActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     lateinit var staffRequestsListData: ArrayList<StaffRequestsListData>
     override fun onCreate(savedInstanceState: Bundle?) {
+        Lang.loadLocate(this)
+        Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_accepted_requests)
         toolbar=header.findViewById(R.id.toolbar)

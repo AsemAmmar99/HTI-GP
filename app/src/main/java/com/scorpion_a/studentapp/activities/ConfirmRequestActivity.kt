@@ -5,8 +5,12 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -130,10 +134,27 @@ class ConfirmRequestActivity : AppCompatActivity() {
         }
     }
     private fun onRequestSent(context: Context,rId:String) {
+
+        val title = SpannableString(getString(R.string.thank))
+        title.setSpan(
+            ForegroundColorSpan(getResources().getColor(R.color.light_black)),
+            0,
+            title.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        val message = SpannableString(getString(R.string.yrequest_number)+rId+getString(R.string.succes_done))
+        message.setSpan(
+            ForegroundColorSpan(getResources().getColor(R.color.light_black)),
+            0,
+            message.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
         val builder: AlertDialog.Builder
         builder = AlertDialog.Builder(context)
-        builder.setTitle(getString(R.string.thank))
-            .setMessage(getString(R.string.yrequest_number)+rId+getString(R.string.succes_done))
+        builder.setTitle(title)
+            .setMessage(message)
             .setCancelable(false)
             .setPositiveButton(
                 android.R.string.ok
@@ -148,5 +169,6 @@ class ConfirmRequestActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
             .show()
+            .window?.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.alert)))
     }
 }

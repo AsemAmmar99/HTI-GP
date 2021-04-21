@@ -12,7 +12,9 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
+import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
+import com.scorpion_a.studentapp.utils.Theme
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
@@ -30,6 +32,8 @@ import java.io.File
 class StaffProfilePageActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
+        Lang.loadLocate(this)
+        Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_staff_profile_page)
         toolbar=header.findViewById(R.id.toolbar)

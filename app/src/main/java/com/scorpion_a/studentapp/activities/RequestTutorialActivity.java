@@ -12,6 +12,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.scorpion_a.studentapp.R;
 import com.scorpion_a.studentapp.adapters.RequestsPageerAdapter;
+import com.scorpion_a.studentapp.utils.Lang;
+import com.scorpion_a.studentapp.utils.Theme;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,8 @@ public class RequestTutorialActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
+        Lang.Companion.loadLocate(this);
+        Theme.Companion.checkTheme(this, getDelegate());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_tutorial);
 //        View header=findViewById(R.id.header);

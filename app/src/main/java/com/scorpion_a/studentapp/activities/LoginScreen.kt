@@ -1,17 +1,23 @@
 package com.scorpion_a.studentapp.activities
 
 import android.content.*
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
 import com.google.android.material.tabs.TabLayout
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import com.google.gson.GsonBuilder
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.model.requests.LoginRequests
@@ -19,8 +25,11 @@ import com.scorpion_a.studentapp.model.responses.LoginResponse
 import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.network.Service.Companion.BaseUrl
+import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Lang.Companion.setLocate
+import com.scorpion_a.studentapp.utils.MyPreferences
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
+import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_login_screen.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -34,12 +43,14 @@ class LoginScreen : AppCompatActivity() {
     var tabLayout: TabLayout? = null
     var MY_PREFS = "SharedPreferences"
     override fun onCreate(savedInstanceState: Bundle?) {
+        Lang.loadLocate(this)
+        Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
 
         val mySharedPreferences: SharedPreferences = getSharedPreferences(MY_PREFS, 0)
-        etID.setText(mySharedPreferences.getString("userid",""))
-        etPassword.setText(mySharedPreferences.getString("userpassword",""))
+        etID.setText(mySharedPreferences.getString("userid", ""))
+        etPassword.setText(mySharedPreferences.getString("userpassword", ""))
         switch1.isChecked = mySharedPreferences.getBoolean("usercheck", false)
 
         lang.setOnClickListener {
@@ -89,9 +100,9 @@ class LoginScreen : AppCompatActivity() {
                                 "TOKEN",
                                 response.body().token.toString())
                             progressBarLogin.visibility = View.GONE
-                            if(switch1.isChecked()){
+                            if (switch1.isChecked()) {
                                 RememberMe()
-                            }else{
+                            } else {
                                 clearRememberMe()
                             }
                             getUser()
@@ -299,10 +310,27 @@ class LoginScreen : AppCompatActivity() {
         }
     }
     private fun onForgot(context: Context) {
+
+        val title = SpannableString(getString(R.string.attention))
+        title.setSpan(
+            ForegroundColorSpan(getResources().getColor(R.color.light_black)),
+            0,
+            title.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        val message = SpannableString(getString(R.string.please_send_id))
+        message.setSpan(
+            ForegroundColorSpan(getResources().getColor(R.color.light_black)),
+            0,
+            message.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
         val builder: AlertDialog.Builder
         builder = AlertDialog.Builder(context)
-        builder.setTitle(getString(R.string.attention))
-            .setMessage(getString(R.string.please_send_id))
+        builder.setTitle(title)
+            .setMessage(message)
             .setCancelable(false)
             .setPositiveButton(
                 getString(R.string.send_email)
@@ -316,7 +344,6 @@ class LoginScreen : AppCompatActivity() {
                 } catch (e: ActivityNotFoundException) {
                     //TODO smth
                 }
-                finish()
                 dialog.dismiss()
             } .setNegativeButton(
                 getString(R.string.ok)
@@ -324,7 +351,9 @@ class LoginScreen : AppCompatActivity() {
                 dialog.dismiss()
             }
             .show()
+            .window?.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.alert)))
 //        val bottomSheetDialog: ResetPasswordFragment = ResetPasswordFragment.newInstance()
 //        bottomSheetDialog.show(supportFragmentManager, "Bottom Sheet Dialog Fragment")
     }
+
 }

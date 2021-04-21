@@ -15,6 +15,7 @@ import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
+import com.scorpion_a.studentapp.utils.Theme
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_student_profile.*
 import kotlinx.android.synthetic.main.activity_supervisor_home.*
@@ -31,6 +32,7 @@ class SupervisorHomeActivity : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
+        Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_supervisor_home)
 

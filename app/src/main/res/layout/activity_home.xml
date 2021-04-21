@@ -9,6 +9,8 @@
         android:id="@+id/container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/navigationView"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progress_bg"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"

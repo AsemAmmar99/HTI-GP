@@ -1,8 +1,12 @@
 package com.scorpion_a.studentapp.activities
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
@@ -10,6 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.MyPreferences
+import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 import kotlinx.android.synthetic.main.activity_settings.*
@@ -20,6 +25,8 @@ class StaffSettingsActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     lateinit var mBtn : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
+        Lang.loadLocate(this)
+        Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_staff_settings)
         toolbar=header.findViewById(R.id.toolbar)
@@ -46,35 +53,90 @@ class StaffSettingsActivity : AppCompatActivity() {
     }
     private fun showChangeLang() {
 
-        val listItmes = arrayOf("العربية", "English")
+        val title = SpannableString(getString(R.string.choose_lang))
+        title.setSpan(
+            ForegroundColorSpan(getResources().getColor(R.color.light_black)),
+            0,
+            title.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        val arab = SpannableString("العربية")
+        arab.setSpan(
+            ForegroundColorSpan(getResources().getColor(R.color.light_black)),
+            0,
+            arab.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        val english = SpannableString("English")
+        english.setSpan(
+            ForegroundColorSpan(getResources().getColor(R.color.light_black)),
+            0,
+            english.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        val listItmes = arrayOf(arab, english)
 
         val mBuilder = AlertDialog.Builder(this)
-        mBuilder.setTitle(getString(R.string.choose_lang))
+        mBuilder.setTitle(title)
         mBuilder.setSingleChoiceItems(listItmes, -1) { dialog, which ->
             if (which == 0) {
                 Lang.setLocate("ar", this)
-                val intent = Intent(baseContext, StaffHomeActivity::class.java)
+                val intent = Intent(baseContext, HomeActivity::class.java)
                 startActivity(intent)
                 finish()
             } else if (which == 1) {
                 Lang.setLocate("en", this)
-                val intent = Intent(baseContext, StaffHomeActivity::class.java)
+                val intent = Intent(baseContext, HomeActivity::class.java)
                 startActivity(intent)
                 finish()
             }
             dialog.dismiss()
         }
         val mDialog = mBuilder.create()
-
         mDialog.show()
-
+        mDialog.window?.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.alert)))
     }
 
     private fun chooseThemeDialog() {
 
+        val title = SpannableString(getString(R.string.choose_mode))
+        title.setSpan(
+            ForegroundColorSpan(getResources().getColor(R.color.light_black)),
+            0,
+            title.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        val light = SpannableString(getString(R.string.light))
+        light.setSpan(
+            ForegroundColorSpan(getResources().getColor(R.color.light_black)),
+            0,
+            light.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        val dark = SpannableString(getString(R.string.dark))
+        dark.setSpan(
+            ForegroundColorSpan(getResources().getColor(R.color.light_black)),
+            0,
+            dark.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        val default = SpannableString(getString(R.string.system_default))
+        default.setSpan(
+            ForegroundColorSpan(getResources().getColor(R.color.light_black)),
+            0,
+            default.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.choose_mode))
-        val styles = arrayOf(getString(R.string.light), getString(R.string.dark), getString(R.string.system_default))
+        builder.setTitle(title)
+        val styles = arrayOf(light, dark, default)
         val checkedItem = MyPreferences(this).darkMode
 
         builder.setSingleChoiceItems(styles, checkedItem) { dialog, which ->
@@ -84,7 +146,7 @@ class StaffSettingsActivity : AppCompatActivity() {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     MyPreferences(this).darkMode = 0
                     delegate.applyDayNight()
-                    val intent = Intent(baseContext, StaffHomeActivity::class.java)
+                    val intent = Intent(baseContext, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
                     dialog.dismiss()
@@ -93,7 +155,7 @@ class StaffSettingsActivity : AppCompatActivity() {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     MyPreferences(this).darkMode = 1
                     delegate.applyDayNight()
-                    val intent = Intent(baseContext, StaffHomeActivity::class.java)
+                    val intent = Intent(baseContext, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
                     dialog.dismiss()
@@ -102,7 +164,7 @@ class StaffSettingsActivity : AppCompatActivity() {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                     MyPreferences(this).darkMode = 2
                     delegate.applyDayNight()
-                    val intent = Intent(baseContext, StaffHomeActivity::class.java)
+                    val intent = Intent(baseContext, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
                     dialog.dismiss()
@@ -113,6 +175,7 @@ class StaffSettingsActivity : AppCompatActivity() {
 
         val dialog = builder.create()
         dialog.show()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.alert)))
     }
 
 }

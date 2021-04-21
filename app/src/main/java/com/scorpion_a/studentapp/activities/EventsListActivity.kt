@@ -10,6 +10,8 @@ import com.scorpion_a.studentapp.adapters.EventsListAdapter
 import com.scorpion_a.studentapp.adapters.NewsListAdapter
 import com.scorpion_a.studentapp.model.EventsListData
 import com.scorpion_a.studentapp.model.NewsListData
+import com.scorpion_a.studentapp.utils.Lang
+import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_events_list.*
 import kotlinx.android.synthetic.main.activity_events_list.header
 import kotlinx.android.synthetic.main.activity_profile_page.*
@@ -18,6 +20,8 @@ class EventsListActivity : AppCompatActivity() {
 //    lateinit var  recyclerView: RecyclerView
     lateinit var toolbar: Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
+        Lang.loadLocate(this)
+        Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_events_list)
         toolbar=header.findViewById(R.id.toolbar)

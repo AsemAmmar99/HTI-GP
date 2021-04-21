@@ -10,12 +10,16 @@ import com.scorpion_a.studentapp.adapters.PropCardAdapter
 import com.scorpion_a.studentapp.adapters.ResultsCardAdapter
 import com.scorpion_a.studentapp.model.PropCardData
 import com.scorpion_a.studentapp.model.ResultsCardData
+import com.scorpion_a.studentapp.utils.Lang
+import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_profile_page.*
 
 class ResultsActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
+        Lang.loadLocate(this)
+        Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_results)
         toolbar=header.findViewById(R.id.toolbar)

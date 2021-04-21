@@ -12,6 +12,7 @@ import com.scorpion_a.studentapp.fragments.NotificationsFragment
 import com.scorpion_a.studentapp.fragments.RequestsPageFragment
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.MyPreferences
+import com.scorpion_a.studentapp.utils.Theme
 
 
 class HomeActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
+        Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
@@ -76,6 +78,5 @@ class HomeActivity : AppCompatActivity() {
         super.onBackPressed()
         finishAffinity()
     }
-
 
 }

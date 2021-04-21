@@ -14,7 +14,9 @@ import com.scorpion_a.studentapp.model.ViewRequestsListData
 import com.scorpion_a.studentapp.model.responses.MyRequestsResponse
 import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
+import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
+import com.scorpion_a.studentapp.utils.Theme
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_my_requests_page.*
 import kotlinx.android.synthetic.main.activity_my_requests_page.header
@@ -31,6 +33,8 @@ class MyRequestsActivity : AppCompatActivity() {
     lateinit var  recyclerView: RecyclerView
     lateinit var toolbar: Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
+        Lang.loadLocate(this)
+        Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_requests_page)
         toolbar=header.findViewById(R.id.toolbar)

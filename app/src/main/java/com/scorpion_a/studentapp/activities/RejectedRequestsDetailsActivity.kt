@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.utils.Lang
+import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_profile_page.*
 
 class RejectedRequestsDetailsActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     lateinit var receiptImage: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
+        Lang.loadLocate(this)
+        Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rejected_requests_details)
         toolbar = header.findViewById(R.id.toolbar)

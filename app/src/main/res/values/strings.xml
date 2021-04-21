@@ -139,8 +139,8 @@
     <string name="confirm">Confirm</string>
     <string name="confirm_request">Confirm Your Request</string>
     <string name="task_cancelled">Task Cancelled</string>
-    <string name="yrequest_number">\"Your request with number \"</string>
-    <string name="succes_done">\" has been sent successfully. Go to My Requests screen to check your request status.\"</string>
+    <string name="yrequest_number">Your request with number \"</string>
+    <string name="succes_done">\" has been sent successfully. Go to My Requests screen to check your request status.</string>
     <string name="editing_profile">Editing Profile</string>
     <string name="important_hints">- Important Hints:</string>
     <string name="_1_your_english_name_must_be_the_same_name_in_the_passport">1- Your English name must be the same name in the passport.</string>

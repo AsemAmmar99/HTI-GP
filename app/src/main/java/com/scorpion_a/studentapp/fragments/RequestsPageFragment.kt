@@ -120,7 +120,6 @@ class RequestsPageFragment : Fragment() {
                     }
                 }else {
                     view.progressBarRequests.visibility = View.GONE
-                    view.clRequests.visibility = View.VISIBLE
                     Toast.makeText(
                         context,
                         getString(R.string.went_wrong),

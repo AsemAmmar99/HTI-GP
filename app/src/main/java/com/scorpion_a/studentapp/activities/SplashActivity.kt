@@ -16,6 +16,7 @@ import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.MyPreferences
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
+import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_student_profile.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -27,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
-        checkTheme()
+        Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         //hiding title bar of this activity
         window.requestFeature(Window.FEATURE_NO_TITLE)
@@ -111,27 +112,6 @@ class SplashActivity : AppCompatActivity() {
         })
 
 
-    }
-
-
-    private fun checkTheme() {
-
-        try {
-            when (MyPreferences(this).darkMode) {
-                0 -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    delegate.applyDayNight()
-                }
-                1 -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    delegate.applyDayNight()
-                }
-                2 -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                    delegate.applyDayNight()
-                }
-            }
-        }catch (ex: Exception){}
     }
 
 }

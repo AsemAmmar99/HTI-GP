@@ -140,8 +140,8 @@
     <string name="confirm">تأكيد</string>
     <string name="confirm_request">أكد طلبك</string>
     <string name="task_cancelled">تم الغاء المهمة</string>
-    <string name="yrequest_number">"تم ارسال طلبكم رقم "</string>
-    <string name="succes_done">" بنجاح. اذهب لشاشة طلباتي لمتابعة حالة طلبك."</string>
+    <string name="yrequest_number">تم ارسال طلبكم رقم \"</string>
+    <string name="succes_done">\" بنجاح. اذهب لشاشة طلباتي لمتابعة حالة طلبك.</string>
     <string name="editing_profile">تعديل الصفحة الشخصية</string>
     <string name="important_hints">- اشارات هامة:</string>
     <string name="_1_your_english_name_must_be_the_same_name_in_the_passport">1- اسمك باللغة الانجليزية يجب أن يكون مطابق لاسمك بجواز السفر.</string>
