@@ -10,7 +10,7 @@
     <ProgressBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBarEventsList"
+        android:id="@+id/progressBarNewsList"
         android:gravity="center"
         android:visibility="gone"
         android:indeterminate="true"
@@ -23,8 +23,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/clEventsList">
-
+        android:id="@+id/clNewsList">
 
     <include
         android:id="@+id/header"
@@ -38,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical"
-        android:id="@+id/rvEventList"
+        android:id="@+id/rvNewsList"
         android:background="@color/light_blue"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"

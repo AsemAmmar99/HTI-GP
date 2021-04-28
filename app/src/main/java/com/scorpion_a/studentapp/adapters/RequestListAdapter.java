@@ -51,6 +51,7 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
                 bundle.putString("title", requestListData.getName());
                 bundle.putString("id", requestListData.getId());
                 bundle.putString("price", requestListData.getPrice());
+                bundle.putString("limit",requestListData.getMax_number());
                 requestInfoFragment.setArguments(bundle);
                 requestInfoFragment.show(((AppCompatActivity) context).getSupportFragmentManager(),
                         "Bottom Sheet Dialog Fragment");

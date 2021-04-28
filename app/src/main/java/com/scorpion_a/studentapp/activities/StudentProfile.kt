@@ -64,6 +64,7 @@ class StudentProfile : AppCompatActivity() {
                     tvStudentDepartment.text=response.body().data?.department
                     tvGPAResultProfile.text=response.body().data?.gpa
                     tvUnitsValueProfile.text=response.body().data?.number_of_units
+                    tvPhoneValue.text=response.body().data?.phone
                     tvStudentNameArabic.text=response.body().data?.name?.ar
                     tvStudentNameEngProfile.text=response.body().data?.name?.en
                     Picasso.with(baseContext).load(response.body().data?.image_path).into(ivProfilePict)

@@ -229,4 +229,6 @@
     <string name="peyen">من فضلك أدخل اسمك بالانجليزية.</string>
     <string name="peye">من فضلك أدخل بريدك الالكتروني.</string>
     <string name="peypn">من فضلك أدخل رقم هاتفك.</string>
+    <string name="max_limit">الحد الأقصى:</string>
+    <string name="maxLim">العدد المدخل أكبر من الحد الأقصى المسموح به.</string>
 </resources>

@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.scorpion_a.studentapp.R;
 import com.scorpion_a.studentapp.adapters.RequestsPageerAdapter;
 import com.scorpion_a.studentapp.utils.Lang;
+import com.scorpion_a.studentapp.utils.SharedPreferenceClass;
 import com.scorpion_a.studentapp.utils.Theme;
 
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class RequestTutorialActivity extends AppCompatActivity {
         imageList.add(R.drawable.third);
 
         pointsList.add("1- In this page you can request some of HTI\n" +
-                "Services like your ID, your Certificates if you a\n" +
+                "Services like your ID, your Certificates if you are a\n" +
                 "graduated student and proove of your study in\n" +
                 "English etc..");
         pointsList.add("2- How can I request a Request?");
@@ -95,6 +96,9 @@ public class RequestTutorialActivity extends AppCompatActivity {
 
             }
         });
+        if(Lang.Companion.getLang  (this).equals("ar")) {
+            viewPager.setRotationY(180);
+        }
 
     }
     public void addDot(int page_position) {

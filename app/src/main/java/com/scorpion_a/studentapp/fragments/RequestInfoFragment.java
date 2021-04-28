@@ -2,6 +2,7 @@ package com.scorpion_a.studentapp.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -27,6 +29,7 @@ public class RequestInfoFragment extends BottomSheetDialogFragment {
     String rCount;
     String rTotal;
     String rId;
+    String limit;
     public static RequestInfoFragment newInstance() {
         RequestInfoFragment fragment = new RequestInfoFragment();
         return fragment;
@@ -77,12 +80,19 @@ public class RequestInfoFragment extends BottomSheetDialogFragment {
         ((View) contentView.getParent()).setBackgroundColor(getResources().getColor(android.R.color.transparent));
         String title= getArguments().getString("title");
         String price= getArguments().getString("price");
+        if(Objects.equals(getArguments().getString("limit"), null)) {
+
+            limit = "1";
+        }   else {
+            limit=getArguments().getString("limit");
+        }
         rId= getArguments().getString("id");
         TextView tvTitle=contentView.findViewById(R.id.tvRequestNameValue);
         TextView tvPrice=contentView.findViewById(R.id.tvRequestPriceValue);
         Button send=contentView.findViewById(R.id.buSendRequest);
         TextView tvTotalcount=contentView.findViewById(R.id.tvRequestTotalPriceValue);
         EditText etcount=contentView.findViewById(R.id.etRequestCount);
+
         TextView tvtotal=contentView.findViewById(R.id.tvTotalPriceButton);
         tvTitle.setText(title);
         tvPrice.setText(price);
@@ -109,9 +119,13 @@ public class RequestInfoFragment extends BottomSheetDialogFragment {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (etcount.getText().toString().equals("")||etcount.getText().toString().equals(null)) {
                     alerting();
-                }else {
+                }else if (Integer.parseInt(etcount.getText().toString()) > Integer.parseInt(limit)){
+                    Context context = Objects.requireNonNull(RequestInfoFragment.this.getActivity()).getApplicationContext();
+                    Toast.makeText(context, R.string.maxLim, Toast.LENGTH_SHORT).show();
+                }else{
                     alertingNot();
                 }
             }

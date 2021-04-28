@@ -35,12 +35,20 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
+import kotlin.properties.Delegates
 
 class ConfirmRequestActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     var rCount:Int = 0
+    var image1 by Delegates.notNull<Boolean>()
+    var image2 by Delegates.notNull<Boolean>()
+    var image3 by Delegates.notNull<Boolean>()
+    var imagesArray :ArrayList<File>? = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        image1 = true
+        image2 = true
+        image3 = true
         setContentView(R.layout.activity_confirm_request)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title=getString(R.string.confirm_request)
@@ -54,6 +62,30 @@ class ConfirmRequestActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+//        clReceipt1.setOnClickListener {
+//            ImagePicker.with(this)
+//                .crop()	    			//Crop image(Optional), Check Customization for more option
+//                .compress(1024)			//Final image size will be less than 1 MB(Optional)
+//                .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+//                .start()
+//        }
+//
+//        clReceipt2.setOnClickListener {
+//            ImagePicker.with(this)
+//                .crop()	    			//Crop image(Optional), Check Customization for more option
+//                .compress(1024)			//Final image size will be less than 1 MB(Optional)
+//                .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+//                .start()
+//        }
+//
+//        clReceipt3.setOnClickListener {
+//            ImagePicker.with(this)
+//                .crop()	    			//Crop image(Optional), Check Customization for more option
+//                .compress(1024)			//Final image size will be less than 1 MB(Optional)
+//                .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+//                .start()
+//        }
+
         val retrofit = Retrofit.Builder()
             .baseUrl(Service.BaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -64,7 +96,8 @@ class ConfirmRequestActivity : AppCompatActivity() {
             .build()
 
         val client = retrofit.create(Service::class.java)
-        val call = client.submitRequest(RequestRequests(intent.getStringExtra("id"),rCount))
+        val call = client.submitRequest(RequestRequests(intent.getStringExtra("id"),rCount,
+            imagesArray!!))
 
 
         buConfirm.setOnClickListener {
@@ -119,9 +152,31 @@ class ConfirmRequestActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             //Image Uri will not be null for RESULT_OK
-            val fileUri = data?.data
-            ivReceipt.setImageURI(fileUri)
-
+            if (image1 == true && image2 == true && image3 == true){
+                image1 = false
+//                val fileUri1 = data?.data
+                ivReceipt1.setImageURI(data?.data)
+                imagesArray?.add(ImagePicker.getFile(data)!!)
+                Log.i("i1", "image1 uploaded")
+                Log.i("image1", image1.toString())
+            }else if (image1 == false && image2 == true && image3 == true){
+                image2 = false
+//                val fileUri2 = data?.data
+                ivReceipt2.setImageURI(data?.data)
+                imagesArray?.add(ImagePicker.getFile(data)!!)
+                Log.i("i2", "image2 uploaded")
+                Log.i("image2", image2.toString())
+            }else if (image1 == false && image2 == false && image3 == true){
+                image3 = false
+//                val fileUri3 = data?.data
+                ivReceipt3.setImageURI(data?.data)
+                imagesArray?.add(ImagePicker.getFile(data)!!)
+                Log.i("i3", "image3 uploaded")
+                Log.i("image3", image3.toString())
+            }else{
+                Toast.makeText(this, "Maximum number of images is 3.", Toast.LENGTH_SHORT).show()
+            }
+            Log.i("arrIm", imagesArray?.size.toString())
             //You can get File object from intent
             val file: File = ImagePicker.getFile(data)!!
 

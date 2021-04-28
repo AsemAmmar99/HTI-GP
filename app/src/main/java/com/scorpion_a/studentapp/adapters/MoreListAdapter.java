@@ -62,36 +62,36 @@ public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHo
                         context.startActivity(new Intent(context, MyRequestsActivity.class));
                         break;
 
+//                    case 2:
+//                        context.startActivity(new Intent(context, PrintoutActivity.class));
+//                        break;
+//
+//                    case 3:
+//                        context.startActivity(new Intent(context, RegProposalActivity.class));
+//                        break;
+//                    case 4:
+//                        context.startActivity(new Intent(context, ResultsActivity.class));
+//                        break;
+//                    case 5:
+//                        context.startActivity(new Intent(context, TestYourselfActivity.class));
+//                        break;
                     case 2:
-                        context.startActivity(new Intent(context, PrintoutActivity.class));
-                        break;
-
-                    case 3:
-                        context.startActivity(new Intent(context, RegProposalActivity.class));
-                        break;
-                    case 4:
-                        context.startActivity(new Intent(context, ResultsActivity.class));
-                        break;
-                    case 5:
-                        context.startActivity(new Intent(context, TestYourselfActivity.class));
-                        break;
-                    case 6:
                         context.startActivity(new Intent(context, TutorialActivity.class));
                         break;
-                    case 7:
+                    case 3:
                         context.startActivity(new Intent(context, FAQSActivity.class));
                         break;
 
-                    case 8:
+                    case 4:
                         context.startActivity(new Intent(context, AboutHTIActivity.class));
                         break;
-                    case 9:
+                    case 5:
                         context.startActivity(new Intent(context, SettingsActivity.class));
                         break;
 //                    case 6:
 //                        context.startActivity(new Intent(context, AppTechSupportActivity.class));
 //                        break;
-                    case 10:
+                    case 6:
                         SharedPreferenceClass.clearSharedPrefrences(context);
                         context.startActivity(new Intent(context, LoginScreen.class));
                         ((Activity)context).finish();

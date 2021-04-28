@@ -228,4 +228,6 @@
     <string name="peyen">Please enter your English name.</string>
     <string name="peye">Please enter your Email.</string>
     <string name="peypn">Please enter your Phone Number.</string>
+    <string name="max_limit">Max Limit:</string>
+    <string name="maxLim">The entered count is greater than the maximum allowed limit.</string>
 </resources>

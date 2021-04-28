@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.StaffSettingsActivity"></activity>
+        <activity android:name=".activities.NewsListActivity"></activity>
+        <activity android:name=".activities.StaffSettingsActivity" />
         <activity android:name=".activities.SupervisorHomeActivity" />
         <activity android:name=".activities.RejectReasonActivity" />
         <activity android:name=".activities.RejectedRequestsDetailsActivity" />

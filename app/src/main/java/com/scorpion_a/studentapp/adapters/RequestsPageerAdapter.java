@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.scorpion_a.studentapp.R;
+import com.scorpion_a.studentapp.utils.Lang;
 
 import java.util.ArrayList;
 
@@ -47,6 +48,11 @@ public class RequestsPageerAdapter extends PagerAdapter {
         imageView.setBackgroundResource(image.get(position));
         textPoint.setText(point.get(position));
         textPointValue.setText(pointDetails.get(position));
+        if(Lang.Companion.getLang  (context).equals("ar")) {
+            imageView.setRotationY(180);
+            textPoint.setRotationY(180);
+            textPointValue.setRotationY(180);
+        }
         container.addView(view);
 
         return view;

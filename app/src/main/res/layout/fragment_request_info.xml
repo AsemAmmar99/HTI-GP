@@ -2,7 +2,7 @@
 <carbon.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_blue"
+    android:background="@drawable/background"
     app:carbon_cornerRadius="15dp"
     android:layout_margin="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -168,6 +168,38 @@
         android:layout_marginTop="15dp"
         />
 
+    <TextView
+        android:id="@+id/tvRequestMaxLimit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRequestCount"
+        android:text="@string/max_limit"
+        android:textColor="@color/light_black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="15dp"
+        />
+
+    <TextView
+        android:id="@+id/tvRequestMaxLimitValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tvRequestMaxLimit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRequestCount"
+        android:text="1"
+        android:textColor="@color/light_black"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="14sp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        />
+
     <carbon.widget.Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -178,7 +210,7 @@
         app:carbon_cornerRadius="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRequestCount"
+        app:layout_constraintTop_toBottomOf="@id/tvRequestMaxLimit"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"

@@ -31,6 +31,17 @@ public class Lang {
         if (language != null) {
             setLocate(language, context)
         }
+
     }
+
+        public fun getLang(context: Context):String? {
+            val sharedPreferences = context.getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+            val language = sharedPreferences.getString("My_Lang", "")
+            if (language != null) {
+                setLocate(language, context)
+            }
+            return language
+
+        }
     }
 }

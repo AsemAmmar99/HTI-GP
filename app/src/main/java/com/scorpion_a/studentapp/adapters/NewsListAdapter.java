@@ -11,15 +11,18 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.scorpion_a.studentapp.activities.NewsDetailsActivity;
+import com.scorpion_a.studentapp.model.ArticlesListData;
 import com.scorpion_a.studentapp.model.NewsListData;
 import com.scorpion_a.studentapp.R;
 
+import java.util.ArrayList;
+
 public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
-    private NewsListData[] newsdata;
+    private ArrayList <ArticlesListData>newsdata;
     private Context context;
 
     // RecyclerView recyclerView;
-    public NewsListAdapter(NewsListData[] newsdata, Context context) {
+    public NewsListAdapter(ArrayList <ArticlesListData>newsdata, Context context) {
         this.newsdata = newsdata;
         this.context = context;
     }
@@ -34,14 +37,15 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final NewsListData myListData = newsdata[position];
-        holder.tvTitle.setText(newsdata[position].getNewsTitle());
-        holder.tvDesc.setText(newsdata[position].getNewsDesc());
-        holder.tvDate.setText(newsdata[position].getNewsDate());
+        final ArticlesListData myListData = newsdata.get(position);
+        holder.tvTitle.setText(newsdata.get(position).getTitle());
+        holder.tvDate.setText(newsdata.get(position).getDate());
         holder.clNewsItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, NewsDetailsActivity.class));
+                Intent intent=new Intent(context, NewsDetailsActivity.class);
+                intent.putExtra("id",newsdata.get(position).getId());
+                context.startActivity(intent);
             }
         });
     }
@@ -49,19 +53,17 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return newsdata.length;
+        return newsdata.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvTitle;
-        public TextView tvDesc;
         public TextView tvDate;
         public ConstraintLayout clNewsItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.tvTitle = itemView.findViewById(R.id.tvNewsTitle);
-            this.tvDesc = itemView.findViewById(R.id.tvNewsDesc);
             this.tvDate = itemView.findViewById(R.id.tvNewsDate);
             this.clNewsItem = itemView.findViewById(R.id.clNewsItem);
         }

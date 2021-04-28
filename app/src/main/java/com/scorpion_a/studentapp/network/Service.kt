@@ -45,4 +45,14 @@ interface Service {
     @Headers("Accept: application/json", "Content-Type: application/json")
     fun updateUser(@Body request: UpdateUserRequests): Call<UserDataResponce>
 
+    @GET("articles")
+    @Headers("Accept: application/json", "Content-Type: application/json"/*,"Locale: ar"*/)
+    fun getArticlesData(
+    ):Call<ArticlesResponse>
+
+    @GET("articles/{id}")
+    @Headers("Accept: application/json", "Content-Type: application/json"/*,"Locale: ar"*/)
+    fun getArticleDetails(@Path("id") id:String
+    ):Call<ArticleDetailsResponse>
+
 }

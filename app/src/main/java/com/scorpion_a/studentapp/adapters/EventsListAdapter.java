@@ -12,15 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.scorpion_a.studentapp.R;
 import com.scorpion_a.studentapp.activities.NewsDetailsActivity;
+import com.scorpion_a.studentapp.model.ArticlesListData;
 import com.scorpion_a.studentapp.model.EventsListData;
 import com.scorpion_a.studentapp.model.NewsListData;
 
+import java.util.ArrayList;
+
 public class EventsListAdapter extends RecyclerView.Adapter<EventsListAdapter.ViewHolder> {
-    private EventsListData[] eventsdata;
+    private ArrayList<ArticlesListData> eventsdata;
     private Context context;
 
     // RecyclerView recyclerView;
-    public EventsListAdapter(EventsListData[] eventsdata, Context context) {
+    public EventsListAdapter(ArrayList<ArticlesListData>eventsdata, Context context) {
         this.eventsdata = eventsdata;
         this.context = context;
     }
@@ -35,14 +38,15 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventsListAdapter.Vi
 
     @Override
     public void onBindViewHolder(EventsListAdapter.ViewHolder holder, int position) {
-        final EventsListData myListData = eventsdata[position];
-        holder.tvTitle.setText(eventsdata[position].getEventsTitle());
-        holder.tvDesc.setText(eventsdata[position].getEventsDesc());
-        holder.tvData.setText(eventsdata[position].getEventsDate());
+        final ArticlesListData myListData = eventsdata.get(position);
+        holder.tvTitle.setText(eventsdata.get(position).getTitle());
+        holder.tvData.setText(eventsdata.get(position).getDate());
         holder.clEvents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, NewsDetailsActivity.class));
+                Intent intent=new Intent(context, NewsDetailsActivity.class);
+                intent.putExtra("id",eventsdata.get(position).getId());
+                context.startActivity(intent);
             }
         });
     }
@@ -50,12 +54,11 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventsListAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return eventsdata.length;
+        return eventsdata.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvTitle;
-        public TextView tvDesc;
         public TextView tvData;
         public ConstraintLayout clEvents;
 
@@ -64,7 +67,6 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventsListAdapter.Vi
         public ViewHolder(View itemView) {
             super(itemView);
             this.tvTitle = itemView.findViewById(R.id.tvEventsTitle);
-            this.tvDesc = itemView.findViewById(R.id.tvEventsDesc);
             this.tvData = itemView.findViewById(R.id.tvEventDate);
             this.clEvents = itemView.findViewById(R.id.clEventsItem);
         }

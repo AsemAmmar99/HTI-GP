@@ -7,6 +7,25 @@
     android:background="@drawable/background"
     tools:context=".activities.NewsDetailsActivity">
 
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBarArticleDetails"
+        android:gravity="center"
+        android:visibility="gone"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progress_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/clArticleDetails">
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +33,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:text="The Institute Guide to Coordination."
+        tools:text="The Institute Guide to Coordination."
         android:textColor="@color/light_black"
         android:textStyle="bold"
         android:textSize="16dp"
@@ -36,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvNewsDate"
-        android:text="05:00PM, 02/09/2020"
+        tools:text="05:00PM, 02/09/2020"
         android:textColor="@color/light_black"
         android:textStyle="bold"
         android:textSize="12dp"
@@ -61,7 +80,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/tvNewsDetails"
-            android:text="فازالمعهد التكنولوجي العالي بالعاشر من رمضان بالمركز الثاني في مسابقة اليوم العلمي الثاني لكلية الهندسة والتكنولوجيا بجامعة بدر BUC ) ) و الخاصة بكليات الهندسة علي مستوي الجامعات المصرية."
+            tools:text="فازالمعهد التكنولوجي العالي بالعاشر من رمضان بالمركز الثاني في مسابقة اليوم العلمي الثاني لكلية الهندسة والتكنولوجيا بجامعة بدر BUC ) ) و الخاصة بكليات الهندسة علي مستوي الجامعات المصرية."
             android:textColor="@color/light_black"
             android:scrollbars="vertical"
             app:layout_constraintTop_toTopOf="parent"
@@ -71,6 +90,8 @@
             android:layout_marginEnd="15dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

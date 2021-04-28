@@ -14,10 +14,16 @@ import carbon.widget.Button
 import com.google.gson.GsonBuilder
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.activities.EventsListActivity
+import com.scorpion_a.studentapp.activities.NewsListActivity
+import com.scorpion_a.studentapp.activities.RequestTutorialActivity
 import com.scorpion_a.studentapp.adapters.EventsListAdapter
 import com.scorpion_a.studentapp.adapters.NewsListAdapter
+import com.scorpion_a.studentapp.adapters.RequestListAdapter
+import com.scorpion_a.studentapp.model.ArticlesListData
 import com.scorpion_a.studentapp.model.EventsListData
 import com.scorpion_a.studentapp.model.NewsListData
+import com.scorpion_a.studentapp.model.responses.ArticlesResponse
+import com.scorpion_a.studentapp.model.responses.RequestsResponse
 import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
@@ -55,8 +61,8 @@ class HomeFragment : Fragment() {
 
 
         val call = client.getUserData()
-        view.progressBarHome.visibility = View.VISIBLE
-        view.clHome.visibility = View.INVISIBLE
+//        view.progressBarHome.visibility = View.VISIBLE
+//        view.clHome.visibility = View.INVISIBLE
         call.enqueue(object : Callback<UserDataResponce> {
             override fun onResponse(
                 call: Call<UserDataResponce>,
@@ -66,12 +72,12 @@ class HomeFragment : Fragment() {
                 if (response.isSuccessful()){
                     if (tvDepartment != null) {
                             tvDepartment.text="Department: " + response.body().data?.department
-                            view.progressBarHome.visibility = View.GONE
-                            view.clHome.visibility = View.VISIBLE
+//                            view.progressBarHome.visibility = View.GONE
+//                            view.clHome.visibility = View.VISIBLE
                         }
                 }else{
-                    view.progressBarHome.visibility = View.GONE
-                    view.clHome.visibility = View.VISIBLE
+//                    view.progressBarHome.visibility = View.GONE
+//                    view.clHome.visibility = View.VISIBLE
                     Toast.makeText(context, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
                 }
                 // Catching Responses From Retrofit
@@ -93,110 +99,86 @@ class HomeFragment : Fragment() {
                 Log.i("test", t.toString())
             }
         })
-        val newsListData: Array<NewsListData> = arrayOf<NewsListData>(
-            NewsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
-                ,"1:00AM 1/1/2020"
-            ),
-            NewsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
-                ,"1:00AM 1/1/2020"
-
-            ),
-            NewsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
-                ,"1:00AM 1/1/2020"
-
-            ),
-            NewsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
-                ,"1:00AM 1/1/2020"
 
 
-            ),
-            NewsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
-                ,"1:00AM 1/1/2020"
 
-            ),
-            NewsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
-                ,"1:00AM 1/1/2020"
+        val callArti = client.getArticlesData()
+        view.progressBarHome.visibility = View.VISIBLE
+        view.clHome.visibility = View.INVISIBLE
+        callArti.enqueue(object : Callback<ArticlesResponse> {
+            override fun onResponse(
+                call: Call<ArticlesResponse>?,
+                response: Response<ArticlesResponse>?
+            ) {
+                if (response!!.isSuccessful()) {
 
-            ),
-            NewsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
-                ,"1:00AM 1/1/2020"
+//                    for ((i:Int,item: ArticlesListData) in response.body().data){
+//                        if (item.type.equals("event")){
+////                            eventsListData.set(item)
+//                        }
+//                    }
+                    var newsListData: ArrayList<ArticlesListData>?=ArrayList()
+                    var eventsListData: ArrayList<ArticlesListData>?=ArrayList()
+                    response.body().data.map {
+                        if (it.type.equals("event")){
+                            eventsListData?.add( ArticlesListData(it.id,it.title,it.images, it.type,it.date))
+                            view.progressBarHome.visibility = View.GONE
+                            view.clHome.visibility = View.VISIBLE
+//                            eventsListData=   arrayOf<ArticlesListData>(
+//                                ArticlesListData(it.id,it.title, it.date, it.images,it.type))
+                            recyclerViewEvents = view.findViewById(R.id.rvEvents)
+                            val adapterEvents = EventsListAdapter(eventsListData, context)
+                            recyclerViewEvents.setHasFixedSize(true)
+                            recyclerViewEvents.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.HORIZONTAL,false)
+                            recyclerViewEvents.adapter = adapterEvents
+                        }else{
+                            newsListData?.add( ArticlesListData(it.id,it.title,it.images, it.type,it.date))
+                            view.progressBarHome.visibility = View.GONE
+                            view.clHome.visibility = View.VISIBLE
+//                          newsListData=  arrayOf<ArticlesListData>(
+//                                ArticlesListData(it.id,it.title,it.date, it.images,it.type)
+//                            )
+                            recyclerViewNews = view.findViewById(R.id.rvNewsList)
+                            val adapterNews = NewsListAdapter(newsListData, context)
+                            recyclerViewNews.setHasFixedSize(true)
+                            recyclerViewNews.layoutManager = LinearLayoutManager(view.context)
+                            recyclerViewNews.adapter = adapterNews
+                        }
+                    }
 
-            ),
-            NewsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
-                ,"1:00AM 1/1/2020"
+                } else {
+                    view.progressBarHome.visibility = View.GONE
+                    view.clHome.visibility = View.VISIBLE
+                    Toast.makeText(
+                        context,
+                        getString(R.string.went_wrong),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
 
-            ),
-            NewsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
-                ,"1:00AM 1/1/2020"
+                Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
+                Log.d("TAG", "onResponsebody: " + response.body())
+                Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
+                Log.d("TAG", "onResponsemessage: " + response.message())
+                Log.d("TAG", "onResponsecode: " + response.code())
+                Log.d("TAG", "onResponseheaders: " + response.headers())
+                Log.d("TAG", "onResponseraw: " + response.raw())
+                Log.d("TAG", "onResponsetoString: " + response.toString())
 
-            )
+            }
+
+            override fun onFailure(call: Call<ArticlesResponse>?, t: Throwable?) {
+                Log.i("test", t.toString())
+            }
+        }
         )
-        val eventsListData: Array<EventsListData> = arrayOf<EventsListData>(
-            EventsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy",
-                "1:00AM 1/1/2020"
-            ),
-            EventsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
-            ,"1:00AM 1/1/2020"
-            ),
-            EventsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
-                ,"1:00AM 1/1/2020"
-            ),
-            EventsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
-                ,"1:00AM 1/1/2020"
-            ),
-
-            EventsListData(
-                "The Institute Guide to Coordination",
-                "DummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummyDummy"
-                ,"1:00AM 1/1/2020"
-            )
-        )
-
-        recyclerViewNews = view.findViewById(R.id.rvNewsList)
-        val adapterNews = NewsListAdapter(newsListData, context)
-        recyclerViewNews.setHasFixedSize(true)
-        recyclerViewNews.layoutManager = LinearLayoutManager(view.context)
-        recyclerViewNews.adapter = adapterNews
-
-        recyclerViewEvents = view.findViewById(R.id.rvEvents)
-        val adapterEvents = EventsListAdapter(eventsListData, context)
-        recyclerViewEvents.setHasFixedSize(true)
-        recyclerViewEvents.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.HORIZONTAL,false)
-        recyclerViewEvents.adapter = adapterEvents
-
         view.tvEventsMore.setOnClickListener {
             val intent = Intent(view.context, EventsListActivity::class.java)
             intent.putExtra("More","Events")
             startActivity(intent)
         }
         view.tvNewsMoreBt.setOnClickListener {
-            val intent = Intent(view.context, EventsListActivity::class.java)
+            val intent = Intent(view.context, NewsListActivity::class.java)
             intent.putExtra("More","News")
             startActivity(intent)
         }

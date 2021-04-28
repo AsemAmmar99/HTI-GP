@@ -8,7 +8,8 @@ data class UserData (
     var gpa:String,
     var number_of_units:String,
     var account_type:String,
-    var department:String
+    var department:String,
+    var phone:String
 )
 
 data class Name(

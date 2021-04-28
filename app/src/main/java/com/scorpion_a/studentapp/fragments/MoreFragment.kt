@@ -35,18 +35,18 @@ class MoreFragment  : Fragment() {
             MoreListData(
                 getString(R.string.my_requests)
             ),
-            MoreListData(
-                getString(R.string.printout)
-            ),
-            MoreListData(
-                getString(R.string.proposal)
-            ),
-            MoreListData(
-                getString(R.string.my_results)
-            ),
-            MoreListData(
-                getString(R.string.test_yourself)
-            ),
+//            MoreListData(
+//                getString(R.string.printout)
+//            ),
+//            MoreListData(
+//                getString(R.string.proposal)
+//            ),
+//            MoreListData(
+//                getString(R.string.my_results)
+//            ),
+//            MoreListData(
+//                getString(R.string.test_yourself)
+//            ),
             MoreListData(
                 getString(R.string.tutorials)
             ),
