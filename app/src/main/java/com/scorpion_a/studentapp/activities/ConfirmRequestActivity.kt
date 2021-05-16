@@ -5,35 +5,36 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.model.requests.RequestRequests
-import com.scorpion_a.studentapp.model.responses.LoginResponse
 import com.scorpion_a.studentapp.model.responses.SubmitRequestResponse
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import kotlinx.android.synthetic.main.activity_confirm_request.*
-import kotlinx.android.synthetic.main.activity_login_screen.*
-import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
-import kotlinx.android.synthetic.main.activity_request_data.*
-import kotlinx.android.synthetic.main.activity_student_profile.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.ByteArrayOutputStream
 import java.io.File
 import kotlin.properties.Delegates
 
@@ -43,13 +44,18 @@ class ConfirmRequestActivity : AppCompatActivity() {
     var image1 by Delegates.notNull<Boolean>()
     var image2 by Delegates.notNull<Boolean>()
     var image3 by Delegates.notNull<Boolean>()
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
     var imagesArray :ArrayList<File>? = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        image1 = true
-        image2 = true
-        image3 = true
         setContentView(R.layout.activity_confirm_request)
+
+        sharedPreferences =
+            this.getSharedPreferences("images", MODE_PRIVATE)
+        editor = sharedPreferences.edit()
+
+
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title=getString(R.string.confirm_request)
         tvRequestDesc.text=intent.getStringExtra("desc");
@@ -90,52 +96,65 @@ class ConfirmRequestActivity : AppCompatActivity() {
             .baseUrl(Service.BaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(OkHttpClient.Builder().addInterceptor { chain ->
-                val request = chain.request().newBuilder().addHeader("Authorization", "Bearer ${SharedPreferenceClass.loadString(this,"TOKEN")}").build()
+                val request = chain.request().newBuilder().addHeader("Authorization", "Bearer ${
+                    SharedPreferenceClass.loadString(
+                        this,
+                        "TOKEN")
+                }").build()
                 chain.proceed(request)
             }.build())
             .build()
 
         val client = retrofit.create(Service::class.java)
-        val call = client.submitRequest(RequestRequests(intent.getStringExtra("id"),rCount,
+        val call = client.submitRequest(RequestRequests(intent.getStringExtra("id"), rCount,
             imagesArray!!))
 
 
         buConfirm.setOnClickListener {
-            progressBarConfirm.visibility = View.VISIBLE
-            clConfirmRequest.visibility = View.INVISIBLE
-            call.enqueue(object : Callback<SubmitRequestResponse> {
-                override fun onResponse(
-                    call: Call<SubmitRequestResponse>?,
-                    response: Response<SubmitRequestResponse>?
-                ) {
-                  if( response!!.isSuccessful()){
-                      Log.d("TAG", "response.body().data.id" + response.body().data.id);
-                      progressBarConfirm.visibility = View.GONE
-                      clConfirmRequest.visibility = View.VISIBLE
-                      onRequestSent(it.context  ,response.body().data.id)
-                  }else{
-                      progressBarConfirm.visibility = View.GONE
-                      clConfirmRequest.visibility = View.VISIBLE
-                      Toast.makeText(baseContext, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
-                  }
+            if (imagesArray!!.size == 0){
+                Toast.makeText(this, getString(R.string.upal), Toast.LENGTH_SHORT).show()
+            }else{
+                progressBarConfirm.visibility = View.VISIBLE
+                clConfirmRequest.visibility = View.INVISIBLE
+                Log.i("id", (intent.getStringExtra("id")))
+                Log.i("count", rCount.toString())
+                Log.i("imageArray", imagesArray!!.toString())
+                call.enqueue(object : Callback<SubmitRequestResponse> {
+                    override fun onResponse(
+                        call: Call<SubmitRequestResponse>?,
+                        response: Response<SubmitRequestResponse>?,
+                    ) {
+                        if (response!!.isSuccessful()) {
+//                        Log.d("TAG", "response.body().data.id" + response.body().data.id);
+                            progressBarConfirm.visibility = View.GONE
+                            clConfirmRequest.visibility = View.VISIBLE
+//                        onRequestSent(it.context, response.body().data.id)
+                        } else {
+                            progressBarConfirm.visibility = View.GONE
+                            clConfirmRequest.visibility = View.VISIBLE
+                            Toast.makeText(baseContext,
+                                getString(R.string.went_wrong),
+                                Toast.LENGTH_SHORT).show()
+                        }
 
-                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
-                    Log.d("TAG", "onResponsebody: " + response.body());
-                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
-                    Log.d("TAG", "onResponsemessage: " + response.message());
-                    Log.d("TAG", "onResponsecode: " + response.code());
-                    Log.d("TAG", "onResponseheaders: " + response.headers());
-                    Log.d("TAG", "onResponseraw: " + response.raw());
-                    Log.d("TAG", "onResponsetoString: " + response.toString());
-                }
+                        Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
+                        Log.d("TAG", "onResponsebody: " + response.body());
+                        Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
+                        Log.d("TAG", "onResponsemessage: " + response.message());
+                        Log.d("TAG", "onResponsecode: " + response.code());
+                        Log.d("TAG", "onResponseheaders: " + response.headers());
+                        Log.d("TAG", "onResponseraw: " + response.raw());
+                        Log.d("TAG", "onResponsetoString: " + response.toString());
+                    }
 
 
-                override fun onFailure(call: Call<SubmitRequestResponse>?, t: Throwable?) {
-                    Log.i("test", t.toString())
+                    override fun onFailure(call: Call<SubmitRequestResponse>?, t: Throwable?) {
+                        Log.i("test", t.toString())
 
-                }
+                    }
 
-            })
+                })
+            }
 
         }
         buUploadReceipt.setOnClickListener{
@@ -152,29 +171,43 @@ class ConfirmRequestActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             //Image Uri will not be null for RESULT_OK
-            if (image1 == true && image2 == true && image3 == true){
-                image1 = false
+            if (sharedPreferences.getString("imageFile1", null) != null){
+                ivReceipt1.setImageBitmap(decode(sharedPreferences.getString("imageFile1", null)!!))
+            }else if (sharedPreferences.getString("imageFile2", null) != null){
+                ivReceipt2.setImageBitmap(decode(sharedPreferences.getString("imageFile2", null)!!))
+            }else if (sharedPreferences.getString("imageFile3", null) != null){
+                ivReceipt3.setImageBitmap(decode(sharedPreferences.getString("imageFile3", null)!!))
+            }
+
+            if (sharedPreferences.getBoolean("image1", true)){
 //                val fileUri1 = data?.data
                 ivReceipt1.setImageURI(data?.data)
                 imagesArray?.add(ImagePicker.getFile(data)!!)
-                Log.i("i1", "image1 uploaded")
-                Log.i("image1", image1.toString())
-            }else if (image1 == false && image2 == true && image3 == true){
-                image2 = false
+                editor.putString("imageFile1", encode(data?.data!!))
+                editor.putBoolean("image1", false)
+                editor.apply()
+            }else if (sharedPreferences.getBoolean("image2", true)){
 //                val fileUri2 = data?.data
                 ivReceipt2.setImageURI(data?.data)
                 imagesArray?.add(ImagePicker.getFile(data)!!)
-                Log.i("i2", "image2 uploaded")
-                Log.i("image2", image2.toString())
-            }else if (image1 == false && image2 == false && image3 == true){
-                image3 = false
+                editor.putString("imageFile2", encode(data?.data!!))
+                editor.putBoolean("image2", false)
+                editor.apply()
+                ivReceipt1.setImageBitmap(decode(sharedPreferences.getString("imageFile1", null)!!))
+            }else if (sharedPreferences.getBoolean("image3", true)){
 //                val fileUri3 = data?.data
                 ivReceipt3.setImageURI(data?.data)
                 imagesArray?.add(ImagePicker.getFile(data)!!)
-                Log.i("i3", "image3 uploaded")
-                Log.i("image3", image3.toString())
+                editor.putString("imageFile3", encode(data?.data!!))
+                editor.putBoolean("image3", false)
+                editor.apply()
+                ivReceipt1.setImageBitmap(decode(sharedPreferences.getString("imageFile1", null)!!))
+                ivReceipt2.setImageBitmap(decode(sharedPreferences.getString("imageFile2", null)!!))
             }else{
-                Toast.makeText(this, "Maximum number of images is 3.", Toast.LENGTH_SHORT).show()
+                ivReceipt1.setImageBitmap(decode(sharedPreferences.getString("imageFile1", null)!!))
+                ivReceipt2.setImageBitmap(decode(sharedPreferences.getString("imageFile2", null)!!))
+                ivReceipt3.setImageBitmap(decode(sharedPreferences.getString("imageFile3", null)!!))
+                Toast.makeText(this, getString(R.string.notallowimage), Toast.LENGTH_SHORT).show()
             }
             Log.i("arrIm", imagesArray?.size.toString())
             //You can get File object from intent
@@ -188,7 +221,30 @@ class ConfirmRequestActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.task_cancelled), Toast.LENGTH_SHORT).show()
         }
     }
-    private fun onRequestSent(context: Context,rId:String) {
+
+    fun encode(imageUri: Uri): String {
+        val input = getContentResolver().openInputStream(imageUri)
+        val image = BitmapFactory.decodeStream(input , null, null)
+
+        // Encode image to base64 string
+        val baos = ByteArrayOutputStream()
+        image?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        var imageBytes = baos.toByteArray()
+        val imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+        return imageString
+    }
+
+    fun decode(imageString: String): Bitmap? {
+
+        // Decode base64 string to image
+        val imageBytes = Base64.decode(imageString, Base64.DEFAULT)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+        return decodedImage
+//        imageview.setImageBitmap(decodedImage)
+    }
+
+    private fun onRequestSent(context: Context, rId: String) {
 
         val title = SpannableString(getString(R.string.thank))
         title.setSpan(
@@ -198,7 +254,7 @@ class ConfirmRequestActivity : AppCompatActivity() {
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
-        val message = SpannableString(getString(R.string.yrequest_number)+rId+getString(R.string.succes_done))
+        val message = SpannableString(getString(R.string.yrequest_number) + rId + getString(R.string.succes_done))
         message.setSpan(
             ForegroundColorSpan(getResources().getColor(R.color.light_black)),
             0,
@@ -225,5 +281,11 @@ class ConfirmRequestActivity : AppCompatActivity() {
             }
             .show()
             .window?.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.alert)))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sharedPreferences.edit().clear().apply()
+        Log.i("isCalled", "yes")
     }
 }

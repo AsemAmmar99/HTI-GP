@@ -50,9 +50,9 @@ class MoreFragment  : Fragment() {
             MoreListData(
                 getString(R.string.tutorials)
             ),
-            MoreListData(
-                getString(R.string.faqs_and_support)
-            ),
+//            MoreListData(
+//                getString(R.string.faqs_and_support)
+//            ),
             MoreListData(
                 getString(R.string.about_hti)
             ),

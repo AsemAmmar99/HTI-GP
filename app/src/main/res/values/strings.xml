@@ -230,4 +230,6 @@
     <string name="peypn">Please enter your Phone Number.</string>
     <string name="max_limit">Max Limit:</string>
     <string name="maxLim">The entered count is greater than the maximum allowed limit.</string>
+    <string name="notallowimage">Not allowed to upload more than 3 images.</string>
+    <string name="upal">Upload at least one image.</string>
 </resources>

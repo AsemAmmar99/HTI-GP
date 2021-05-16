@@ -74,6 +74,16 @@ class MyRequestsActivity : AppCompatActivity() {
                    clMyRequests.visibility = View.VISIBLE
                    Toast.makeText(baseContext, "Something went wrong, please check your data", Toast.LENGTH_SHORT).show()
                }
+
+                Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
+                Log.d("TAG", "onResponsebody: " + response.body())
+                Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
+                Log.d("TAG", "onResponsemessage: " + response.message())
+                Log.d("TAG", "onResponsecode: " + response.code())
+                Log.d("TAG", "onResponseheaders: " + response.headers())
+                Log.d("TAG", "onResponseraw: " + response.raw())
+                Log.d("TAG", "onResponsetoString: " + response.toString())
+
             }
 
             override fun onFailure(call: Call<MyRequestsResponse>?, t: Throwable?) {

@@ -78,20 +78,20 @@ public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHo
                     case 2:
                         context.startActivity(new Intent(context, TutorialActivity.class));
                         break;
-                    case 3:
-                        context.startActivity(new Intent(context, FAQSActivity.class));
-                        break;
+//                    case 3:
+//                        context.startActivity(new Intent(context, FAQSActivity.class));
+//                        break;
 
-                    case 4:
+                    case 3:
                         context.startActivity(new Intent(context, AboutHTIActivity.class));
                         break;
-                    case 5:
+                    case 4:
                         context.startActivity(new Intent(context, SettingsActivity.class));
                         break;
 //                    case 6:
 //                        context.startActivity(new Intent(context, AppTechSupportActivity.class));
 //                        break;
-                    case 6:
+                    case 5:
                         SharedPreferenceClass.clearSharedPrefrences(context);
                         context.startActivity(new Intent(context, LoginScreen.class));
                         ((Activity)context).finish();

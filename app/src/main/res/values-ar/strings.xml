@@ -231,4 +231,6 @@
     <string name="peypn">من فضلك أدخل رقم هاتفك.</string>
     <string name="max_limit">الحد الأقصى:</string>
     <string name="maxLim">العدد المدخل أكبر من الحد الأقصى المسموح به.</string>
+    <string name="notallowimage">غير مسموح برفع أكثر من 3 صور.</string>
+    <string name="upal">قم برفع صورة واحدة على الأقل.</string>
 </resources>
