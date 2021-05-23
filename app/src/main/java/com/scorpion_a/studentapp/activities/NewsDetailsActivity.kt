@@ -1,23 +1,18 @@
 package com.scorpion_a.studentapp.activities
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.model.responses.ArticleDetailsResponse
-import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_news_details.*
-import kotlinx.android.synthetic.main.activity_staff_profile_page.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,33 +32,42 @@ class NewsDetailsActivity : AppCompatActivity() {
             .baseUrl(Service.BaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(OkHttpClient.Builder().addInterceptor { chain ->
-                val request = chain.request().newBuilder().addHeader("Authorization", "Bearer ${SharedPreferenceClass.loadString(this,"TOKEN")}").build()
+                val request = chain.request().newBuilder().addHeader("Authorization", "Bearer ${
+                    SharedPreferenceClass.loadString(
+                        this,
+                        "TOKEN")
+                }").build()
                 chain.proceed(request)
             }.build())
             .build()
 
         val client = retrofit.create(Service::class.java)
 
-        Log.i("idsssssss",id)
+        Log.i("idsssssss", id)
         val call = client.getArticleDetails(id)
         progressBarArticleDetails.visibility = View.VISIBLE
         clArticleDetails.visibility = View.INVISIBLE
         call.enqueue(object : Callback<ArticleDetailsResponse> {
             override fun onResponse(
                 call: Call<ArticleDetailsResponse>,
-                response: Response<ArticleDetailsResponse>
+                response: Response<ArticleDetailsResponse>,
             ) {
 
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     tvNewsTitle.text = response.body()?.data?.title
                     tvNewsDetails.text = response.body()?.data?.description
-                    tvNewsDate.text =response.body()?.data?.date
+                    tvNewsDate.text = response.body()?.data?.date
+                    Picasso.with(this@NewsDetailsActivity)
+                        .load("https://app.jabbarproject.com/" + response.body()?.data?.images
+                            ).fit().into(NorEImage)
                     progressBarArticleDetails.visibility = View.GONE
                     clArticleDetails.visibility = View.VISIBLE
-                }else{
+                } else {
                     progressBarArticleDetails.visibility = View.GONE
                     clArticleDetails.visibility = View.VISIBLE
-                    Toast.makeText(this@NewsDetailsActivity, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@NewsDetailsActivity,
+                        getString(R.string.went_wrong),
+                        Toast.LENGTH_SHORT).show()
                 }
                 // Catching Responses From Retrofit
 
@@ -77,7 +81,6 @@ class NewsDetailsActivity : AppCompatActivity() {
                 Log.d("TAG", "onResponsetoString: " + response.toString());
 
             }
-
 
 
             override fun onFailure(call: Call<ArticleDetailsResponse>?, t: Throwable?) {

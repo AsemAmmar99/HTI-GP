@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -15,6 +16,7 @@ import com.scorpion_a.studentapp.activities.NewsDetailsActivity;
 import com.scorpion_a.studentapp.model.ArticlesListData;
 import com.scorpion_a.studentapp.model.EventsListData;
 import com.scorpion_a.studentapp.model.NewsListData;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -41,6 +43,7 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventsListAdapter.Vi
         final ArticlesListData myListData = eventsdata.get(position);
         holder.tvTitle.setText(eventsdata.get(position).getTitle());
         holder.tvData.setText(eventsdata.get(position).getDate());
+        Picasso.with(context).load("https://app.jabbarproject.com/"+eventsdata.get(position).getImages()).fit().into( holder.ivImage);
         holder.clEvents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +63,7 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventsListAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvTitle;
         public TextView tvData;
+        public ImageView ivImage;
         public ConstraintLayout clEvents;
 
 //        public ConstraintLayout clNewsItem;
@@ -68,6 +72,7 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventsListAdapter.Vi
             super(itemView);
             this.tvTitle = itemView.findViewById(R.id.tvEventsTitle);
             this.tvData = itemView.findViewById(R.id.tvEventDate);
+            this.ivImage = itemView.findViewById(R.id.ivEvent);
             this.clEvents = itemView.findViewById(R.id.clEventsItem);
         }
     }
