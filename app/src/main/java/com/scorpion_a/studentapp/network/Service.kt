@@ -6,6 +6,8 @@ import com.scorpion_a.studentapp.model.requests.RequestRequests
 import com.scorpion_a.studentapp.model.requests.UpdateUserRequests
 import com.scorpion_a.studentapp.model.responses.*
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -37,9 +39,12 @@ interface Service {
     fun getRequestsTypesData(
     ):Call<RequestsResponse>
 
+    @Multipart
     @POST("requests")
     @Headers("Accept: application/json", "Content-Type: application/json")
-    fun submitRequest(@Body request: RequestRequests): Call<SubmitRequestResponse>
+//    fun submitRequest(@Part request: RequestRequests): Call<SubmitRequestResponse>
+    fun submitRequest(@Part("request_type_id") request_type_id: RequestBody,@Part("count") count: RequestBody,
+                      @Part("receipt[]")receipt: ArrayList<MultipartBody.Part>): Call<SubmitRequestResponse>
 
     @PUT("user")
     @Headers("Accept: application/json", "Content-Type: application/json")

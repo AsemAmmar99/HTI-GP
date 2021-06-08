@@ -2,6 +2,7 @@ package com.scorpion_a.studentapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,8 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
         holder.tvTitle.setText(newsdata.get(position).getTitle());
         holder.tvDate.setText(newsdata.get(position).getDate());
         Picasso.with(context).load("https://app.jabbarproject.com/"+newsdata.get(position).getImages()).fit().into( holder.ivImage);
+
+        Log.i("image",newsdata.get(position).getImages());
         holder.clNewsItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

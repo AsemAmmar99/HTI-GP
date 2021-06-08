@@ -28,7 +28,11 @@ import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import kotlinx.android.synthetic.main.activity_confirm_request.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
+import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,7 +50,7 @@ class ConfirmRequestActivity : AppCompatActivity() {
     var image3 by Delegates.notNull<Boolean>()
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
-    var imagesArray :ArrayList<File>? = arrayListOf()
+    var imagesArray :ArrayList<MultipartBody.Part>? = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_request)
@@ -106,8 +110,10 @@ class ConfirmRequestActivity : AppCompatActivity() {
             .build()
 
         val client = retrofit.create(Service::class.java)
-        val call = client.submitRequest(RequestRequests(intent.getStringExtra("id"), rCount,
-            imagesArray!!))
+        val request_type_id = RequestBody.create(MediaType.parse("multipart/form-data"), intent.getStringExtra("id"))
+        val rCount_ = RequestBody.create(MediaType.parse("multipart/form-data"), rCount.toString())
+        val call = client.submitRequest(request_type_id, rCount_,
+            imagesArray!!)
 
 
         buConfirm.setOnClickListener {
@@ -145,6 +151,18 @@ class ConfirmRequestActivity : AppCompatActivity() {
                         Log.d("TAG", "onResponseheaders: " + response.headers());
                         Log.d("TAG", "onResponseraw: " + response.raw());
                         Log.d("TAG", "onResponsetoString: " + response.toString());
+
+                        try {
+                            val jObjError = JSONObject(response.errorBody()!!.string())
+                            Toast.makeText(this@ConfirmRequestActivity,
+                                jObjError.toString(),
+                                Toast.LENGTH_LONG).show()
+                            Log.i("erroooooooooooooor", jObjError.toString())
+                        } catch (e: Exception) {
+                            Toast.makeText(this@ConfirmRequestActivity,
+                                e.message,
+                                Toast.LENGTH_LONG).show()
+                        }
                     }
 
 
@@ -167,6 +185,7 @@ class ConfirmRequestActivity : AppCompatActivity() {
 
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -182,14 +201,33 @@ class ConfirmRequestActivity : AppCompatActivity() {
             if (sharedPreferences.getBoolean("image1", true)){
 //                val fileUri1 = data?.data
                 ivReceipt1.setImageURI(data?.data)
-                imagesArray?.add(ImagePicker.getFile(data)!!)
+                ////
+                val requestFile: RequestBody =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), ImagePicker.getFile(
+                        data)!!)
+                val body: MultipartBody.Part =
+                    MultipartBody.Part.createFormData("image",
+                        ImagePicker.getFile(data)!!.getName(),
+                        requestFile)
+                imagesArray?.add(body)
+                ////
                 editor.putString("imageFile1", encode(data?.data!!))
                 editor.putBoolean("image1", false)
                 editor.apply()
             }else if (sharedPreferences.getBoolean("image2", true)){
 //                val fileUri2 = data?.data
                 ivReceipt2.setImageURI(data?.data)
-                imagesArray?.add(ImagePicker.getFile(data)!!)
+//                imagesArray?.add(ImagePicker.getFile(data)!!)
+                ////
+                val requestFile: RequestBody =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), ImagePicker.getFile(
+                        data)!!)
+                val body: MultipartBody.Part =
+                    MultipartBody.Part.createFormData("image",
+                        ImagePicker.getFile(data)!!.getName(),
+                        requestFile)
+                imagesArray?.add(body)
+                ////
                 editor.putString("imageFile2", encode(data?.data!!))
                 editor.putBoolean("image2", false)
                 editor.apply()
@@ -197,7 +235,16 @@ class ConfirmRequestActivity : AppCompatActivity() {
             }else if (sharedPreferences.getBoolean("image3", true)){
 //                val fileUri3 = data?.data
                 ivReceipt3.setImageURI(data?.data)
-                imagesArray?.add(ImagePicker.getFile(data)!!)
+                ////
+                val requestFile: RequestBody =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), ImagePicker.getFile(
+                        data)!!)
+                val body: MultipartBody.Part =
+                    MultipartBody.Part.createFormData("image",
+                        ImagePicker.getFile(data)!!.getName(),
+                        requestFile)
+                imagesArray?.add(body)
+                ////
                 editor.putString("imageFile3", encode(data?.data!!))
                 editor.putBoolean("image3", false)
                 editor.apply()
@@ -224,7 +271,7 @@ class ConfirmRequestActivity : AppCompatActivity() {
 
     fun encode(imageUri: Uri): String {
         val input = getContentResolver().openInputStream(imageUri)
-        val image = BitmapFactory.decodeStream(input , null, null)
+        val image = BitmapFactory.decodeStream(input, null, null)
 
         // Encode image to base64 string
         val baos = ByteArrayOutputStream()
