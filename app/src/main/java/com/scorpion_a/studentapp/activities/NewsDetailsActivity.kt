@@ -47,7 +47,7 @@ class NewsDetailsActivity : AppCompatActivity() {
         val call = client.getArticleDetails(id)
         progressBarArticleDetails.visibility = View.VISIBLE
         clArticleDetails.visibility = View.INVISIBLE
-        call.enqueue(object : Callback<ArticleDetailsResponse> {
+        call.clone().enqueue(object : Callback<ArticleDetailsResponse> {
             override fun onResponse(
                 call: Call<ArticleDetailsResponse>,
                 response: Response<ArticleDetailsResponse>,

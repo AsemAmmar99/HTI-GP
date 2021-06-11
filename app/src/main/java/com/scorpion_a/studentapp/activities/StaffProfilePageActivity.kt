@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.model.responses.UserDataResponce
@@ -31,6 +32,7 @@ import java.io.File
 
 class StaffProfilePageActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
+    var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
         Theme.checkTheme(this, delegate)
@@ -52,9 +54,51 @@ class StaffProfilePageActivity : AppCompatActivity() {
 
 
         val call = client.getUserData()
+
+        mSwipeRefreshLayout= findViewById(R.id.swipe_refresh_layout)
+        mSwipeRefreshLayout!!.setOnRefreshListener {
+            call.clone().enqueue(object : Callback<UserDataResponce> {
+                override fun onResponse(
+                    call: Call<UserDataResponce>,
+                    response: Response<UserDataResponce>
+                ) {
+
+                    if (response.isSuccessful()){
+                        mSwipeRefreshLayout!!.isRefreshing = false
+//                    tvDepartment.text="Department: " + response.body().data?.department
+                        tvStaffDepartment.text=response.body().data?.department
+                        tvStaffNameArabic.text=response.body().data?.name?.ar
+                        tvStaffNameEngProfile.text=response.body().data?.name?.en
+                        Picasso.with(baseContext).load(response.body().data?.image_path).into(ivStaffProfilePict);
+                        progressBarSProfile.visibility = View.GONE
+                        clSProfilePage.visibility = View.VISIBLE
+                    }else{
+                        mSwipeRefreshLayout!!.isRefreshing = false
+                        progressBarSProfile.visibility = View.GONE
+                        clSProfilePage.visibility = View.VISIBLE
+                        Toast.makeText(baseContext, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
+                    }
+                    // Catching Responses From Retrofit
+
+                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
+                    Log.d("TAG", "onResponsebody: " + response.body());
+                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
+                    Log.d("TAG", "onResponsemessage: " + response.message());
+                    Log.d("TAG", "onResponsecode: " + response.code());
+                    Log.d("TAG", "onResponseheaders: " + response.headers());
+                    Log.d("TAG", "onResponseraw: " + response.raw());
+                    Log.d("TAG", "onResponsetoString: " + response.toString());
+
+                }
+
+                override fun onFailure(call: Call<UserDataResponce>?, t: Throwable?) {
+                    Log.i("test", t.toString())
+                }
+            })
+        }
         progressBarSProfile.visibility = View.VISIBLE
         clSProfilePage.visibility = View.INVISIBLE
-        call.enqueue(object : Callback<UserDataResponce> {
+        call.clone().enqueue(object : Callback<UserDataResponce> {
             override fun onResponse(
                 call: Call<UserDataResponce>,
                 response: Response<UserDataResponce>

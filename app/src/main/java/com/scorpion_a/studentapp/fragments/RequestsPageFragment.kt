@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.tabs.TabLayout
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.activities.RequestTutorialActivity
@@ -38,7 +39,7 @@ class RequestsPageFragment : Fragment() {
     lateinit var toolbar: Toolbar
     var tabLayout: TabLayout?= null
     lateinit var tvToturial: TextView
-
+    var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     lateinit var  recyclerView: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -96,9 +97,51 @@ class RequestsPageFragment : Fragment() {
 
         val client = retrofit.create(Service::class.java)
         val call = client.getRequestsTypesData()
+
+        mSwipeRefreshLayout= view.findViewById(R.id.swipe_refresh_layout)
+        mSwipeRefreshLayout!!.setOnRefreshListener {
+            call.clone().enqueue(object : Callback<RequestsResponse> {
+                override fun onResponse(
+                    call: Call<RequestsResponse>?,
+                    response: Response<RequestsResponse>?
+                ) {
+                    if (response!!.isSuccessful())
+                    {
+                        mSwipeRefreshLayout!!.isRefreshing = false
+                        recyclerView = view.findViewById(R.id.rvRequest)
+                        val adapter = RequestListAdapter(response.body().data, context)
+                        recyclerView.setHasFixedSize(true)
+                        recyclerView.layoutManager = LinearLayoutManager(view.context,
+                            LinearLayoutManager.VERTICAL,false)
+                        view.progressBarRequests.visibility = View.GONE
+                        view.clRequests.visibility = View.VISIBLE
+                        recyclerView.adapter = adapter
+                        tvToturial=view.findViewById(R.id.request_tutorial)
+                        tvToturial.setOnClickListener {
+                            val intent = Intent(context, RequestTutorialActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }else {
+                        mSwipeRefreshLayout!!.isRefreshing = false
+                        view.progressBarRequests.visibility = View.GONE
+                        Toast.makeText(
+                            context,
+                            getString(R.string.went_wrong),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<RequestsResponse>?, t: Throwable?) {
+                    Log.i("test", t.toString())
+                }
+
+
+            })
+        }
         view.progressBarRequests.visibility = View.VISIBLE
         view.clRequests.visibility = View.INVISIBLE
-        call.enqueue(object : Callback<RequestsResponse> {
+        call.clone().enqueue(object : Callback<RequestsResponse> {
             override fun onResponse(
                 call: Call<RequestsResponse>?,
                 response: Response<RequestsResponse>?

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.EventsListAdapter
 import com.scorpion_a.studentapp.adapters.StaffRequestsListAdapter
@@ -40,6 +41,7 @@ class SearchForRequestsActivity : AppCompatActivity(){
     lateinit var stfrequestsListData: ArrayList<ViewRequestsListData>
     lateinit var adapterSearch: StaffRequestsListAdapter
     lateinit var rvStaffRequestS: RecyclerView
+    var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
         Theme.checkTheme(this, delegate)
@@ -61,9 +63,58 @@ class SearchForRequestsActivity : AppCompatActivity(){
         val client = retrofit.create(Service::class.java)
 
         val call = client.getRequestsData()
+
+        mSwipeRefreshLayout= findViewById(R.id.swipe_refresh_layout)
+        mSwipeRefreshLayout!!.setOnRefreshListener {
+            call.clone().enqueue(object : Callback<MyRequestsResponse> {
+                override fun onResponse(
+                    call: Call<MyRequestsResponse>,
+                    response: Response<MyRequestsResponse>
+                ) {
+
+                    if (response.isSuccessful()){
+                        mSwipeRefreshLayout!!.isRefreshing = false
+//                    var stfrequestsListData: java.util.ArrayList<ViewRequestsListData>?=ArrayList()
+                        response.body().data.map {
+                            stfrequestsListData?.add( ViewRequestsListData(it.id,it.name,it.price, it.status))
+                            progressBarStS.visibility = GONE
+                            clStS.visibility = VISIBLE
+//                            eventsListData=   arrayOf<ArticlesListData>(
+//                                ArticlesListData(it.id,it.title, it.date, it.images,it.type))
+                            rvStaffRequestS = findViewById(R.id.rvStaffRequestS)
+                            adapterSearch = StaffRequestsListAdapter(stfrequestsListData, this@SearchForRequestsActivity, "search")
+                            rvStaffRequestS.setHasFixedSize(true)
+                            rvStaffRequestS.layoutManager = LinearLayoutManager(this@SearchForRequestsActivity)
+                            rvStaffRequestS.adapter = adapterSearch}
+                    }else{
+                        mSwipeRefreshLayout!!.isRefreshing = false
+                        progressBarStS.visibility = GONE
+                        clStS.visibility = VISIBLE
+                        Toast.makeText(this@SearchForRequestsActivity, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
+                    }
+                    // Catching Responses From Retrofit
+
+                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
+                    Log.d("TAG", "onResponsebody: " + response.body());
+                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
+                    Log.d("TAG", "onResponsemessage: " + response.message());
+                    Log.d("TAG", "onResponsecode: " + response.code());
+                    Log.d("TAG", "onResponseheaders: " + response.headers());
+                    Log.d("TAG", "onResponseraw: " + response.raw());
+                    Log.d("TAG", "onResponsetoString: " + response.toString());
+
+                }
+
+
+
+                override fun onFailure(call: Call<MyRequestsResponse>?, t: Throwable?) {
+                    Log.i("test", t.toString())
+                }
+            })
+        }
         progressBarStS.visibility = VISIBLE
         clStS.visibility = INVISIBLE
-        call.enqueue(object : Callback<MyRequestsResponse> {
+        call.clone().enqueue(object : Callback<MyRequestsResponse> {
             override fun onResponse(
                 call: Call<MyRequestsResponse>,
                 response: Response<MyRequestsResponse>

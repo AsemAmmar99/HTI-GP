@@ -125,7 +125,7 @@ class ConfirmRequestActivity : AppCompatActivity() {
                 Log.i("id", (intent.getStringExtra("id")))
                 Log.i("count", rCount.toString())
                 Log.i("imageArray", imagesArray!!.toString())
-                call.enqueue(object : Callback<SubmitRequestResponse> {
+                call.clone().enqueue(object : Callback<SubmitRequestResponse> {
                     override fun onResponse(
                         call: Call<SubmitRequestResponse>?,
                         response: Response<SubmitRequestResponse>?,

@@ -66,7 +66,7 @@ class SplashActivity : AppCompatActivity() {
 
 
         val call = clientUser.getUserData()
-        call.enqueue(object : Callback<UserDataResponce> {
+        call.clone().enqueue(object : Callback<UserDataResponce> {
             override fun onResponse(
                 call: Call<UserDataResponce>,
                 response: Response<UserDataResponce>

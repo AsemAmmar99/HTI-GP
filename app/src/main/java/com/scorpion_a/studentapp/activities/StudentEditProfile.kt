@@ -80,7 +80,7 @@ class StudentEditProfile : AppCompatActivity() {
                 )
                 progressBarEditProfile.visibility = View.VISIBLE
                 clEditProfilePage.visibility = View.INVISIBLE
-                call.enqueue(object : Callback<UserDataResponce> {
+                call.clone().enqueue(object : Callback<UserDataResponce> {
                     override fun onResponse(
                         call: Call<UserDataResponce>,
                         response: Response<UserDataResponce>
