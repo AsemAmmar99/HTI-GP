@@ -11,6 +11,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.scorpion_a.studentapp.R;
+import com.scorpion_a.studentapp.activities.DeliveredRequestsActivity;
+import com.scorpion_a.studentapp.activities.DeliveredRequestsDetailsActivity;
 import com.scorpion_a.studentapp.activities.RejectedRequestsDetailsActivity;
 import com.scorpion_a.studentapp.activities.AcceptedRequestsDetailsActivity;
 import com.scorpion_a.studentapp.activities.PendingRequestsDetailsActivity;
@@ -53,7 +55,9 @@ public class StaffRequestsListAdapter extends RecyclerView.Adapter<StaffRequests
                     context.startActivity(new Intent(context, AcceptedRequestsDetailsActivity.class));
                 }else if (pageName.equals("rejected")){
                     context.startActivity(new Intent(context, RejectedRequestsDetailsActivity.class));
-                }else{
+                }else if (pageName.equals("delivered")){
+                    context.startActivity(new Intent(context, DeliveredRequestsDetailsActivity.class));
+                }else {
                     context.startActivity(new Intent(context, PendingRequestsDetailsActivity.class));
                 }
             }
