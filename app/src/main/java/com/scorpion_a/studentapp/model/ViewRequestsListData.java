@@ -4,11 +4,13 @@ public class ViewRequestsListData {
     private String id;
     private String name;
     private String price;
+    private String status;
 
-    public ViewRequestsListData(String id, String name, String price) {
+    public ViewRequestsListData(String id, String name, String price, String status) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.status = status;
     }
 
     public String getId() {
@@ -33,5 +35,13 @@ public class ViewRequestsListData {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

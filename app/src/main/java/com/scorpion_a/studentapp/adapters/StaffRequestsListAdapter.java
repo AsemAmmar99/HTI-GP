@@ -15,17 +15,18 @@ import com.scorpion_a.studentapp.activities.RejectedRequestsDetailsActivity;
 import com.scorpion_a.studentapp.activities.AcceptedRequestsDetailsActivity;
 import com.scorpion_a.studentapp.activities.PendingRequestsDetailsActivity;
 import com.scorpion_a.studentapp.model.StaffRequestsListData;
+import com.scorpion_a.studentapp.model.ViewRequestsListData;
 
 import java.util.ArrayList;
 
 public class StaffRequestsListAdapter extends RecyclerView.Adapter<StaffRequestsListAdapter.ViewHolder> {
-    private ArrayList<StaffRequestsListData> staffreqdata;
+    private ArrayList<ViewRequestsListData> staffreqdata;
     private Context context;
-    private ArrayList<StaffRequestsListData> itemList;
+    private ArrayList<ViewRequestsListData> itemList;
     private String pageName;
 
     // RecyclerView recyclerView;
-    public StaffRequestsListAdapter(ArrayList<StaffRequestsListData> staffteqdata, Context context, String pageName) {
+    public StaffRequestsListAdapter(ArrayList<ViewRequestsListData> staffteqdata, Context context, String pageName) {
         this.staffreqdata = staffteqdata;
         this.context = context;
         this.pageName = pageName;
@@ -41,8 +42,8 @@ public class StaffRequestsListAdapter extends RecyclerView.Adapter<StaffRequests
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final StaffRequestsListData myListData = staffreqdata.get(position);
-        holder.tvReqNum.setText(staffreqdata.get(position).getRequestNumVal());
+        final ViewRequestsListData myListData = staffreqdata.get(position);
+        holder.tvReqNum.setText(staffreqdata.get(position).getId());
         holder.clStaffItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +67,7 @@ public class StaffRequestsListAdapter extends RecyclerView.Adapter<StaffRequests
         return staffreqdata.size();
     }
 
-    public void filterList(ArrayList<StaffRequestsListData> filterllist) {
+    public void filterList(ArrayList<ViewRequestsListData> filterllist) {
         // below line is to add our filtered
         // list in our course array list.
         staffreqdata = filterllist;
