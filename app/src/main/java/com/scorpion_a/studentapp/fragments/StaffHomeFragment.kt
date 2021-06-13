@@ -64,7 +64,7 @@ class StaffHomeFragment : Fragment() {
                 }else{
                     view.progressBarSHome.visibility = View.GONE
                     view.clSHome.visibility = View.VISIBLE
-                    Toast.makeText(context, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(view.context!! , getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
                 }
                 // Catching Responses From Retrofit
 

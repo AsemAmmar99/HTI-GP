@@ -47,6 +47,7 @@ class SearchForRequestsActivity : AppCompatActivity(){
         setContentView(R.layout.activity_search_for_requests)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title= getString(R.string.search_for_request)
+        stfrequestsListData=ArrayList<ViewRequestsListData>()
 
         val retrofit = Retrofit.Builder()
             .baseUrl(Service.BaseUrl)
@@ -69,9 +70,12 @@ class SearchForRequestsActivity : AppCompatActivity(){
             ) {
 
                 if (response.isSuccessful()){
-                    var stfrequestsListData: java.util.ArrayList<ViewRequestsListData>?=ArrayList()
+//                    stfrequestsListData: java.util.ArrayList<ViewRequestsListData>?=ArrayList()
                     response.body().data.map {
-                            stfrequestsListData?.add( ViewRequestsListData(it.id,it.name,it.price, it.status))
+                            stfrequestsListData?.add( ViewRequestsListData(it.id,
+                                it.name,
+                                it.price,
+                                it.status,it.count,it.total_price,it.created_at,it.student_id,it.student,it.request_type))
                             progressBarStS.visibility = GONE
                             clStS.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(

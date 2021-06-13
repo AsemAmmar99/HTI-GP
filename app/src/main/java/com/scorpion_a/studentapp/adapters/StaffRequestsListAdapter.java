@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.scorpion_a.studentapp.R;
 import com.scorpion_a.studentapp.activities.RejectedRequestsDetailsActivity;
 import com.scorpion_a.studentapp.activities.AcceptedRequestsDetailsActivity;
@@ -17,6 +18,7 @@ import com.scorpion_a.studentapp.activities.PendingRequestsDetailsActivity;
 import com.scorpion_a.studentapp.model.StaffRequestsListData;
 import com.scorpion_a.studentapp.model.ViewRequestsListData;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class StaffRequestsListAdapter extends RecyclerView.Adapter<StaffRequestsListAdapter.ViewHolder> {
@@ -44,17 +46,28 @@ public class StaffRequestsListAdapter extends RecyclerView.Adapter<StaffRequests
     public void onBindViewHolder(ViewHolder holder, int position) {
         final ViewRequestsListData myListData = staffreqdata.get(position);
         holder.tvReqNum.setText(staffreqdata.get(position).getId());
+        Gson gson = new Gson();
+
         holder.clStaffItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (pageName.equals("pending")) {
-                    context.startActivity(new Intent(context, PendingRequestsDetailsActivity.class));
+
+                    Intent intent2 =new Intent(context, PendingRequestsDetailsActivity.class);
+                    intent2.putExtra("Pending", gson.toJson(myListData) );
+                    context.startActivity(intent2);
                 }else if (pageName.equals("accepted")){
-                    context.startActivity(new Intent(context, AcceptedRequestsDetailsActivity.class));
+                    Intent intent1 =new Intent(context, AcceptedRequestsDetailsActivity.class);
+                    intent1.putExtra("Accepted", gson.toJson(myListData) );
+                    context.startActivity(intent1);
                 }else if (pageName.equals("rejected")){
-                    context.startActivity(new Intent(context, RejectedRequestsDetailsActivity.class));
+                    Intent intent3 =new Intent(context, RejectedRequestsDetailsActivity.class);
+                    intent3.putExtra("Rejected", gson.toJson(myListData) );
+                    context.startActivity(intent3);
                 }else{
-                    context.startActivity(new Intent(context, PendingRequestsDetailsActivity.class));
+                    Intent intent4 =new Intent(context, PendingRequestsDetailsActivity.class);
+                    intent4.putExtra("Pending", gson.toJson(myListData) );
+                    context.startActivity(intent4);
                 }
             }
         });
