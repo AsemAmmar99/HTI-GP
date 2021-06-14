@@ -60,4 +60,17 @@ interface Service {
     fun getArticleDetails(@Path("id") id:String
     ):Call<ArticleDetailsResponse>
 
+ @POST("requests/{id}/approve")
+ @Headers("Accept: application/json", "Content-Type: application/json")
+ fun approveReq(@Path("id") id:String,@Body _method: String): Call<String>
+
+
+ @POST("requests/{id}/reject")
+ @Headers("Accept: application/json", "Content-Type: application/json")
+ fun rejectReq(@Path("id") id:String,@Body _method: String): Call<String>
+
+ @POST("requests/{id}/done")
+ @Headers("Accept: application/json", "Content-Type: application/json")
+ fun doneReq(@Path("id") id:String,@Body _method: String): Call<String>
+
 }

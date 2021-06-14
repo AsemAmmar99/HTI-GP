@@ -12,16 +12,25 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import android.util.Log
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.model.ViewRequestsListData
+import com.scorpion_a.studentapp.model.requests.LoginRequests
+import com.scorpion_a.studentapp.model.responses.LoginResponse
+import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.Lang
+import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_accepted_requests_details.*
+import kotlinx.android.synthetic.main.activity_login_screen.*
 import kotlinx.android.synthetic.main.activity_pending_requests_details.*
 import kotlinx.android.synthetic.main.activity_pending_requests_details.tvCDateValue
 import kotlinx.android.synthetic.main.activity_pending_requests_details.tvCountValue
@@ -38,6 +47,11 @@ import kotlinx.android.synthetic.main.activity_pending_requests_details.tvStuden
 import kotlinx.android.synthetic.main.activity_pending_requests_details.tvTotalPriceValue
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class PendingRequestsDetailsActivity : AppCompatActivity() {
@@ -101,6 +115,84 @@ class PendingRequestsDetailsActivity : AppCompatActivity() {
             val intent = Intent(it.context, RejectReasonActivity::class.java)
             startActivity(intent)
         }
+
+
+
+        val gsonl = GsonBuilder()
+            .setLenient()
+            .create()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Service.BaseUrl)
+            .addConverterFactory(GsonConverterFactory.create(gsonl))
+            .build()
+
+        val service = retrofit.create(Service::class.java)
+        val call = service.approveReq(pending.id,
+           "PUT"
+        )
+        call.clone().enqueue(object : Callback<String> {
+            override fun onResponse(
+                call: Call<String>,
+                response: Response<String>,
+            ) {
+                if (response.isSuccessful) {
+                   finish()
+                } else {
+
+                    Toast.makeText(baseContext,
+                        getString(R.string.went_wrong),
+                        Toast.LENGTH_SHORT).show()
+                }
+                // Catching Responses From Retrofit
+                Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
+                Log.d("TAG", "onResponsebody: " + response.body())
+                Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
+                Log.d("TAG", "onResponsemessage: " + response.message())
+                Log.d("TAG", "onResponsecode: " + response.code())
+                Log.d("TAG", "onResponseheaders: " + response.headers())
+                Log.d("TAG", "onResponseraw: " + response.raw())
+                Log.d("TAG", "onResponsetoString: " + response.toString())
+
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.i("test", t.toString())
+            }
+        })
+
+        val callreq = service.rejectReq(pending.id,
+            "PUT"
+        )
+        callreq.clone().enqueue(object : Callback<String> {
+            override fun onResponse(
+                call: Call<String>,
+                response: Response<String>,
+            ) {
+                if (response.isSuccessful) {
+                    finish()
+                } else {
+
+                    Toast.makeText(baseContext,
+                        getString(R.string.went_wrong),
+                        Toast.LENGTH_SHORT).show()
+                }
+                // Catching Responses From Retrofit
+                Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
+                Log.d("TAG", "onResponsebody: " + response.body())
+                Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
+                Log.d("TAG", "onResponsemessage: " + response.message())
+                Log.d("TAG", "onResponsecode: " + response.code())
+                Log.d("TAG", "onResponseheaders: " + response.headers())
+                Log.d("TAG", "onResponseraw: " + response.raw())
+                Log.d("TAG", "onResponsetoString: " + response.toString())
+
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.i("test", t.toString())
+            }
+        })
     }
 
     private fun onAccept(context: Context) {
@@ -174,6 +266,9 @@ class PendingRequestsDetailsActivity : AppCompatActivity() {
             .show()
             .window?.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.alert)))
     }
+
+
+
 
 
 }
