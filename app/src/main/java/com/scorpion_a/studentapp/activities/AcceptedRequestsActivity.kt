@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.StaffRequestsListAdapter
 import com.scorpion_a.studentapp.model.StaffRequestsListData
@@ -31,6 +32,7 @@ class AcceptedRequestsActivity : AppCompatActivity() {
     lateinit var staffRequestsListData: ArrayList<ViewRequestsListData>
     lateinit var adapterAccepted: StaffRequestsListAdapter
     lateinit var rvStaffRequestA: RecyclerView
+    var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
         Theme.checkTheme(this, delegate)
@@ -51,9 +53,67 @@ class AcceptedRequestsActivity : AppCompatActivity() {
         val client = retrofit.create(Service::class.java)
 
         val call = client.getRequestsData()
+
+        mSwipeRefreshLayout= findViewById(R.id.swipe_refresh_layout)
+        mSwipeRefreshLayout!!.setOnRefreshListener {
+            call.clone().enqueue(object : Callback<MyRequestsResponse> {
+                override fun onResponse(
+                    call: Call<MyRequestsResponse>,
+                    response: Response<MyRequestsResponse>
+                ) {
+
+                    if (response.isSuccessful()){
+                        mSwipeRefreshLayout!!.isRefreshing = false
+                        var stfrequestsListData: java.util.ArrayList<ViewRequestsListData>?=ArrayList()
+                        response.body().data.map {
+                            if (it.status.equals("approved")) {
+                                stfrequestsListData?.add(ViewRequestsListData(it.id,
+                                    it.name,
+                                    it.price,
+                                    it.status))
+                                progressBarStA.visibility = GONE
+                                clStA.visibility = VISIBLE
+//                            eventsListData=   arrayOf<ArticlesListData>(
+//                                ArticlesListData(it.id,it.title, it.date, it.images,it.type))
+                                rvStaffRequestA = findViewById(R.id.rvStaffRequest)
+                                adapterAccepted = StaffRequestsListAdapter(stfrequestsListData,
+                                    this@AcceptedRequestsActivity,
+                                    "accepted")
+                                rvStaffRequestA.setHasFixedSize(true)
+                                rvStaffRequestA.layoutManager =
+                                    LinearLayoutManager(this@AcceptedRequestsActivity)
+                                rvStaffRequestA.adapter = adapterAccepted
+                            }
+                        }
+                    }else{
+                        mSwipeRefreshLayout!!.isRefreshing = false
+                        progressBarStA.visibility = GONE
+                        clStA.visibility = VISIBLE
+                        Toast.makeText(this@AcceptedRequestsActivity, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
+                    }
+                    // Catching Responses From Retrofit
+
+                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
+                    Log.d("TAG", "onResponsebody: " + response.body());
+                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
+                    Log.d("TAG", "onResponsemessage: " + response.message());
+                    Log.d("TAG", "onResponsecode: " + response.code());
+                    Log.d("TAG", "onResponseheaders: " + response.headers());
+                    Log.d("TAG", "onResponseraw: " + response.raw());
+                    Log.d("TAG", "onResponsetoString: " + response.toString());
+
+                }
+
+
+
+                override fun onFailure(call: Call<MyRequestsResponse>?, t: Throwable?) {
+                    Log.i("test", t.toString())
+                }
+            })
+        }
         progressBarStA.visibility = VISIBLE
         clStA.visibility = INVISIBLE
-        call.enqueue(object : Callback<MyRequestsResponse> {
+        call.clone().enqueue(object : Callback<MyRequestsResponse> {
             override fun onResponse(
                 call: Call<MyRequestsResponse>,
                 response: Response<MyRequestsResponse>

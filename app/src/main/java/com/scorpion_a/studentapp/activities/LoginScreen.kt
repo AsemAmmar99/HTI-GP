@@ -89,7 +89,7 @@ class LoginScreen : AppCompatActivity() {
                 )
                 progressBarLogin.visibility = View.VISIBLE
                 clLogin.visibility = View.INVISIBLE
-                call.enqueue(object : Callback<LoginResponse> {
+                call.clone().enqueue(object : Callback<LoginResponse> {
                     override fun onResponse(
                         call: Call<LoginResponse>,
                         response: Response<LoginResponse>,
@@ -220,7 +220,7 @@ class LoginScreen : AppCompatActivity() {
         val call = clientUser.getUserData()
         progressBarLogin.visibility = View.VISIBLE
         clLogin.visibility = View.INVISIBLE
-        call.enqueue(object : Callback<UserDataResponce> {
+        call.clone().enqueue(object : Callback<UserDataResponce> {
             override fun onResponse(
                 call: Call<UserDataResponce>,
                 response: Response<UserDataResponce>,

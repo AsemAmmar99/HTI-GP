@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.activities.*
 import com.scorpion_a.studentapp.model.responses.UserDataResponce
@@ -27,6 +28,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class StaffHomeFragment : Fragment() {
+    var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,9 +49,51 @@ class StaffHomeFragment : Fragment() {
 
 
         val call = client.getUserData()
+
+        mSwipeRefreshLayout= view.findViewById(R.id.swipe_refresh_layout)
+        mSwipeRefreshLayout!!.setOnRefreshListener {
+            call.clone().enqueue(object : Callback<UserDataResponce> {
+                override fun onResponse(
+                    call: Call<UserDataResponce>,
+                    response: Response<UserDataResponce>
+                ) {
+
+                    if (response.isSuccessful()){
+                        mSwipeRefreshLayout!!.isRefreshing = false
+                        if (tvStaffDepartment != null) {
+                            tvStaffDepartment.text="Department: " + response.body().data?.department
+                            view.progressBarSHome.visibility = View.GONE
+                            view.clSHome.visibility = View.VISIBLE
+                        }
+                    }else{
+                        mSwipeRefreshLayout!!.isRefreshing = false
+                        view.progressBarSHome.visibility = View.GONE
+                        view.clSHome.visibility = View.VISIBLE
+                        Toast.makeText(context, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
+                    }
+                    // Catching Responses From Retrofit
+
+                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
+                    Log.d("TAG", "onResponsebody: " + response.body());
+                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
+                    Log.d("TAG", "onResponsemessage: " + response.message());
+                    Log.d("TAG", "onResponsecode: " + response.code());
+                    Log.d("TAG", "onResponseheaders: " + response.headers());
+                    Log.d("TAG", "onResponseraw: " + response.raw());
+                    Log.d("TAG", "onResponsetoString: " + response.toString());
+
+                }
+
+
+
+                override fun onFailure(call: Call<UserDataResponce>?, t: Throwable?) {
+                    Log.i("test", t.toString())
+                }
+            })
+        }
         view.progressBarSHome.visibility = View.VISIBLE
         view.clSHome.visibility = View.INVISIBLE
-        call.enqueue(object : Callback<UserDataResponce> {
+        call.clone().enqueue(object : Callback<UserDataResponce> {
             override fun onResponse(
                 call: Call<UserDataResponce>,
                 response: Response<UserDataResponce>

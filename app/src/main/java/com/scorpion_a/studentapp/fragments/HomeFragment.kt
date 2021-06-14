@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import carbon.widget.Button
 import com.google.gson.GsonBuilder
 import com.scorpion_a.studentapp.R
@@ -41,6 +42,7 @@ class HomeFragment : Fragment() {
     lateinit var buLogout:Button
     lateinit var recyclerViewNews: RecyclerView
     lateinit var recyclerViewEvents: RecyclerView
+    var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,53 +61,164 @@ class HomeFragment : Fragment() {
 
         val client = retrofit.create(Service::class.java)
 
-
         val call = client.getUserData()
 //        view.progressBarHome.visibility = View.VISIBLE
 //        view.clHome.visibility = View.INVISIBLE
-        call.enqueue(object : Callback<UserDataResponce> {
-            override fun onResponse(
-                call: Call<UserDataResponce>,
-                response: Response<UserDataResponce>
-            ) {
+        mSwipeRefreshLayout= view.findViewById(R.id.swipe_refresh_layout)
+        mSwipeRefreshLayout!!.setOnRefreshListener {
+            call.clone().enqueue(object : Callback<UserDataResponce> {
+                override fun onResponse(
+                    call: Call<UserDataResponce>,
+                    response: Response<UserDataResponce>
+                ) {
 
-                if (response.isSuccessful()){
-                    if (tvDepartment != null) {
-                            tvDepartment.text="Department: " + response.body().data?.department
+                    if (response.isSuccessful()) {
+                        if (tvDepartment != null) {
+                            tvDepartment.text = "Department: " + response.body().data?.department
+                            mSwipeRefreshLayout!!.isRefreshing = false
 //                            view.progressBarHome.visibility = View.GONE
 //                            view.clHome.visibility = View.VISIBLE
                         }
-                }else{
+                    } else {
 //                    view.progressBarHome.visibility = View.GONE
 //                    view.clHome.visibility = View.VISIBLE
-                    Toast.makeText(context, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
+                        mSwipeRefreshLayout!!.isRefreshing = false
+                        Toast.makeText(context, getString(R.string.went_wrong), Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    // Catching Responses From Retrofit
+
+                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
+                    Log.d("TAG", "onResponsebody: " + response.body());
+                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
+                    Log.d("TAG", "onResponsemessage: " + response.message());
+                    Log.d("TAG", "onResponsecode: " + response.code());
+                    Log.d("TAG", "onResponseheaders: " + response.headers());
+                    Log.d("TAG", "onResponseraw: " + response.raw());
+                    Log.d("TAG", "onResponsetoString: " + response.toString());
+
                 }
-                // Catching Responses From Retrofit
-
-                Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
-                Log.d("TAG", "onResponsebody: " + response.body());
-                Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
-                Log.d("TAG", "onResponsemessage: " + response.message());
-                Log.d("TAG", "onResponsecode: " + response.code());
-                Log.d("TAG", "onResponseheaders: " + response.headers());
-                Log.d("TAG", "onResponseraw: " + response.raw());
-                Log.d("TAG", "onResponsetoString: " + response.toString());
-
-            }
 
 
+                override fun onFailure(call: Call<UserDataResponce>?, t: Throwable?) {
+                    Log.i("test", t.toString())
+                }
+            })
 
-            override fun onFailure(call: Call<UserDataResponce>?, t: Throwable?) {
-                Log.i("test", t.toString())
-            }
-        })
+            val callArti = client.getArticlesData()
+            callArti.clone().enqueue(object : Callback<ArticlesResponse> {
+                override fun onResponse(
+                    call: Call<ArticlesResponse>?,
+                    response: Response<ArticlesResponse>?
+                ) {
+                    if (response!!.isSuccessful()) {
+
+//                    for ((i:Int,item: ArticlesListData) in response.body().data){
+//                        if (item.type.equals("event")){
+////                            eventsListData.set(item)
+//                        }
+//                    }
+                        mSwipeRefreshLayout!!.isRefreshing = false
+                        var newsListData: ArrayList<ArticlesListData>?=ArrayList()
+                        var eventsListData: ArrayList<ArticlesListData>?=ArrayList()
+                        response.body().data.map {
+                            if (it.type.equals("event")){
+                                eventsListData?.add( ArticlesListData(it.id,it.title,it.images, it.type,it.date))
+                                view.progressBarHome.visibility = View.GONE
+                                view.clHome.visibility = View.VISIBLE
+//                            eventsListData=   arrayOf<ArticlesListData>(
+//                                ArticlesListData(it.id,it.title, it.date, it.images,it.type))
+                                recyclerViewEvents = view.findViewById(R.id.rvEvents)
+                                val adapterEvents = EventsListAdapter(eventsListData, context)
+                                recyclerViewEvents.setHasFixedSize(true)
+                                recyclerViewEvents.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.HORIZONTAL,false)
+                                recyclerViewEvents.adapter = adapterEvents
+                            }else{
+                                newsListData?.add( ArticlesListData(it.id,it.title,it.images, it.type,it.date))
+                                view.progressBarHome.visibility = View.GONE
+                                view.clHome.visibility = View.VISIBLE
+//                          newsListData=  arrayOf<ArticlesListData>(
+//                                ArticlesListData(it.id,it.title,it.date, it.images,it.type)
+//                            )
+                                recyclerViewNews = view.findViewById(R.id.rvNewsList)
+                                val adapterNews = NewsListAdapter(newsListData, context)
+                                recyclerViewNews.setHasFixedSize(true)
+                                recyclerViewNews.layoutManager = LinearLayoutManager(view.context)
+                                recyclerViewNews.adapter = adapterNews
+                            }
+                        }
+
+                    } else {
+                        mSwipeRefreshLayout!!.isRefreshing = false
+                        view.progressBarHome.visibility = View.GONE
+                        view.clHome.visibility = View.VISIBLE
+                        Toast.makeText(
+                            context,
+                            getString(R.string.went_wrong),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
+                    Log.d("TAG", "onResponsebody: " + response.body())
+                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
+                    Log.d("TAG", "onResponsemessage: " + response.message())
+                    Log.d("TAG", "onResponsecode: " + response.code())
+                    Log.d("TAG", "onResponseheaders: " + response.headers())
+                    Log.d("TAG", "onResponseraw: " + response.raw())
+                    Log.d("TAG", "onResponsetoString: " + response.toString())
+
+                }
+
+                override fun onFailure(call: Call<ArticlesResponse>?, t: Throwable?) {
+                    Log.i("test", t.toString())
+                }
+            })
+
+        }
+            call.clone().enqueue(object : Callback<UserDataResponce> {
+                override fun onResponse(
+                    call: Call<UserDataResponce>,
+                    response: Response<UserDataResponce>
+                ) {
+
+                    if (response.isSuccessful()) {
+                        if (tvDepartment != null) {
+                            tvDepartment.text = "Department: " + response.body().data?.department
+                            mSwipeRefreshLayout!!.isRefreshing = false
+//                            view.progressBarHome.visibility = View.GONE
+//                            view.clHome.visibility = View.VISIBLE
+                        }
+                    } else {
+//                    view.progressBarHome.visibility = View.GONE
+//                    view.clHome.visibility = View.VISIBLE
+                        mSwipeRefreshLayout!!.isRefreshing = false
+                        Toast.makeText(context, getString(R.string.went_wrong), Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    // Catching Responses From Retrofit
+
+                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
+                    Log.d("TAG", "onResponsebody: " + response.body());
+                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
+                    Log.d("TAG", "onResponsemessage: " + response.message());
+                    Log.d("TAG", "onResponsecode: " + response.code());
+                    Log.d("TAG", "onResponseheaders: " + response.headers());
+                    Log.d("TAG", "onResponseraw: " + response.raw());
+                    Log.d("TAG", "onResponsetoString: " + response.toString());
+
+                }
 
 
+                override fun onFailure(call: Call<UserDataResponce>?, t: Throwable?) {
+                    Log.i("test", t.toString())
+                }
+            })
 
         val callArti = client.getArticlesData()
         view.progressBarHome.visibility = View.VISIBLE
         view.clHome.visibility = View.INVISIBLE
-        callArti.enqueue(object : Callback<ArticlesResponse> {
+        callArti.clone().enqueue(object : Callback<ArticlesResponse> {
             override fun onResponse(
                 call: Call<ArticlesResponse>?,
                 response: Response<ArticlesResponse>?
