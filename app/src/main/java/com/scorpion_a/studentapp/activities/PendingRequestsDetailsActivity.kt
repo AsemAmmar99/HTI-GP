@@ -107,17 +107,6 @@ class PendingRequestsDetailsActivity : AppCompatActivity() {
 
         }
 
-        buAccept.setOnClickListener {
-            onAccept(it.context)
-        }
-
-        buReject.setOnClickListener {
-            val intent = Intent(it.context, RejectReasonActivity::class.java)
-            startActivity(intent)
-        }
-
-
-
         val gsonl = GsonBuilder()
             .setLenient()
             .create()
@@ -128,71 +117,86 @@ class PendingRequestsDetailsActivity : AppCompatActivity() {
             .build()
 
         val service = retrofit.create(Service::class.java)
-        val call = service.approveReq(pending.id,
-           "PUT"
-        )
-        call.clone().enqueue(object : Callback<String> {
-            override fun onResponse(
-                call: Call<String>,
-                response: Response<String>,
-            ) {
-                if (response.isSuccessful) {
-                   finish()
-                } else {
+        buAccept.setOnClickListener {
 
-                    Toast.makeText(baseContext,
-                        getString(R.string.went_wrong),
-                        Toast.LENGTH_SHORT).show()
+            val call = service.approveReq(pending.id,
+                "PUT"
+            )
+            call.clone().enqueue(object : Callback<String> {
+                override fun onResponse(
+                    call: Call<String>,
+                    response: Response<String>,
+                ) {
+                    if (response.isSuccessful) {
+                        onAccept(it.context)
+                    } else {
+
+                        Toast.makeText(baseContext,
+                            getString(R.string.went_wrong),
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    // Catching Responses From Retrofit
+                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
+                    Log.d("TAG", "onResponsebody: " + response.body())
+                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
+                    Log.d("TAG", "onResponsemessage: " + response.message())
+                    Log.d("TAG", "onResponsecode: " + response.code())
+                    Log.d("TAG", "onResponseheaders: " + response.headers())
+                    Log.d("TAG", "onResponseraw: " + response.raw())
+                    Log.d("TAG", "onResponsetoString: " + response.toString())
+
                 }
-                // Catching Responses From Retrofit
-                Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
-                Log.d("TAG", "onResponsebody: " + response.body())
-                Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
-                Log.d("TAG", "onResponsemessage: " + response.message())
-                Log.d("TAG", "onResponsecode: " + response.code())
-                Log.d("TAG", "onResponseheaders: " + response.headers())
-                Log.d("TAG", "onResponseraw: " + response.raw())
-                Log.d("TAG", "onResponsetoString: " + response.toString())
 
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.i("test", t.toString())
-            }
-        })
-
-        val callreq = service.rejectReq(pending.id,
-            "PUT"
-        )
-        callreq.clone().enqueue(object : Callback<String> {
-            override fun onResponse(
-                call: Call<String>,
-                response: Response<String>,
-            ) {
-                if (response.isSuccessful) {
-                    finish()
-                } else {
-
-                    Toast.makeText(baseContext,
-                        getString(R.string.went_wrong),
-                        Toast.LENGTH_SHORT).show()
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.i("test", t.toString())
                 }
-                // Catching Responses From Retrofit
-                Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
-                Log.d("TAG", "onResponsebody: " + response.body())
-                Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
-                Log.d("TAG", "onResponsemessage: " + response.message())
-                Log.d("TAG", "onResponsecode: " + response.code())
-                Log.d("TAG", "onResponseheaders: " + response.headers())
-                Log.d("TAG", "onResponseraw: " + response.raw())
-                Log.d("TAG", "onResponsetoString: " + response.toString())
+            })
+        }
 
-            }
+        buReject.setOnClickListener {
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.i("test", t.toString())
-            }
-        })
+            val callreq = service.rejectReq(pending.id,
+                "PUT"
+            )
+            callreq.clone().enqueue(object : Callback<String> {
+                override fun onResponse(
+                    call: Call<String>,
+                    response: Response<String>,
+                ) {
+                    if (response.isSuccessful) {
+                        val intent = Intent(it.context, RejectReasonActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+
+                        Toast.makeText(baseContext,
+                            getString(R.string.went_wrong),
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    // Catching Responses From Retrofit
+                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
+                    Log.d("TAG", "onResponsebody: " + response.body())
+                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
+                    Log.d("TAG", "onResponsemessage: " + response.message())
+                    Log.d("TAG", "onResponsecode: " + response.code())
+                    Log.d("TAG", "onResponseheaders: " + response.headers())
+                    Log.d("TAG", "onResponseraw: " + response.raw())
+                    Log.d("TAG", "onResponsetoString: " + response.toString())
+
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.i("test", t.toString())
+                }
+            })
+
+        }
+
+
+
+
+
+
     }
 
     private fun onAccept(context: Context) {
