@@ -71,7 +71,7 @@ class PendingRequestsDetailsActivity : AppCompatActivity() {
         toolbar.title=getString(R.string.prd)
         val gson = Gson()
 
-        pending= gson.fromJson(intent.extras?.getString("Pending"), ViewRequestsListData::class.java)
+        pending= gson.fromJson(intent.extras?.getString("pending"), ViewRequestsListData::class.java)
 
         tvRequestNumber.text=pending.id
         tvRequestDesc.text=pending.request_type.name.en
@@ -134,15 +134,20 @@ class PendingRequestsDetailsActivity : AppCompatActivity() {
             val call = service.approveReq(pending.id,
                 "PUT"
             )
+            progressBarStPD.visibility = View.VISIBLE
+            clStPD.visibility = View.INVISIBLE
             call.clone().enqueue(object : Callback<ActionsResponce> {
                 override fun onResponse(
                     call: Call<ActionsResponce>,
                     response: Response<ActionsResponce>,
                 ) {
                     if (response.isSuccessful) {
+                        progressBarStPD.visibility = View.GONE
+                        clStPD.visibility = View.VISIBLE
                         onAccept()
                     } else {
-
+                        progressBarStPD.visibility = View.GONE
+                        clStPD.visibility = View.VISIBLE
                         Toast.makeText(baseContext,
                             getString(R.string.went_wrong),
                             Toast.LENGTH_SHORT).show()

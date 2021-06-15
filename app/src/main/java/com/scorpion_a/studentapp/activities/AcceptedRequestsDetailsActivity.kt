@@ -11,6 +11,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
@@ -27,6 +28,7 @@ import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_accepted_requests_details.*
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
+import kotlinx.android.synthetic.main.activity_rejected_requests.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -47,7 +49,7 @@ class AcceptedRequestsDetailsActivity : AppCompatActivity() {
 
         toolbar = header.findViewById(R.id.toolbar)
         toolbar.title = getString(R.string.ard)
-        Accepted= gson.fromJson(intent.extras?.getString("Accepted"), ViewRequestsListData::class.java)
+        Accepted= gson.fromJson(intent.extras?.getString("accepted"), ViewRequestsListData::class.java)
 
         tvRequestNumber.text=Accepted.id
         tvRequestDesc.text=Accepted.request_type.name.en
@@ -103,15 +105,20 @@ class AcceptedRequestsDetailsActivity : AppCompatActivity() {
             val callreq = service.doneReq(Accepted.id,
                 "PUT"
             )
+            progressBarStAD.visibility = View.VISIBLE
+            clStAD.visibility = View.INVISIBLE
             callreq.clone().enqueue(object : Callback<ActionsResponce> {
                 override fun onResponse(
                     call: Call<ActionsResponce>,
                     response: Response<ActionsResponce>,
                 ) {
                     if (response.isSuccessful) {
+                        progressBarStAD.visibility = View.GONE
+                        clStAD.visibility = View.VISIBLE
                         onDone()
                     } else {
-
+                        progressBarStAD.visibility = View.GONE
+                        clStAD.visibility = View.VISIBLE
                         Toast.makeText(baseContext,
                             getString(R.string.went_wrong),
                             Toast.LENGTH_SHORT).show()

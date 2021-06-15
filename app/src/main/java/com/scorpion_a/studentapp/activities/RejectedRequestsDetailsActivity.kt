@@ -44,7 +44,7 @@ class RejectedRequestsDetailsActivity : AppCompatActivity() {
         toolbar.title = getString(R.string.rrd)
         val gson = Gson()
 
-        Rejected= gson.fromJson(intent.extras?.getString("Rejected"), ViewRequestsListData::class.java)
+        Rejected= gson.fromJson(intent.extras?.getString("rejected"), ViewRequestsListData::class.java)
 
         tvRequestNumber.text=Rejected.id
         tvRequestDesc.text=Rejected.request_type.name.en

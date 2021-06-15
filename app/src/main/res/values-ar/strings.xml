@@ -236,4 +236,5 @@
     <string name="drd">تفاصيل الطلب المعلق</string>
     <string name="done">تم</string>
     <string name="srhbmad">تم تحديد طلب الطالب بنجاح كطلب تم تسليمه.</string>
+    <string name="taftr">من فضلك, أدخل سبب الرفض.</string>
 </resources>
