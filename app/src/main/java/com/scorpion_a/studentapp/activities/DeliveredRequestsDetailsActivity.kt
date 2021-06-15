@@ -34,7 +34,7 @@ import kotlinx.android.synthetic.main.activity_profile_page.header
 class DeliveredRequestsDetailsActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     lateinit var receiptImage: ImageView
-    lateinit var rejected: ViewRequestsListData
+    lateinit var delivered: ViewRequestsListData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
@@ -45,24 +45,24 @@ class DeliveredRequestsDetailsActivity : AppCompatActivity() {
 
         toolbar = header.findViewById(R.id.toolbar)
         toolbar.title = getString(R.string.drd)
-        rejected= gson.fromJson(intent.extras?.getString("rejected"), ViewRequestsListData::class.java)
-        tvRequestNumber.text=rejected.id
-        tvRequestDesc.text=rejected.request_type.name.en
-        tvCountValue.text=rejected.count
-        tvPriceValue.text=rejected.price +" LE"
-        tvTotalPriceValue.text=rejected.total_price+" LE"
-        tvCDateValue.text=rejected.created_at.split("T")[0]
-        tvRequestStatusTitle.text=rejected.status
+        delivered= gson.fromJson(intent.extras?.getString("delivered"), ViewRequestsListData::class.java)
+        tvRequestNumber.text=delivered.id
+        tvRequestDesc.text=delivered.request_type.name.en
+        tvCountValue.text=delivered.count
+        tvPriceValue.text=delivered.price +" LE"
+        tvTotalPriceValue.text=delivered.total_price+" LE"
+        tvCDateValue.text=delivered.created_at.split("T")[0]
+        tvRequestStatusTitle.text=delivered.status
 
-        tvNameInArabicValue.text=rejected.student.name.ar
-        tvNameInEnglishValue.text=rejected.student.name.en
-        tvIdValue.text=rejected.student_id
-        tvStudentStatusValue.text=rejected.student.account_type
-        tvDEmailValue.text=rejected.student.email
+        tvNameInArabicValue.text=delivered.student.name.ar
+        tvNameInEnglishValue.text=delivered.student.name.en
+        tvIdValue.text=delivered.student_id
+        tvStudentStatusValue.text=delivered.student.account_type
+        tvDEmailValue.text=delivered.student.email
         tvMoneyConfirmValue.text="Confirmed"
 
         val pagerAdapter =
-            ImagesAdapter(this, rejected.receipt)
+            ImagesAdapter(this, delivered.receipt)
         ivReceiptDeliverd.setAdapter(pagerAdapter)
         ivReceiptDeliverd.setPageMargin(20)
 
