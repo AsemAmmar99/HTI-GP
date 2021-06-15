@@ -75,7 +75,7 @@ class DeliveredRequestsActivity : AppCompatActivity() {
                                 stfrequestsListData?.add(ViewRequestsListData(it.id,
                                     it.name,
                                     it.price,
-                                    it.status,it.count,it.total_price,it.created_at,it.student_id,it.student,it.request_type))
+                                    it.status,it.count,it.total_price,it.created_at,it.student_id,it.student,it.request_type,it.receipt))
                                 progressBarStD.visibility = GONE
                                 clStD.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(
@@ -131,7 +131,7 @@ class DeliveredRequestsActivity : AppCompatActivity() {
                             stfrequestsListData?.add(ViewRequestsListData(it.id,
                                 it.name,
                                 it.price,
-                                it.status,it.count,it.total_price,it.created_at,it.student_id,it.student,it.request_type))
+                                it.status,it.count,it.total_price,it.created_at,it.student_id,it.student,it.request_type,it.receipt))
                             progressBarStD.visibility = GONE
                             clStD.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(

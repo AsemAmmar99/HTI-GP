@@ -1,11 +1,9 @@
 package com.scorpion_a.studentapp.activities
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -14,18 +12,22 @@ import android.util.Log
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.adapters.ImagesAdapter
+import com.scorpion_a.studentapp.adapters.RequestsPageerAdapter
 import com.scorpion_a.studentapp.model.ViewRequestsListData
 import com.scorpion_a.studentapp.model.responses.ActionsResponce
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.Lang
+import com.scorpion_a.studentapp.utils.Lang.Companion.getLang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_accepted_requests_details.*
-import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -38,6 +40,7 @@ class AcceptedRequestsDetailsActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     lateinit var receiptImage: ImageView
     lateinit var Accepted: ViewRequestsListData
+
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
         Theme.checkTheme(this, delegate)
@@ -63,25 +66,40 @@ class AcceptedRequestsDetailsActivity : AppCompatActivity() {
         tvStudentStatusValue.text=Accepted.student.account_type
         tvDEmailValue.text=Accepted.student.email
         tvMoneyConfirmValue.text="Confirmed"
-        receiptImage = findViewById(R.id.ivReceipt)
-        val image = ImageView(this)
-        image.setImageResource(R.drawable.receipt)
+//        receiptImage = findViewById(R.id.ivReceipt)
+//        val image = ImageView(this)
+//        image.setImageResource(R.drawable.receipt)
 
-        receiptImage.setOnClickListener {
-            if (image.getParent() != null) (image.getParent() as ViewGroup).removeView(
-                image
-            )
-            var dialog = AlertDialog.Builder(this).setPositiveButton(getString(R.string.ok),
-                object : DialogInterface.OnClickListener {
-                    override fun onClick(dialog: DialogInterface?, which: Int) {
 
-                        dialog?.dismiss()
-                    }
+        val pagerAdapter =
+            ImagesAdapter(this, Accepted.receipt)
+        ivReceipt.setAdapter(pagerAdapter)
+        ivReceipt.setPageMargin(20)
 
-                })
+        // whenever the page changes
 
-            dialog.setView(image).create().show()
+        // whenever the page changes
+
+        if (getLang(this) == "ar") {
+            ivReceipt.setRotationY(180f)
         }
+
+//
+//        receiptImage.setOnClickListener {
+//            if (image.getParent() != null) (image.getParent() as ViewGroup).removeView(
+//                image
+//            )
+//            var dialog = AlertDialog.Builder(this).setPositiveButton(getString(R.string.ok),
+//                object : DialogInterface.OnClickListener {
+//                    override fun onClick(dialog: DialogInterface?, which: Int) {
+//
+//                        dialog?.dismiss()
+//                    }
+//
+//                })
+//
+//            dialog.setView(image).create().show()
+//        }
 
         val gsonl = GsonBuilder()
             .setLenient()

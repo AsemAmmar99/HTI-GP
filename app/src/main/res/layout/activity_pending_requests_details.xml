@@ -471,25 +471,38 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="7dp"/>
 
-            <ImageView
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="200dp"-->
+<!--                android:id="@+id/ivReceipt"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/tvFullScreen"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:src="@drawable/receipt"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                android:layout_marginEnd="15dp"/>-->
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/ivReceiptPending"
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
-                android:id="@+id/ivReceipt"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintTop_toBottomOf="@id/tvFullScreen"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/receipt"
-                android:adjustViewBounds="true"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"/>
+                />
 
             <carbon.widget.Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/buAccept"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivReceipt"
+                app:layout_constraintTop_toBottomOf="@id/ivReceiptPending"
                 app:layout_constraintEnd_toStartOf="@id/buReject"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="5dp"
@@ -506,7 +519,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/buReject"
                 app:layout_constraintStart_toEndOf="@id/buAccept"
-                app:layout_constraintTop_toBottomOf="@id/ivReceipt"
+                app:layout_constraintTop_toBottomOf="@id/ivReceiptPending"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="5dp"

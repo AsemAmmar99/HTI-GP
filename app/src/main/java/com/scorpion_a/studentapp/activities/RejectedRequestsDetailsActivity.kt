@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import com.google.gson.Gson
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.adapters.ImagesAdapter
 import com.scorpion_a.studentapp.model.ViewRequestsListData
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Theme
@@ -44,7 +45,7 @@ class RejectedRequestsDetailsActivity : AppCompatActivity() {
         toolbar.title = getString(R.string.rrd)
         val gson = Gson()
 
-        Rejected= gson.fromJson(intent.extras?.getString("Rejected"), ViewRequestsListData::class.java)
+        Rejected= gson.fromJson(intent.extras?.getString("rejected"), ViewRequestsListData::class.java)
 
         tvRequestNumber.text=Rejected.id
         tvRequestDesc.text=Rejected.request_type.name.en
@@ -61,25 +62,39 @@ class RejectedRequestsDetailsActivity : AppCompatActivity() {
         tvDEmailValue.text=Rejected.student.email
         tvMoneyConfirmValue.text="Confirmed"
 
-        receiptImage = findViewById(R.id.ivReceipt)
-        val image = ImageView(this)
-        image.setImageResource(R.drawable.receipt)
 
-        receiptImage.setOnClickListener {
-            if (image.getParent() != null) (image.getParent() as ViewGroup).removeView(
-                image
-            )
-            var dialog = AlertDialog.Builder(this).setPositiveButton(getString(R.string.ok),
-                object : DialogInterface.OnClickListener {
-                    override fun onClick(dialog: DialogInterface?, which: Int) {
 
-                        dialog?.dismiss()
-                    }
+        val pagerAdapter =
+            ImagesAdapter(this, Rejected.receipt)
+        ivReceiptReqjected.setAdapter(pagerAdapter)
+        ivReceiptReqjected.setPageMargin(20)
 
-                })
+        // whenever the page changes
 
-            dialog.setView(image).create().show()
+        // whenever the page changes
+
+        if (Lang.getLang(this) == "ar") {
+            ivReceiptReqjected.setRotationY(180f)
         }
+//        receiptImage = findViewById(R.id.ivReceipt)
+//        val image = ImageView(this)
+//        image.setImageResource(R.drawable.receipt)
+//
+//        receiptImage.setOnClickListener {
+//            if (image.getParent() != null) (image.getParent() as ViewGroup).removeView(
+//                image
+//            )
+//            var dialog = AlertDialog.Builder(this).setPositiveButton(getString(R.string.ok),
+//                object : DialogInterface.OnClickListener {
+//                    override fun onClick(dialog: DialogInterface?, which: Int) {
+//
+//                        dialog?.dismiss()
+//                    }
+//
+//                })
+//
+//            dialog.setView(image).create().show()
+//        }
 
 
     }

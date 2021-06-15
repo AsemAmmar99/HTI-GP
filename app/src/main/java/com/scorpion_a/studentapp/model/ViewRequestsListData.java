@@ -3,6 +3,8 @@ package com.scorpion_a.studentapp.model;
 import com.scorpion_a.studentapp.model.ViewRequestsClasses.RequestType;
 import com.scorpion_a.studentapp.model.ViewRequestsClasses.Student;
 
+import java.util.ArrayList;
+
 public class ViewRequestsListData {
     private String id;
     private String name;
@@ -14,8 +16,9 @@ public class ViewRequestsListData {
     private String student_id;
     private Student student;
     private RequestType request_type;
+    private ArrayList<String> receipt;
 
-    public ViewRequestsListData(String id, String name, String price, String status, String count, String total_price, String created_at, String student_id, Student student, RequestType request_type) {
+    public ViewRequestsListData(String id, String name, String price, String status, String count, String total_price, String created_at, String student_id, Student student, RequestType request_type, ArrayList<String> receipt) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -26,6 +29,15 @@ public class ViewRequestsListData {
         this.student_id = student_id;
         this.student = student;
         this.request_type = request_type;
+        this.receipt = receipt;
+    }
+
+    public ArrayList<String> getReceipt() {
+        return receipt;
+    }
+
+    public void setReceipt(ArrayList<String> receipt) {
+        this.receipt = receipt;
     }
 
     public String getCount() {

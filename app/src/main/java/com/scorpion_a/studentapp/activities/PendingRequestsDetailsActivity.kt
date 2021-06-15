@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.adapters.ImagesAdapter
 import com.scorpion_a.studentapp.model.ViewRequestsListData
 import com.scorpion_a.studentapp.model.requests.LoginRequests
 import com.scorpion_a.studentapp.model.responses.ActionsResponce
@@ -88,27 +89,41 @@ class PendingRequestsDetailsActivity : AppCompatActivity() {
         tvDEmailValue.text=pending.student.email
         tvMoneyConfirmValue.text="Confirmed"
 
-        receiptImage = findViewById(R.id.ivReceipt)
-        val image = ImageView(this)
-        image.setImageResource(R.drawable.receipt)
 
-        receiptImage.setOnClickListener{
-            if (image.getParent() != null) (image.getParent() as ViewGroup).removeView(
-                image
-            )
-           var dialog= AlertDialog.Builder(this).setPositiveButton(getString(R.string.ok),
-                object : DialogInterface.OnClickListener {
-                    override fun onClick(dialog: DialogInterface?, which: Int) {
+        val pagerAdapter =
+            ImagesAdapter(this, pending.receipt)
+        ivReceiptPending.setAdapter(pagerAdapter)
+        ivReceiptPending.setPageMargin(20)
 
-                        dialog?.dismiss()
-                    }
+        // whenever the page changes
 
-                })
+        // whenever the page changes
 
-            dialog.setView(image).create().show()
-            dialog.setView(image).create().window?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
-
+        if (Lang.getLang(this) == "ar") {
+            ivReceiptPending.setRotationY(180f)
         }
+
+//        receiptImage = findViewById(R.id.ivReceipt)
+//        val image = ImageView(this)
+//        image.setImageResource(R.drawable.receipt)
+//
+//        receiptImage.setOnClickListener{
+//            if (image.getParent() != null) (image.getParent() as ViewGroup).removeView(
+//                image
+//            )
+//           var dialog= AlertDialog.Builder(this).setPositiveButton(getString(R.string.ok),
+//                object : DialogInterface.OnClickListener {
+//                    override fun onClick(dialog: DialogInterface?, which: Int) {
+//
+//                        dialog?.dismiss()
+//                    }
+//
+//                })
+//
+//            dialog.setView(image).create().show()
+//            dialog.setView(image).create().window?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
+//
+//        }
 
         val gsonl = GsonBuilder()
             .setLenient()
