@@ -75,7 +75,7 @@ class DeliveredRequestsActivity : AppCompatActivity() {
                                 stfrequestsListData?.add(ViewRequestsListData(it.id,
                                     it.name,
                                     it.price,
-                                    it.status))
+                                    it.status,it.count,it.total_price,it.created_at,it.student_id,it.student,it.request_type))
                                 progressBarStD.visibility = GONE
                                 clStD.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(

@@ -9,16 +9,31 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import com.google.gson.GsonBuilder
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.model.requests.ReqjectRequest
+import com.scorpion_a.studentapp.model.responses.ActionsResponce
+import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.Lang
+import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 import kotlinx.android.synthetic.main.activity_reject_reason.*
+import okhttp3.OkHttpClient
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class RejectReasonActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
         Theme.checkTheme(this, delegate)
@@ -26,13 +41,81 @@ class RejectReasonActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reject_reason)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title=getString(R.string.rr)
+       var reqId= intent.extras?.getString("id")
 
+        val gsonl = GsonBuilder()
+            .setLenient()
+            .create()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Service.BaseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(OkHttpClient.Builder().addInterceptor { chain ->
+                val request = chain.request().newBuilder().addHeader("Authorization", "Bearer ${
+                SharedPreferenceClass.loadString(
+                    this,
+                    "TOKEN")
+                }").build()
+                chain.proceed(request)
+            }.build())
+            .build()
+
+
+
+        val service = retrofit.create(Service::class.java)
         buConfirmRejection.setOnClickListener {
-            onReject(it.context)
+
+            val callreq = service.rejectReq(
+                reqId!!,
+                ReqjectRequest("PUT",
+                    etMessage.text.toString())
+            )
+            callreq.clone().enqueue(object : Callback<ActionsResponce> {
+                override fun onResponse(
+                    call: Call<ActionsResponce>,
+                    response: Response<ActionsResponce>,
+                ) {
+                    if (response.isSuccessful) {
+                        onReject()
+
+                    } else {
+
+                        Toast.makeText(baseContext,
+                            getString(R.string.went_wrong),
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    // Catching Responses From Retrofit
+                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
+                    Log.d("TAG", "onResponsebody: " + response.body())
+                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
+                    Log.d("TAG", "onResponsemessage: " + response.message())
+                    Log.d("TAG", "onResponsecode: " + response.code())
+                    Log.d("TAG", "onResponseheaders: " + response.headers())
+                    Log.d("TAG", "onResponseraw: " + response.raw())
+                    Log.d("TAG", "onResponsetoString: " + response.toString())
+
+
+                    try {
+                        val jObjError = JSONObject(response.errorBody()!!.string())
+//                    Toast.makeText(this@CheckoutActivity, jObjError.toString(), Toast.LENGTH_LONG).show()
+                        Log.i("erroooooooooooooor",jObjError.toString())
+                    } catch (e: Exception) {
+//                    Toast.makeText(this@CheckoutActivity, e.message, Toast.LENGTH_LONG).show()
+                    }
+
+
+                    Log.d("fail",response.code().toString())
+
+                }
+
+                override fun onFailure(call: Call<ActionsResponce>, t: Throwable) {
+                    Log.i("test", t.toString())
+                }
+            })
         }
     }
 
-    private fun onReject(context: Context) {
+    private fun onReject() {
 
         val title = SpannableString(getString(R.string.pa))
         title.setSpan(
@@ -51,14 +134,14 @@ class RejectReasonActivity : AppCompatActivity() {
         )
 
         val builder: androidx.appcompat.app.AlertDialog.Builder
-        builder = androidx.appcompat.app.AlertDialog.Builder(context)
+        builder = androidx.appcompat.app.AlertDialog.Builder(this)
         builder.setTitle(title)
             .setMessage(message)
             .setCancelable(false)
             .setPositiveButton(
                 getString(R.string.yes)
             ) { dialog: DialogInterface, which: Int ->
-                onRejectYes(context)
+                onRejectYes()
                 dialog.dismiss()
             }.setNegativeButton(
                 getString(R.string.cancel)
@@ -69,7 +152,7 @@ class RejectReasonActivity : AppCompatActivity() {
             .window?.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.alert)))
     }
 
-    private fun onRejectYes(context: Context) {
+    private fun onRejectYes() {
 
         val title = SpannableString(getString(R.string.thank_you))
         title.setSpan(
@@ -88,14 +171,14 @@ class RejectReasonActivity : AppCompatActivity() {
         )
 
         val builder: androidx.appcompat.app.AlertDialog.Builder
-        builder = androidx.appcompat.app.AlertDialog.Builder(context)
+        builder = androidx.appcompat.app.AlertDialog.Builder(this)
         builder.setTitle(title)
             .setMessage(message)
             .setCancelable(false)
             .setPositiveButton(
                 getString(R.string.ok)
             ) { dialog: DialogInterface, which: Int ->
-                val intent = Intent(context, StaffHomeActivity::class.java)
+                val intent = Intent(this, StaffHomeActivity::class.java)
                 startActivity(intent)
                 finish()
                 dialog.dismiss()

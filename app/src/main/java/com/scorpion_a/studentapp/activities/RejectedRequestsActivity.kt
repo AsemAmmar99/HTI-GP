@@ -70,7 +70,7 @@ class RejectedRequestsActivity : AppCompatActivity() {
                                 stfrequestsListData?.add(ViewRequestsListData(it.id,
                                     it.name,
                                     it.price,
-                                    it.status))
+                                    it.status,it.count,it.total_price,it.created_at,it.student_id,it.student,it.request_type))
                                 progressBarStR.visibility = GONE
                                 clStR.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(

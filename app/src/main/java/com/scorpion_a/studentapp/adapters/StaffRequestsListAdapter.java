@@ -63,11 +63,6 @@ public class StaffRequestsListAdapter extends RecyclerView.Adapter<StaffRequests
                     intent1.putExtra("Accepted", gson.toJson(myListData) );
                     context.startActivity(intent1);
                 }else if (pageName.equals("rejected")){
-                    context.startActivity(new Intent(context, RejectedRequestsDetailsActivity.class));
-                }else if (pageName.equals("delivered")){
-                    context.startActivity(new Intent(context, DeliveredRequestsDetailsActivity.class));
-                }else {
-                    context.startActivity(new Intent(context, PendingRequestsDetailsActivity.class));
                     Intent intent3 =new Intent(context, RejectedRequestsDetailsActivity.class);
                     intent3.putExtra("Rejected", gson.toJson(myListData) );
                     context.startActivity(intent3);

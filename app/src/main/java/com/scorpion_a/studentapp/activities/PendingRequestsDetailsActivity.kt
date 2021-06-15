@@ -24,6 +24,7 @@ import com.google.gson.GsonBuilder
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.model.ViewRequestsListData
 import com.scorpion_a.studentapp.model.requests.LoginRequests
+import com.scorpion_a.studentapp.model.responses.ActionsResponce
 import com.scorpion_a.studentapp.model.responses.LoginResponse
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.Lang
@@ -47,6 +48,8 @@ import kotlinx.android.synthetic.main.activity_pending_requests_details.tvStuden
 import kotlinx.android.synthetic.main.activity_pending_requests_details.tvTotalPriceValue
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
+import okhttp3.OkHttpClient
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -113,22 +116,31 @@ class PendingRequestsDetailsActivity : AppCompatActivity() {
 
         val retrofit = Retrofit.Builder()
             .baseUrl(Service.BaseUrl)
-            .addConverterFactory(GsonConverterFactory.create(gsonl))
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(OkHttpClient.Builder().addInterceptor { chain ->
+                val request = chain.request().newBuilder().addHeader("Authorization", "Bearer ${
+                SharedPreferenceClass.loadString(
+                    this,
+                    "TOKEN")
+                }").build()
+                chain.proceed(request)
+            }.build())
             .build()
+
+
 
         val service = retrofit.create(Service::class.java)
         buAccept.setOnClickListener {
-
             val call = service.approveReq(pending.id,
                 "PUT"
             )
-            call.clone().enqueue(object : Callback<String> {
+            call.clone().enqueue(object : Callback<ActionsResponce> {
                 override fun onResponse(
-                    call: Call<String>,
-                    response: Response<String>,
+                    call: Call<ActionsResponce>,
+                    response: Response<ActionsResponce>,
                 ) {
                     if (response.isSuccessful) {
-                        onAccept(it.context)
+                        onAccept()
                     } else {
 
                         Toast.makeText(baseContext,
@@ -147,59 +159,24 @@ class PendingRequestsDetailsActivity : AppCompatActivity() {
 
                 }
 
-                override fun onFailure(call: Call<String>, t: Throwable) {
+                override fun onFailure(call: Call<ActionsResponce>, t: Throwable) {
                     Log.i("test", t.toString())
                 }
             })
         }
 
         buReject.setOnClickListener {
+            val intent = Intent(it.context, RejectReasonActivity::class.java)
+            intent.putExtra("id",pending.id)
+            startActivity(intent)
+            finish()
 
-            val callreq = service.rejectReq(pending.id,
-                "PUT"
-            )
-            callreq.clone().enqueue(object : Callback<String> {
-                override fun onResponse(
-                    call: Call<String>,
-                    response: Response<String>,
-                ) {
-                    if (response.isSuccessful) {
-                        val intent = Intent(it.context, RejectReasonActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-
-                        Toast.makeText(baseContext,
-                            getString(R.string.went_wrong),
-                            Toast.LENGTH_SHORT).show()
-                    }
-                    // Catching Responses From Retrofit
-                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
-                    Log.d("TAG", "onResponsebody: " + response.body())
-                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
-                    Log.d("TAG", "onResponsemessage: " + response.message())
-                    Log.d("TAG", "onResponsecode: " + response.code())
-                    Log.d("TAG", "onResponseheaders: " + response.headers())
-                    Log.d("TAG", "onResponseraw: " + response.raw())
-                    Log.d("TAG", "onResponsetoString: " + response.toString())
-
-                }
-
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.i("test", t.toString())
-                }
-            })
 
         }
 
-
-
-
-
-
     }
 
-    private fun onAccept(context: Context) {
+    private fun onAccept() {
 
         val title = SpannableString(getString(R.string.pa))
         title.setSpan(
@@ -218,14 +195,14 @@ class PendingRequestsDetailsActivity : AppCompatActivity() {
         )
 
         val builder: androidx.appcompat.app.AlertDialog.Builder
-        builder = androidx.appcompat.app.AlertDialog.Builder(context)
+        builder = androidx.appcompat.app.AlertDialog.Builder(this)
         builder.setTitle(title)
             .setMessage(message)
             .setCancelable(false)
             .setPositiveButton(
                 getString(R.string.yes)
             ) { dialog: DialogInterface, which: Int ->
-                onAcceptYes(context)
+                onAcceptYes(this)
                 dialog.dismiss()
             }.setNegativeButton(
                 getString(R.string.cancel)

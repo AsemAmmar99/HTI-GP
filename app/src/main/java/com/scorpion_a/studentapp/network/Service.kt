@@ -2,6 +2,7 @@ package com.scorpion_a.studentapp.network
 
 import android.content.Context
 import com.scorpion_a.studentapp.model.requests.LoginRequests
+import com.scorpion_a.studentapp.model.requests.ReqjectRequest
 import com.scorpion_a.studentapp.model.requests.RequestRequests
 import com.scorpion_a.studentapp.model.requests.UpdateUserRequests
 import com.scorpion_a.studentapp.model.responses.*
@@ -60,17 +61,17 @@ interface Service {
     fun getArticleDetails(@Path("id") id:String
     ):Call<ArticleDetailsResponse>
 
- @POST("requests/{id}/approve")
+ @PUT("requests/{id}/approve")
  @Headers("Accept: application/json", "Content-Type: application/json")
- fun approveReq(@Path("id") id:String,@Body _method: String): Call<String>
+ fun approveReq(@Path("id") id:String,@Body _method: String): Call<ActionsResponce>
 
 
- @POST("requests/{id}/reject")
+ @PUT("requests/{id}/reject")
  @Headers("Accept: application/json", "Content-Type: application/json")
- fun rejectReq(@Path("id") id:String,@Body _method: String): Call<String>
+ fun rejectReq(@Path("id") id:String,@Body reject: ReqjectRequest): Call<ActionsResponce>
 
- @POST("requests/{id}/done")
+ @PUT("requests/{id}/done")
  @Headers("Accept: application/json", "Content-Type: application/json")
- fun doneReq(@Path("id") id:String,@Body _method: String): Call<String>
+ fun doneReq(@Path("id") id:String,@Body _method: String): Call<ActionsResponce>
 
 }
