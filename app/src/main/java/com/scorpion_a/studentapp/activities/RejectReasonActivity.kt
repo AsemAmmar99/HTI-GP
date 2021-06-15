@@ -10,6 +10,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.google.gson.GsonBuilder
@@ -20,6 +21,7 @@ import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
+import kotlinx.android.synthetic.main.activity_accepted_requests_details.*
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 import kotlinx.android.synthetic.main.activity_reject_reason.*
@@ -64,54 +66,64 @@ class RejectReasonActivity : AppCompatActivity() {
 
         val service = retrofit.create(Service::class.java)
         buConfirmRejection.setOnClickListener {
+            if (etMessage.text.equals(null)){
+                Toast.makeText(baseContext,
+                    getString(R.string.taftr),
+                    Toast.LENGTH_SHORT).show()
+            }else {
+                val callreq = service.rejectReq(
+                    reqId!!,
+                    ReqjectRequest("PUT",
+                        etMessage.text.toString())
+                )
+                progressBarStRD.visibility = View.VISIBLE
+                clStRD.visibility = View.INVISIBLE
+                callreq.clone().enqueue(object : Callback<ActionsResponce> {
+                    override fun onResponse(
+                        call: Call<ActionsResponce>,
+                        response: Response<ActionsResponce>,
+                    ) {
+                        if (response.isSuccessful) {
+                            progressBarStRD.visibility = View.GONE
+                            clStRD.visibility = View.VISIBLE
+                            onReject()
 
-            val callreq = service.rejectReq(
-                reqId!!,
-                ReqjectRequest("PUT",
-                    etMessage.text.toString())
-            )
-            callreq.clone().enqueue(object : Callback<ActionsResponce> {
-                override fun onResponse(
-                    call: Call<ActionsResponce>,
-                    response: Response<ActionsResponce>,
-                ) {
-                    if (response.isSuccessful) {
-                        onReject()
-
-                    } else {
-
-                        Toast.makeText(baseContext,
-                            getString(R.string.went_wrong),
-                            Toast.LENGTH_SHORT).show()
-                    }
-                    // Catching Responses From Retrofit
-                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
-                    Log.d("TAG", "onResponsebody: " + response.body())
-                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
-                    Log.d("TAG", "onResponsemessage: " + response.message())
-                    Log.d("TAG", "onResponsecode: " + response.code())
-                    Log.d("TAG", "onResponseheaders: " + response.headers())
-                    Log.d("TAG", "onResponseraw: " + response.raw())
-                    Log.d("TAG", "onResponsetoString: " + response.toString())
+                        } else {
+                            progressBarStRD.visibility = View.GONE
+                            clStRD.visibility = View.VISIBLE
+                            Toast.makeText(baseContext,
+                                getString(R.string.went_wrong),
+                                Toast.LENGTH_SHORT).show()
+                        }
+                        // Catching Responses From Retrofit
+                        Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful)
+                        Log.d("TAG", "onResponsebody: " + response.body())
+                        Log.d("TAG", "onResponseerrorBody: " + response.errorBody())
+                        Log.d("TAG", "onResponsemessage: " + response.message())
+                        Log.d("TAG", "onResponsecode: " + response.code())
+                        Log.d("TAG", "onResponseheaders: " + response.headers())
+                        Log.d("TAG", "onResponseraw: " + response.raw())
+                        Log.d("TAG", "onResponsetoString: " + response.toString())
 
 
-                    try {
-                        val jObjError = JSONObject(response.errorBody()!!.string())
+                        try {
+                            val jObjError = JSONObject(response.errorBody()!!.string())
 //                    Toast.makeText(this@CheckoutActivity, jObjError.toString(), Toast.LENGTH_LONG).show()
-                        Log.i("erroooooooooooooor",jObjError.toString())
-                    } catch (e: Exception) {
+                            Log.i("erroooooooooooooor", jObjError.toString())
+                        } catch (e: Exception) {
 //                    Toast.makeText(this@CheckoutActivity, e.message, Toast.LENGTH_LONG).show()
+                        }
+
+
+                        Log.d("fail", response.code().toString())
+
                     }
 
-
-                    Log.d("fail",response.code().toString())
-
-                }
-
-                override fun onFailure(call: Call<ActionsResponce>, t: Throwable) {
-                    Log.i("test", t.toString())
-                }
-            })
+                    override fun onFailure(call: Call<ActionsResponce>, t: Throwable) {
+                        Log.i("test", t.toString())
+                    }
+                })
+            }
         }
     }
 

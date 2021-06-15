@@ -54,7 +54,6 @@ public class StaffRequestsListAdapter extends RecyclerView.Adapter<StaffRequests
             @Override
             public void onClick(View v) {
                 if (pageName.equals("pending")) {
-
                     Intent intent2 =new Intent(context, PendingRequestsDetailsActivity.class);
                     intent2.putExtra("Pending", gson.toJson(myListData) );
                     context.startActivity(intent2);
@@ -66,10 +65,28 @@ public class StaffRequestsListAdapter extends RecyclerView.Adapter<StaffRequests
                     Intent intent3 =new Intent(context, RejectedRequestsDetailsActivity.class);
                     intent3.putExtra("rejected", gson.toJson(myListData) );
                     context.startActivity(intent3);
-                }else{
-                    Intent intent4 =new Intent(context, PendingRequestsDetailsActivity.class);
-                    intent4.putExtra("Pending", gson.toJson(myListData) );
+                }else if (pageName.equals("delivered")){
+                    Intent intent4 =new Intent(context, DeliveredRequestsDetailsActivity.class);
+                    intent4.putExtra("delivered", gson.toJson(myListData) );
                     context.startActivity(intent4);
+                }else if (pageName.equals("search")){
+                    if (myListData.getStatus().equals("accepted")){
+                        Intent intent5 =new Intent(context, AcceptedRequestsDetailsActivity.class);
+                        intent5.putExtra("accepted", gson.toJson(myListData) );
+                        context.startActivity(intent5);
+                    }else if (myListData.getStatus().equals("rejected")){
+                        Intent intent5 =new Intent(context, RejectedRequestsDetailsActivity.class);
+                        intent5.putExtra("rejected", gson.toJson(myListData) );
+                        context.startActivity(intent5);
+                    }else if (myListData.getStatus().equals("pending")){
+                        Intent intent5 =new Intent(context, PendingRequestsDetailsActivity.class);
+                        intent5.putExtra("pending", gson.toJson(myListData) );
+                        context.startActivity(intent5);
+                    }else if (myListData.getStatus().equals("done")){
+                    Intent intent5 =new Intent(context, DeliveredRequestsDetailsActivity.class);
+                    intent5.putExtra("delivered", gson.toJson(myListData) );
+                    context.startActivity(intent5);
+                }
                 }
             }
         });
