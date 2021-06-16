@@ -42,15 +42,15 @@ class TutorialActivity : AppCompatActivity() {
             TutorialsListData(
                 "Notifications Screen"
             ),
-            TutorialsListData(
-                "FAQs and Support Screen"
-            ),
+//            TutorialsListData(
+//                "FAQs and Support Screen"
+//            ),
             TutorialsListData(
                 "My Requests Screen"
             ),
-            TutorialsListData(
-                "Test Yourself Screen"
-            ),
+//            TutorialsListData(
+//                "Test Yourself Screen"
+//            ),
         )
 
         recyclerView = findViewById(R.id.rvTutorials)
