@@ -52,14 +52,15 @@ class TutorialDetailsActivity : AppCompatActivity() {
         }else if (txt.equals("My Requests Screen")){
             tvTutorialDetails.text =
                 "- My request page, you can access it by more button in the BottomNavigationBar, you will see the requests status, request number, request description, Count, and requesting time."
-        }else if (txt.equals("Test Yourself Screen")){
-            tvTutorialDetails.text =
-                "- Test yourSelf page, you can access is by pressing the more button in BottomNavigationBar, in this page you will se your Courses which you registerd in the current semester and can you test yourself by presseing on the subject name, we are collected some Questions in true and false format to test you knowledge in the Course.\n\n" +
-                        "In this test, you can press the buttons true and false and show the right answer, it is not a quiz with result or an exam it just for you to make you better and you can back any time."
-        }else if (txt.equals("FAQs and Support Screen")){
-            tvTutorialDetails.text =
-            "- FAQs and Support page you can access it by pressing more button in BottomNavigationBar, you will see the pages divided into section like (Registration - About HTI) and you can press on any button you need and will auto navigate to the more FAQ pages and see the questions and answers.\n\n" +
-                    "- Support button, you can use it to send a Question to the HTI Support, In this case your email and ID and Your message will be sent to the HTI Support."
         }
+//        else if (txt.equals("Test Yourself Screen")){
+//            tvTutorialDetails.text =
+//                "- Test yourSelf page, you can access is by pressing the more button in BottomNavigationBar, in this page you will se your Courses which you registerd in the current semester and can you test yourself by presseing on the subject name, we are collected some Questions in true and false format to test you knowledge in the Course.\n\n" +
+//                        "In this test, you can press the buttons true and false and show the right answer, it is not a quiz with result or an exam it just for you to make you better and you can back any time."
+//        }else if (txt.equals("FAQs and Support Screen")){
+//            tvTutorialDetails.text =
+//            "- FAQs and Support page you can access it by pressing more button in BottomNavigationBar, you will see the pages divided into section like (Registration - About HTI) and you can press on any button you need and will auto navigate to the more FAQ pages and see the questions and answers.\n\n" +
+//                    "- Support button, you can use it to send a Question to the HTI Support, In this case your email and ID and Your message will be sent to the HTI Support."
+//        }
     }
 }

@@ -53,6 +53,8 @@ class LoginScreen : AppCompatActivity() {
         etPassword.setText(mySharedPreferences.getString("userpassword", ""))
         switch1.isChecked = mySharedPreferences.getBoolean("usercheck", false)
 
+
+
         lang.setOnClickListener {
             if(lang.text == "English") {
                 setLocate("en", it.context)
@@ -235,12 +237,12 @@ class LoginScreen : AppCompatActivity() {
                     } else if (account_type == "employee") {
                         startActivity(Intent(this@LoginScreen, StaffHomeActivity::class.java))
                         finish()
-                    } else if (account_type == "supervisor") {
-                        startActivity(Intent(this@LoginScreen, SupervisorHomeActivity::class.java))
-                        finish()
-                    } else {
-                        startActivity(Intent(this@LoginScreen, HomeActivity::class.java))
-                        finish()
+//                    } else if (account_type == "supervisor") {
+//                        startActivity(Intent(this@LoginScreen, SupervisorHomeActivity::class.java))
+//                        finish()
+//                    } else {
+//                        startActivity(Intent(this@LoginScreen, HomeActivity::class.java))
+//                        finish()
                     }
                 } else {
                     progressBarLogin.visibility = View.GONE
