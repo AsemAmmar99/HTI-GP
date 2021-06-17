@@ -2,11 +2,11 @@ package com.scorpion_a.studentapp.activities
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -17,11 +17,14 @@ import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 import kotlinx.android.synthetic.main.activity_student_profile.*
-import kotlinx.android.synthetic.main.fragment_home.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
+import okhttp3.logging.HttpLoggingInterceptor
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +35,7 @@ import java.io.File
 class StudentProfile : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     var mSwipeRefreshLayout: SwipeRefreshLayout? = null
+    var file: File?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
         Theme.checkTheme(this, delegate)
@@ -50,7 +54,6 @@ class StudentProfile : AppCompatActivity() {
             .build()
 
         val client = retrofit.create(Service::class.java)
-
 
         val call = client.getUserData()
 
@@ -161,22 +164,123 @@ class StudentProfile : AppCompatActivity() {
                 .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
                 .start()
         }
+
+        uploadimage.setOnClickListener {
+            val logging = HttpLoggingInterceptor()
+// set your desired log level
+// set your desired log level
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+
+            val httpClient = OkHttpClient.Builder()
+
+            httpClient.addInterceptor(logging) //
+
+//            val filePart = MultipartBody.Part.createFormData(
+//                "image",
+//                file!!.name,
+//                RequestBody.create(MediaType.parse("image/*"), file)
+//            )
+
+            var requestFile: RequestBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file)
+            var body: MultipartBody.Part =
+                MultipartBody.Part.createFormData("image",
+                    file?.name,
+                    requestFile)
+
+            var methods=RequestBody.create(MediaType.parse("multipart/form-data"), "PATCH")
+
+            
+            val retrofit1 = Retrofit.Builder()
+                .baseUrl(Service.BaseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+//                .client(OkHttpClient.Builder().addInterceptor { chain ->
+//                    val request = chain.request().newBuilder().addHeader("Authorization", ).build()
+//                    chain.proceed(request)
+//                }.build())
+                .client(httpClient.build())
+
+                .build()
+
+            val client1 = retrofit1.create(Service::class.java)
+
+
+            val call1 = client1.updateProfilePic("Bearer ${SharedPreferenceClass.loadString(this,"TOKEN")}"
+                ,body,methods
+            )
+
+
+            call1.clone().enqueue(object : Callback<UserDataResponce> {
+                override fun onResponse(
+                    call: Call<UserDataResponce>,
+                    response: Response<UserDataResponce>
+                ) {
+
+                    if (response.isSuccessful()){
+//                    tvDepartment.text="Department: " + response.body().data?.department
+
+                    }else{
+
+                        Toast.makeText(baseContext, getString(R.string.went_wrong), Toast.LENGTH_SHORT).show()
+                        try {
+                            val jObjError = JSONObject(response.errorBody()!!.string())
+//                    Toast.makeText(this@CheckoutActivity, jObjError.toString(), Toast.LENGTH_LONG).show()
+                            Log.i("erroooooooooooooor", jObjError.toString())
+                        } catch (e: Exception) {
+//                    Toast.makeText(this@CheckoutActivity, e.message, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    // Catching Responses From Retrofit
+
+                    Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
+                    Log.d("TAG", "onResponsebody: " + response.body());
+                    Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
+                    Log.d("TAG", "onResponsemessage: " + response.message());
+                    Log.d("TAG", "onResponsecode: " + response.code());
+                    Log.d("TAG", "onResponseheaders: " + response.headers());
+                    Log.d("TAG", "onResponseraw: " + response.raw());
+                    Log.d("TAG", "onResponsetoString: " + response.toString());
+                    try {
+                        val jObjError = JSONObject(response.errorBody()!!.string())
+//                    Toast.makeText(this@CheckoutActivity, jObjError.toString(), Toast.LENGTH_LONG).show()
+                        Log.i("erroooooooooooooor", jObjError.toString())
+                    } catch (e: Exception) {
+//                    Toast.makeText(this@CheckoutActivity, e.message, Toast.LENGTH_LONG).show()
+                    }
+
+                }
+
+                override fun onFailure(call: Call<UserDataResponce>?, t: Throwable?) {
+                    Log.i("test", t.toString())
+                }
+            })
+
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK && data?.getData()!=null) {
             //Image Uri will not be null for RESULT_OK
             val fileUri = data?.data
             ivProfilePict.setImageURI(fileUri)
 
             //You can get File object from intent
-            val file: File = ImagePicker.getFile(data)!!
+            file = ImagePicker.getFile(data)!!
+
 
             //You can also get File Path from intent
             val filePath:String = ImagePicker.getFilePath(data)!!
+
+
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+        }else  if (resultCode !== Activity.RESULT_CANCELED) {
+//            if (requestCode === CAMERA_REQUEST) {
+//                val photo: Bitmap? = data!!.extras!!["data"] as Bitmap?
+//                imageView.setImageBitmap(photo)
+//
+//        }
         } else {
             Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
         }

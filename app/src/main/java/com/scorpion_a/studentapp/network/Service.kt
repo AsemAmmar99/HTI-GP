@@ -74,4 +74,9 @@ interface Service {
  @Headers("Accept: application/json", "Content-Type: application/json")
  fun doneReq(@Path("id") id:String,@Body _method: String): Call<ActionsResponce>
 
+ @Multipart
+ @PATCH("user")
+ @Headers("Accept: application/json", "Content-Type: application/json")
+ fun updateProfilePic(@Header("Authorization") Authorization:String, @Part image: MultipartBody.Part, @Part("_method") _method: RequestBody): Call<UserDataResponce>
+
 }
