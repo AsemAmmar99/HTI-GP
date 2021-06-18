@@ -24,11 +24,14 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.model.requests.RequestRequests
 import com.scorpion_a.studentapp.model.responses.SubmitRequestResponse
+import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import kotlinx.android.synthetic.main.activity_confirm_request.*
+import kotlinx.android.synthetic.main.activity_confirm_request.tvDepartment
 import kotlinx.android.synthetic.main.activity_profile_page.header
+import kotlinx.android.synthetic.main.fragment_home.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -117,6 +120,51 @@ class ConfirmRequestActivity : BaseActivity() {
         val rCount_ = RequestBody.create(MediaType.parse("multipart/form-data"), rCount.toString())
         val call = client.submitRequest(request_type_id, rCount_,
             imagesArray!!)
+
+        val callStudent = client.getUserData()
+        progressBarConfirm.visibility = View.VISIBLE
+        clConfirmRequest.visibility = View.INVISIBLE
+        callStudent.clone().enqueue(object : Callback<UserDataResponce> {
+            override fun onResponse(
+                call: Call<UserDataResponce>,
+                response: Response<UserDataResponce>
+            ) {
+
+                if (response.isSuccessful()) {
+                    if (tvDepartment != null) {
+                        tvNameInEnglishValue.text = response.body().data?.name?.en
+                        tvNameInArabicValue.text = response.body().data?.name?.ar
+                        tvDepartmentValue.text = response.body().data?.department
+                        tvStatusValue.text = response.body().data?.account_type
+                        tvIdValue.text = response.body().data?.user_id
+
+                            progressBarConfirm.visibility = View.GONE
+                            clConfirmRequest.visibility = View.VISIBLE
+                    }
+                } else {
+                    progressBarConfirm.visibility = View.GONE
+                    clConfirmRequest.visibility = View.VISIBLE
+                    Toast.makeText(this@ConfirmRequestActivity, getString(R.string.went_wrong), Toast.LENGTH_SHORT)
+                        .show()
+                }
+                // Catching Responses From Retrofit
+
+                Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
+                Log.d("TAG", "onResponsebody: " + response.body());
+                Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
+                Log.d("TAG", "onResponsemessage: " + response.message());
+                Log.d("TAG", "onResponsecode: " + response.code());
+                Log.d("TAG", "onResponseheaders: " + response.headers());
+                Log.d("TAG", "onResponseraw: " + response.raw());
+                Log.d("TAG", "onResponsetoString: " + response.toString());
+
+            }
+
+
+            override fun onFailure(call: Call<UserDataResponce>?, t: Throwable?) {
+                Log.i("test", t.toString())
+            }
+        })
 
 
         buConfirm.setOnClickListener {

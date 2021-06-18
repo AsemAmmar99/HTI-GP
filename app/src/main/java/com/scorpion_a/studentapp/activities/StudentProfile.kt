@@ -184,13 +184,13 @@ class StudentProfile : BaseActivity() {
 //            )
 
             var requestFile: RequestBody =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file)
+                RequestBody.create(MediaType.parse("application/json"), file)
             var body: MultipartBody.Part =
                 MultipartBody.Part.createFormData("image",
                     file?.name,
                     requestFile)
 
-            var methods=RequestBody.create(MediaType.parse("multipart/form-data"), "PATCH")
+            var methods=RequestBody.create(MediaType.parse("application/json"), "PATCH")
 
             
             val retrofit1 = Retrofit.Builder()

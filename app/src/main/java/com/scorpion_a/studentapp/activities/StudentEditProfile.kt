@@ -18,6 +18,7 @@ import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
+import kotlinx.android.synthetic.main.activity_confirm_request.*
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.android.synthetic.main.activity_login_screen.*
 import kotlinx.android.synthetic.main.activity_profile_page.*
@@ -61,6 +62,47 @@ class StudentEditProfile : BaseActivity() {
             .build()
 
         val service = retrofit.create(Service::class.java)
+
+        val callStudent = service.getUserData()
+        progressBarEditProfile.visibility = View.VISIBLE
+        clEditProfilePage.visibility = View.INVISIBLE
+        callStudent.clone().enqueue(object : Callback<UserDataResponce> {
+            override fun onResponse(
+                call: Call<UserDataResponce>,
+                response: Response<UserDataResponce>
+            ) {
+
+                if (response.isSuccessful()) {
+                    if (response.body().data?.account_type == "student") {
+                        tvSEmail.visibility = View.INVISIBLE
+                        etSEmail.visibility = View.INVISIBLE
+                    }
+                    progressBarEditProfile.visibility = View.GONE
+                    clEditProfilePage.visibility = View.VISIBLE
+                } else {
+                    progressBarEditProfile.visibility = View.GONE
+                    clEditProfilePage.visibility = View.VISIBLE
+                    Toast.makeText(this@StudentEditProfile, getString(R.string.went_wrong), Toast.LENGTH_SHORT)
+                        .show()
+                }
+                // Catching Responses From Retrofit
+
+                Log.d("TAG", "onResponseisSuccessful: " + response.isSuccessful());
+                Log.d("TAG", "onResponsebody: " + response.body());
+                Log.d("TAG", "onResponseerrorBody: " + response.errorBody());
+                Log.d("TAG", "onResponsemessage: " + response.message());
+                Log.d("TAG", "onResponsecode: " + response.code());
+                Log.d("TAG", "onResponseheaders: " + response.headers());
+                Log.d("TAG", "onResponseraw: " + response.raw());
+                Log.d("TAG", "onResponsetoString: " + response.toString());
+
+            }
+
+
+            override fun onFailure(call: Call<UserDataResponce>?, t: Throwable?) {
+                Log.i("test", t.toString())
+            }
+        })
 
         buSave.setOnClickListener {
             if (etSArabName.text.trim().toString().isEmpty()) {
