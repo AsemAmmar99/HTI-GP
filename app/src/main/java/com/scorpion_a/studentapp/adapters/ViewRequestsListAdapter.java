@@ -33,7 +33,8 @@ public class ViewRequestsListAdapter extends RecyclerView.Adapter<ViewRequestsLi
         final ViewRequestsListData viewRequestsListData = requestsdata.get(position);
         holder.tvRequestNumber.setText(viewRequestsListData.getId());
         holder.tvRequestDescription.setText(viewRequestsListData.getName());
-        holder.tvRequestStatus.setText(viewRequestsListData.getPrice());
+        holder.tvRequestStatus.setText(viewRequestsListData.getStatus());
+        holder.tvRequestTime.setText(viewRequestsListData.getCreated_at());
 //        holder.tvRequestCount.setText(requestsdata[position].getRequestsCount());
 //        holder.tvRequestTime.setText(requestsdata[position].getRequestsTime());
     }

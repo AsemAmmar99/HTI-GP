@@ -82,7 +82,9 @@ public class RequestInfoFragment extends BottomSheetDialogFragment {
         String price= getArguments().getString("price");
         if(Objects.equals(getArguments().getString("limit"), null)) {
 
-            limit = "1";
+            limit = "10000000";
+            TextView tvMaxLimitValue=contentView.findViewById(R.id.tvRequestMaxLimitValue);
+            tvMaxLimitValue.setText(R.string.nml);
         }   else {
             limit=getArguments().getString("limit");
         }
