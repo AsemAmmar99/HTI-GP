@@ -25,6 +25,7 @@ import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.model.requests.RequestRequests
 import com.scorpion_a.studentapp.model.responses.SubmitRequestResponse
 import com.scorpion_a.studentapp.network.Service
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import kotlinx.android.synthetic.main.activity_confirm_request.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
@@ -42,7 +43,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import kotlin.properties.Delegates
 
-class ConfirmRequestActivity : AppCompatActivity() {
+class ConfirmRequestActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     var rCount:Int = 0
     var image1 by Delegates.notNull<Boolean>()
@@ -54,6 +55,8 @@ class ConfirmRequestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_request)
+
+        Connection.isNetworkAvailable(this)
 
         sharedPreferences =
             this.getSharedPreferences("images", MODE_PRIVATE)

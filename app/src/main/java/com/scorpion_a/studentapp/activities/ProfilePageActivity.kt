@@ -5,15 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.utils.Connection
 import kotlinx.android.synthetic.main.activity_profile_page.*
 
-class ProfilePageActivity : AppCompatActivity() {
+class ProfilePageActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_page)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title="Profile Page"
+        Connection.isNetworkAvailable(this)
 
         tvEdit.setOnClickListener {
             val intent = Intent(this, EditProfileActivity::class.java)

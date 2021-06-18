@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.TutorialsListAdapter
 import com.scorpion_a.studentapp.model.TutorialsListData
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_profile_page.*
 
-class TutorialActivity : AppCompatActivity() {
+class TutorialActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     lateinit var  recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +23,7 @@ class TutorialActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tutorial)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title= getString(R.string.tutorials)
+        Connection.isNetworkAvailable(this)
 
         val tutorialsListData: Array<TutorialsListData> = arrayOf<TutorialsListData>(
             TutorialsListData(

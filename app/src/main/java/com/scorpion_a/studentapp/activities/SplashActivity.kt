@@ -13,10 +13,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
-import com.scorpion_a.studentapp.utils.Lang
-import com.scorpion_a.studentapp.utils.MyPreferences
-import com.scorpion_a.studentapp.utils.SharedPreferenceClass
-import com.scorpion_a.studentapp.utils.Theme
+import com.scorpion_a.studentapp.utils.*
 import kotlinx.android.synthetic.main.activity_student_profile.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -25,7 +22,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
         Theme.checkTheme(this, delegate)
@@ -35,6 +32,7 @@ class SplashActivity : AppCompatActivity() {
         //making this activity full screen
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_splash)
+        Connection.isNetworkAvailable(this)
 
         //4second splash time
         Handler().postDelayed({

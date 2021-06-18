@@ -11,6 +11,7 @@ import com.google.gson.Gson
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.ImagesAdapter
 import com.scorpion_a.studentapp.model.ViewRequestsListData
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_accepted_requests_details.*
@@ -31,7 +32,7 @@ import kotlinx.android.synthetic.main.activity_rejected_requests_details.tvReque
 import kotlinx.android.synthetic.main.activity_rejected_requests_details.tvStudentStatusValue
 import kotlinx.android.synthetic.main.activity_rejected_requests_details.tvTotalPriceValue
 
-class RejectedRequestsDetailsActivity : AppCompatActivity() {
+class RejectedRequestsDetailsActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     lateinit var receiptImage: ImageView
     lateinit var Rejected: ViewRequestsListData
@@ -44,6 +45,7 @@ class RejectedRequestsDetailsActivity : AppCompatActivity() {
         toolbar = header.findViewById(R.id.toolbar)
         toolbar.title = getString(R.string.rrd)
         val gson = Gson()
+        Connection.isNetworkAvailable(this)
 
         Rejected= gson.fromJson(intent.extras?.getString("rejected"), ViewRequestsListData::class.java)
 

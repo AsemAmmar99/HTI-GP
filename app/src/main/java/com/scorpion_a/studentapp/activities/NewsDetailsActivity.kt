@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.model.responses.ArticleDetailsResponse
 import com.scorpion_a.studentapp.network.Service
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
@@ -20,13 +21,15 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class NewsDetailsActivity : AppCompatActivity() {
+class NewsDetailsActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
         Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_details)
         var id= intent.getStringExtra("id")
+        Connection.isNetworkAvailable(this)
+
 
         val retrofit = Retrofit.Builder()
             .baseUrl(Service.BaseUrl)

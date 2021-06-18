@@ -4,12 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_profile_page.header
 import kotlinx.android.synthetic.main.activity_test_questions.*
 
-class TestQuestionsActivity : AppCompatActivity() {
+class TestQuestionsActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
@@ -18,6 +19,7 @@ class TestQuestionsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_test_questions)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title=getIntent().getStringExtra("pagetitle")
+        Connection.isNetworkAvailable(this)
 
         buTrue.setOnClickListener {
             finish()

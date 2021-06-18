@@ -7,9 +7,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.utils.Connection
 import kotlinx.android.synthetic.main.activity_request_data.*
 
-class RequestDataActivity : AppCompatActivity() {
+class RequestDataActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_request_data)
@@ -17,6 +18,8 @@ class RequestDataActivity : AppCompatActivity() {
             val intent = Intent(this, EditProfileActivity::class.java)
             startActivity(intent)
         }
+        Connection.isNetworkAvailable(this)
+
         buSendRequest.setOnClickListener {
             onRequestSent(this)
         }

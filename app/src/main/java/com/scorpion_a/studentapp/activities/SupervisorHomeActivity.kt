@@ -13,6 +13,7 @@ import com.scorpion_a.studentapp.adapters.SupervisorCardAdapter
 import com.scorpion_a.studentapp.model.SupervisorCardData
 import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
@@ -28,13 +29,14 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class SupervisorHomeActivity : AppCompatActivity() {
+class SupervisorHomeActivity : BaseActivity() {
     lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
         Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_supervisor_home)
+        Connection.isNetworkAvailable(this)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(Service.BaseUrl)

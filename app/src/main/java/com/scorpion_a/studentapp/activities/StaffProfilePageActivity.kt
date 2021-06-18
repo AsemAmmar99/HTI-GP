@@ -13,6 +13,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
@@ -30,7 +31,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 
-class StaffProfilePageActivity : AppCompatActivity() {
+class StaffProfilePageActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +41,7 @@ class StaffProfilePageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_staff_profile_page)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title= getString(R.string.profile_page)
+        Connection.isNetworkAvailable(this)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(Service.BaseUrl)

@@ -11,13 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_about_hti.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 
 
-class AboutHTIActivity : AppCompatActivity() {
+class AboutHTIActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     val MY_PERMISSIONS_REQUEST_CALL_PHONE=1
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,8 @@ class AboutHTIActivity : AppCompatActivity() {
         Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_hti)
+
+        Connection.isNetworkAvailable(this)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title= getString(R.string.about_hti)
 

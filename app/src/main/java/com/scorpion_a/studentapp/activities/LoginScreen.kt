@@ -25,11 +25,8 @@ import com.scorpion_a.studentapp.model.responses.LoginResponse
 import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.network.Service.Companion.BaseUrl
-import com.scorpion_a.studentapp.utils.Lang
+import com.scorpion_a.studentapp.utils.*
 import com.scorpion_a.studentapp.utils.Lang.Companion.setLocate
-import com.scorpion_a.studentapp.utils.MyPreferences
-import com.scorpion_a.studentapp.utils.SharedPreferenceClass
-import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_login_screen.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -39,7 +36,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class LoginScreen : AppCompatActivity() {
+class LoginScreen : BaseActivity() {
     var tabLayout: TabLayout? = null
     var MY_PREFS = "SharedPreferences"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +44,8 @@ class LoginScreen : AppCompatActivity() {
         Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
+        Connection.isNetworkAvailable(this)
+
 
         val mySharedPreferences: SharedPreferences = getSharedPreferences(MY_PREFS, 0)
         etID.setText(mySharedPreferences.getString("userid", ""))

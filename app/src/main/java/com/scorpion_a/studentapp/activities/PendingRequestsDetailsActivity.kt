@@ -28,6 +28,7 @@ import com.scorpion_a.studentapp.model.requests.LoginRequests
 import com.scorpion_a.studentapp.model.responses.ActionsResponce
 import com.scorpion_a.studentapp.model.responses.LoginResponse
 import com.scorpion_a.studentapp.network.Service
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
@@ -58,7 +59,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class PendingRequestsDetailsActivity : AppCompatActivity() {
+class PendingRequestsDetailsActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     lateinit var receiptImage: ImageView
     lateinit var pending: ViewRequestsListData
@@ -71,6 +72,7 @@ class PendingRequestsDetailsActivity : AppCompatActivity() {
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title=getString(R.string.prd)
         val gson = Gson()
+        Connection.isNetworkAvailable(this)
 
         pending= gson.fromJson(intent.extras?.getString("pending"), ViewRequestsListData::class.java)
 

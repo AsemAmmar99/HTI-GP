@@ -7,16 +7,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.utils.Connection
 import kotlinx.android.synthetic.main.activity_app_tech_support.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 
-class AppTechSupportActivity : AppCompatActivity() {
+class BaseActivityAppTechSupportActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_app_tech_support)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title="Application Technical Support"
+        Connection.isNetworkAvailable(this)
+
 
         buSend.setOnClickListener {
             onSend(it.context)

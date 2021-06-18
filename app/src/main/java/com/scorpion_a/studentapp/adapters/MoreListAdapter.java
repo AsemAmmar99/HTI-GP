@@ -12,7 +12,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.scorpion_a.studentapp.activities.AboutHTIActivity;
-import com.scorpion_a.studentapp.activities.AppTechSupportActivity;
 import com.scorpion_a.studentapp.activities.FAQSActivity;
 import com.scorpion_a.studentapp.activities.LoginScreen;
 import com.scorpion_a.studentapp.activities.MyRequestsActivity;

@@ -24,6 +24,7 @@ import com.scorpion_a.studentapp.adapters.RequestsPageerAdapter
 import com.scorpion_a.studentapp.model.ViewRequestsListData
 import com.scorpion_a.studentapp.model.responses.ActionsResponce
 import com.scorpion_a.studentapp.network.Service
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Lang.Companion.getLang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
@@ -38,7 +39,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class AcceptedRequestsDetailsActivity : AppCompatActivity() {
+class AcceptedRequestsDetailsActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     lateinit var receiptImage: ImageView
     lateinit var Accepted: ViewRequestsListData
@@ -48,6 +49,8 @@ class AcceptedRequestsDetailsActivity : AppCompatActivity() {
         Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_accepted_requests_details)
+        Connection.isNetworkAvailable(this)
+
         val gson = Gson()
 
         toolbar = header.findViewById(R.id.toolbar)

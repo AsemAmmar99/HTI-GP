@@ -15,6 +15,7 @@ import com.scorpion_a.studentapp.model.StaffRequestsListData
 import com.scorpion_a.studentapp.model.ViewRequestsListData
 import com.scorpion_a.studentapp.model.responses.MyRequestsResponse
 import com.scorpion_a.studentapp.network.Service
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
@@ -27,7 +28,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class AcceptedRequestsActivity : AppCompatActivity() {
+class AcceptedRequestsActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     lateinit var staffRequestsListData: ArrayList<ViewRequestsListData>
     lateinit var adapterAccepted: StaffRequestsListAdapter
@@ -38,6 +39,8 @@ class AcceptedRequestsActivity : AppCompatActivity() {
         Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_accepted_requests)
+        Connection.isNetworkAvailable(this)
+
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title= getString(R.string.accepted_requests)
 

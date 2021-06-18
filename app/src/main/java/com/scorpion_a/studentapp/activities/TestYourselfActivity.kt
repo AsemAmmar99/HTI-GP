@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.TestsListAdapter
 import com.scorpion_a.studentapp.model.TestsListData
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_profile_page.*
 
-class TestYourselfActivity : AppCompatActivity() {
+class TestYourselfActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     lateinit var  recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +23,7 @@ class TestYourselfActivity : AppCompatActivity() {
         setContentView(R.layout.activity_test_your_self)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title= getString(R.string.test_yourself)
+        Connection.isNetworkAvailable(this)
 
         val testsListData: Array<TestsListData> = arrayOf<TestsListData>(
             TestsListData(

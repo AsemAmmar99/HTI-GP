@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.RegCardAdapter
 import com.scorpion_a.studentapp.model.RegCardData
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_profile_page.*
 
-class PrintoutActivity : AppCompatActivity() {
+class PrintoutActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +23,7 @@ class PrintoutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_printout)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title= getString(R.string.printout)
+        Connection.isNetworkAvailable(this)
 
 //        val regCardTitles: Array<RegCardData> = arrayOf<RegCardData>(
 //            RegCardData(

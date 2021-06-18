@@ -9,12 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.FAQsListAdapter
 import com.scorpion_a.studentapp.model.FAQsListData
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_faqs.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 
-class FAQSActivity : AppCompatActivity() {
+class FAQSActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     lateinit var  recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +25,8 @@ class FAQSActivity : AppCompatActivity() {
         setContentView(R.layout.activity_faqs)
         toolbar=header.findViewById(R.id.toolbar)
             toolbar.title=getString(R.string.faqss)
+        Connection.isNetworkAvailable(this)
+
 
         tvSupport.setOnClickListener {
             val intent = Intent(this, SupportActivity::class.java)

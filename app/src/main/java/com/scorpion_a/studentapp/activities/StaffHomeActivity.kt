@@ -6,16 +6,19 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.fragments.*
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Theme
 
-class StaffHomeActivity : AppCompatActivity() {
+class StaffHomeActivity : BaseActivity() {
     lateinit var  bottomNavigation: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
         Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_staff_home)
+        Connection.isNetworkAvailable(this)
+
         bottomNavigation = findViewById(R.id.navigationView)
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         val staffHomeFragment = StaffHomeFragment.newInstance()

@@ -4,13 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 import kotlinx.android.synthetic.main.activity_tutorial_details.*
 
-class TutorialDetailsActivity : AppCompatActivity() {
+class TutorialDetailsActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
@@ -20,6 +21,7 @@ class TutorialDetailsActivity : AppCompatActivity() {
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title= intent.getStringExtra("pagetitle")
         var txt= intent.getStringExtra("pagetitle")
+        Connection.isNetworkAvailable(this)
 
         if (txt.equals("Login Screen")) {
             tvTutorialDetails.text =

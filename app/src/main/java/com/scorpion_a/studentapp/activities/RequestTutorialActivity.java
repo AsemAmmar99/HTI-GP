@@ -12,13 +12,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.scorpion_a.studentapp.R;
 import com.scorpion_a.studentapp.adapters.RequestsPageerAdapter;
+import com.scorpion_a.studentapp.utils.Connection;
 import com.scorpion_a.studentapp.utils.Lang;
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass;
 import com.scorpion_a.studentapp.utils.Theme;
 
 import java.util.ArrayList;
 
-public class RequestTutorialActivity extends AppCompatActivity {
+public class RequestTutorialActivity extends BaseActivity {
 
     ViewPager viewPager;
     ArrayList<Integer> imageList;
@@ -44,6 +45,7 @@ public class RequestTutorialActivity extends AppCompatActivity {
         imageList = new ArrayList<>();
         pointsList = new ArrayList<>();
         pointsValueList = new ArrayList<>();
+        Connection.isNetworkAvailable(this);
 
         imageList.add(R.drawable.first);
         imageList.add(R.drawable.second);

@@ -18,6 +18,7 @@ import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.model.requests.ReqjectRequest
 import com.scorpion_a.studentapp.model.responses.ActionsResponce
 import com.scorpion_a.studentapp.network.Service
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
@@ -33,7 +34,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RejectReasonActivity : AppCompatActivity() {
+class RejectReasonActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +45,7 @@ class RejectReasonActivity : AppCompatActivity() {
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title=getString(R.string.rr)
        var reqId= intent.extras?.getString("id")
+        Connection.isNetworkAvailable(this)
 
         val gsonl = GsonBuilder()
             .setLenient()

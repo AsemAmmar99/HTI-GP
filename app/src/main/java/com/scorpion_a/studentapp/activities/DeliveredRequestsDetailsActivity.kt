@@ -11,6 +11,7 @@ import com.google.gson.Gson
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.ImagesAdapter
 import com.scorpion_a.studentapp.model.ViewRequestsListData
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_accepted_requests_details.*
@@ -31,7 +32,7 @@ import kotlinx.android.synthetic.main.activity_delivered_requests_details.tvTota
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 
-class DeliveredRequestsDetailsActivity : AppCompatActivity() {
+class DeliveredRequestsDetailsActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     lateinit var receiptImage: ImageView
     lateinit var delivered: ViewRequestsListData
@@ -41,6 +42,8 @@ class DeliveredRequestsDetailsActivity : AppCompatActivity() {
         Theme.checkTheme(this, delegate)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delivered_requests_details)
+        Connection.isNetworkAvailable(this)
+
         val gson = Gson()
 
         toolbar = header.findViewById(R.id.toolbar)

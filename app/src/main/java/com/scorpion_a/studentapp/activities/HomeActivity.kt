@@ -10,12 +10,13 @@ import com.scorpion_a.studentapp.fragments.HomeFragment
 import com.scorpion_a.studentapp.fragments.MoreFragment
 import com.scorpion_a.studentapp.fragments.NotificationsFragment
 import com.scorpion_a.studentapp.fragments.RequestsPageFragment
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.MyPreferences
 import com.scorpion_a.studentapp.utils.Theme
 
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
      lateinit var  bottomNavigation: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +27,8 @@ class HomeActivity : AppCompatActivity() {
 
         bottomNavigation = findViewById(R.id.navigationView)
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        Connection.isNetworkAvailable(this)
+
 
         var nav= intent.getIntExtra("menu", 0)
         if(nav==1){

@@ -12,12 +12,13 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import androidx.appcompat.widget.Toolbar
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_app_tech_support.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 
-class SupportActivity : AppCompatActivity() {
+class SupportActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
@@ -26,6 +27,7 @@ class SupportActivity : AppCompatActivity() {
         setContentView(R.layout.activity_support)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title=getString(R.string.htisupport)
+        Connection.isNetworkAvailable(this)
 
         buSend.setOnClickListener {
             onSend(it.context)

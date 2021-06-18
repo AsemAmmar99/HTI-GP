@@ -10,11 +10,12 @@ import com.scorpion_a.studentapp.adapters.PropCardAdapter
 import com.scorpion_a.studentapp.adapters.ResultsCardAdapter
 import com.scorpion_a.studentapp.model.PropCardData
 import com.scorpion_a.studentapp.model.ResultsCardData
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_profile_page.*
 
-class ResultsActivity : AppCompatActivity() {
+class ResultsActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +25,7 @@ class ResultsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_results)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title= getString(R.string.my_results)
+        Connection.isNetworkAvailable(this)
 
         val ResultsCardItems: Array<ResultsCardData> = arrayOf<ResultsCardData>(
             ResultsCardData(

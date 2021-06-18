@@ -20,6 +20,7 @@ import com.scorpion_a.studentapp.model.NewsListData
 import com.scorpion_a.studentapp.model.responses.ArticlesResponse
 import com.scorpion_a.studentapp.model.responses.RequestsResponse
 import com.scorpion_a.studentapp.network.Service
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
@@ -34,7 +35,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class EventsListActivity : AppCompatActivity() {
+class EventsListActivity : BaseActivity() {
 //    lateinit var  recyclerView: RecyclerView
     lateinit var toolbar: Toolbar
     lateinit var recyclerViewEvents: RecyclerView
@@ -46,6 +47,8 @@ class EventsListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_events_list)
         toolbar=header.findViewById(R.id.toolbar)
             toolbar.title=getString(R.string.events_page)
+        Connection.isNetworkAvailable(this)
+
 
 //            val eventsListData: Array<NewsListData> = arrayOf<NewsListData>(
 //            NewsListData(

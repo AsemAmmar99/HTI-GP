@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import com.scorpion_a.studentapp.R
+import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.MyPreferences
 import com.scorpion_a.studentapp.utils.Theme
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.activity_settings.tvSwitchMode
 import kotlinx.android.synthetic.main.activity_staff_settings.*
 
-class StaffSettingsActivity : AppCompatActivity() {
+class StaffSettingsActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     lateinit var mBtn : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +32,7 @@ class StaffSettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_staff_settings)
         toolbar=header.findViewById(R.id.toolbar)
         toolbar.title= getString(R.string.settings)
+        Connection.isNetworkAvailable(this)
 
         tvSwitchSMode.setOnClickListener {
 //            when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
