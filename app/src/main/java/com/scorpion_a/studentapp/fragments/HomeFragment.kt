@@ -37,6 +37,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
     lateinit var buLogout:Button
@@ -240,7 +242,9 @@ class HomeFragment : Fragment() {
 //                            eventsListData=   arrayOf<ArticlesListData>(
 //                                ArticlesListData(it.id,it.title, it.date, it.images,it.type))
                             recyclerViewEvents = view.findViewById(R.id.rvEvents)
-                            val adapterEvents = EventsListAdapter(eventsListData, context)
+                            Collections.reverse(eventsListData)
+                            val adapterEvents = EventsListAdapter(eventsListData
+                            , context)
                             recyclerViewEvents.setHasFixedSize(true)
                             recyclerViewEvents.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.HORIZONTAL,false)
                             recyclerViewEvents.adapter = adapterEvents
@@ -252,6 +256,8 @@ class HomeFragment : Fragment() {
 //                                ArticlesListData(it.id,it.title,it.date, it.images,it.type)
 //                            )
                             recyclerViewNews = view.findViewById(R.id.rvNewsList)
+                            Collections.reverse(newsListData)
+
                             val adapterNews = NewsListAdapter(newsListData, context)
                             recyclerViewNews.setHasFixedSize(true)
                             recyclerViewNews.layoutManager = LinearLayoutManager(view.context)

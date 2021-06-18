@@ -27,6 +27,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
+import kotlin.collections.ArrayList
 
 class RejectedRequestsActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
@@ -77,16 +79,18 @@ class RejectedRequestsActivity : BaseActivity() {
                                 clStR.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(
 //                                ArticlesListData(it.id,it.title, it.date, it.images,it.type))
-                                rvStaffRequestR = findViewById(R.id.rvStaffRequestR)
-                                adapterRejected = StaffRequestsListAdapter(stfrequestsListData,
-                                    this@RejectedRequestsActivity,
-                                    "rejected")
-                                rvStaffRequestR.setHasFixedSize(true)
-                                rvStaffRequestR.layoutManager =
-                                    LinearLayoutManager(this@RejectedRequestsActivity)
-                                rvStaffRequestR.adapter = adapterRejected
+
                             }
                         }
+                        rvStaffRequestR = findViewById(R.id.rvStaffRequestR)
+                        Collections.sort(stfrequestsListData, DescendingComparator())
+                        adapterRejected = StaffRequestsListAdapter(stfrequestsListData,
+                            this@RejectedRequestsActivity,
+                            "rejected")
+                        rvStaffRequestR.setHasFixedSize(true)
+                        rvStaffRequestR.layoutManager =
+                            LinearLayoutManager(this@RejectedRequestsActivity)
+                        rvStaffRequestR.adapter = adapterRejected
                     }else{
                         mSwipeRefreshLayout!!.isRefreshing = false
                         progressBarStR.visibility = GONE
@@ -133,16 +137,19 @@ class RejectedRequestsActivity : BaseActivity() {
                             clStR.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(
 //                                ArticlesListData(it.id,it.title, it.date, it.images,it.type))
-                            rvStaffRequestR = findViewById(R.id.rvStaffRequestR)
-                            adapterRejected = StaffRequestsListAdapter(stfrequestsListData,
-                                this@RejectedRequestsActivity,
-                                "rejected")
-                            rvStaffRequestR.setHasFixedSize(true)
-                            rvStaffRequestR.layoutManager =
-                                LinearLayoutManager(this@RejectedRequestsActivity)
-                            rvStaffRequestR.adapter = adapterRejected
+
                         }
                     }
+                    rvStaffRequestR = findViewById(R.id.rvStaffRequestR)
+                    Collections.sort(stfrequestsListData, DescendingComparator())
+
+                    adapterRejected = StaffRequestsListAdapter(stfrequestsListData,
+                        this@RejectedRequestsActivity,
+                        "rejected")
+                    rvStaffRequestR.setHasFixedSize(true)
+                    rvStaffRequestR.layoutManager =
+                        LinearLayoutManager(this@RejectedRequestsActivity)
+                    rvStaffRequestR.adapter = adapterRejected
                 }else{
                     progressBarStR.visibility = GONE
                     clStR.visibility = VISIBLE

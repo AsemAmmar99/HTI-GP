@@ -1,20 +1,15 @@
 package com.scorpion_a.studentapp.activities
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View.*
-import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.StaffRequestsListAdapter
-import com.scorpion_a.studentapp.model.StaffRequestsListData
 import com.scorpion_a.studentapp.model.ViewRequestsListData
 import com.scorpion_a.studentapp.model.responses.MyRequestsResponse
 import com.scorpion_a.studentapp.network.Service
@@ -24,13 +19,14 @@ import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_delivered_requests.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
-import kotlinx.android.synthetic.main.staff_request_item.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DeliveredRequestsActivity : BaseActivity() {
@@ -57,6 +53,7 @@ class DeliveredRequestsActivity : BaseActivity() {
             }.build())
             .build()
 
+
         val client = retrofit.create(Service::class.java)
 
         val call = client.getRequestsData()
@@ -82,16 +79,19 @@ class DeliveredRequestsActivity : BaseActivity() {
                                 clStD.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(
 //                                ArticlesListData(it.id,it.title, it.date, it.images,it.type))
-                                rvStaffRequestD = findViewById(R.id.rvStaffRequestD)
-                                adapterDelivered = StaffRequestsListAdapter(stfrequestsListData,
-                                    this@DeliveredRequestsActivity,
-                                    "delivered")
-                                rvStaffRequestD.setHasFixedSize(true)
-                                rvStaffRequestD.layoutManager =
-                                    LinearLayoutManager(this@DeliveredRequestsActivity)
-                                rvStaffRequestD.adapter = adapterDelivered
+
                             }
                         }
+                        rvStaffRequestD = findViewById(R.id.rvStaffRequestD)
+                        Collections.sort(stfrequestsListData, DescendingComparator())
+                        adapterDelivered.notifyDataSetChanged();
+                        adapterDelivered = StaffRequestsListAdapter(stfrequestsListData,
+                            this@DeliveredRequestsActivity,
+                            "delivered")
+                        rvStaffRequestD.setHasFixedSize(true)
+                        rvStaffRequestD.layoutManager =
+                            LinearLayoutManager(this@DeliveredRequestsActivity)
+                        rvStaffRequestD.adapter = adapterDelivered
                     }else{
                         mSwipeRefreshLayout!!.isRefreshing = false
                         progressBarStD.visibility = GONE
@@ -138,16 +138,19 @@ class DeliveredRequestsActivity : BaseActivity() {
                             clStD.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(
 //                                ArticlesListData(it.id,it.title, it.date, it.images,it.type))
-                            rvStaffRequestD = findViewById(R.id.rvStaffRequestD)
-                            adapterDelivered = StaffRequestsListAdapter(stfrequestsListData,
-                                this@DeliveredRequestsActivity,
-                                "delivered")
-                            rvStaffRequestD.setHasFixedSize(true)
-                            rvStaffRequestD.layoutManager =
-                                LinearLayoutManager(this@DeliveredRequestsActivity)
-                            rvStaffRequestD.adapter = adapterDelivered
+
                         }
                     }
+                    rvStaffRequestD = findViewById(R.id.rvStaffRequestD)
+                    Collections.sort(stfrequestsListData, DescendingComparator())
+
+                    adapterDelivered = StaffRequestsListAdapter(stfrequestsListData,
+                        this@DeliveredRequestsActivity,
+                        "delivered")
+                    rvStaffRequestD.setHasFixedSize(true)
+                    rvStaffRequestD.layoutManager =
+                        LinearLayoutManager(this@DeliveredRequestsActivity)
+                    rvStaffRequestD.adapter = adapterDelivered
                 }else{
                     progressBarStD.visibility = GONE
                     clStD.visibility = VISIBLE
@@ -172,6 +175,7 @@ class DeliveredRequestsActivity : BaseActivity() {
                 Log.i("test", t.toString())
             }
         })
+
 
 //        staffRequestsListData = ArrayList<StaffRequestsListData>()
 //        staffRequestsListData.add(StaffRequestsListData(
@@ -213,5 +217,24 @@ class DeliveredRequestsActivity : BaseActivity() {
 //        rvStaffRequestD.layoutManager = LinearLayoutManager(this)
 //        rvStaffRequestD.adapter = adapterDelivered
 
+    }
+}
+
+class DescendingComparator : Comparator<ViewRequestsListData?> {
+
+
+    override fun compare(o1: ViewRequestsListData?, o2: ViewRequestsListData?): Int {
+        //Log.d("hightolow","productList"+p2.getPrice().compareTo(p1.getPrice()));
+        //  Log.d("hightolow","productList:"+p1.getPrice());
+        //    Log.d("hightolow","productList::"+p2.getPrice());
+        val pM1 = Math.round(o1!!.id.toFloat()).toInt()
+        val pM2 = Math.round(o2!!.id.toFloat()).toInt()
+        return if (pM2 > pM1) {
+            1
+        } else if (pM2 < pM1) {
+            -1
+        } else {
+            0
+        }
     }
 }

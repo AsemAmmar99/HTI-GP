@@ -26,6 +26,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
+import kotlin.collections.ArrayList
 
 class NewsListActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
@@ -126,6 +128,8 @@ class NewsListActivity : BaseActivity() {
 //                            eventsListData=   arrayOf<ArticlesListData>(
 //                                ArticlesListData(it.id,it.title, it.date, it.images,it.type))
                             recyclerViewNews = findViewById(R.id.rvNewsList)
+                            Collections.reverse(newsListData)
+
                             val adapterEvents =
                                 NewsListAdapter(newsListData, this@NewsListActivity)
                             recyclerViewNews.setHasFixedSize(true)

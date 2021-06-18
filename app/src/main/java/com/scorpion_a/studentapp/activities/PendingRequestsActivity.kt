@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.StaffRequestsListAdapter
+import com.scorpion_a.studentapp.model.ArticlesListData
 import com.scorpion_a.studentapp.model.StaffRequestsListData
 import com.scorpion_a.studentapp.model.ViewRequestsListData
 import com.scorpion_a.studentapp.model.responses.MyRequestsResponse
@@ -27,6 +28,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PendingRequestsActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
@@ -77,16 +80,19 @@ class PendingRequestsActivity : BaseActivity() {
                                 clStP.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(
 //                                ArticlesListData(it.id,it.title, it.date, it.images,it.type))
-                                rvStaffRequestP = findViewById(R.id.rvStaffRequestP)
-                                adapterPending = StaffRequestsListAdapter(stfrequestsListData,
-                                    this@PendingRequestsActivity,
-                                    "pending")
-                                rvStaffRequestP.setHasFixedSize(true)
-                                rvStaffRequestP.layoutManager =
-                                    LinearLayoutManager(this@PendingRequestsActivity)
-                                rvStaffRequestP.adapter = adapterPending
+
                             }
                         }
+                        rvStaffRequestP = findViewById(R.id.rvStaffRequestP)
+                        Collections.sort(stfrequestsListData, DescendingComparator())
+
+                        adapterPending = StaffRequestsListAdapter(stfrequestsListData,
+                            this@PendingRequestsActivity,
+                            "pending")
+                        rvStaffRequestP.setHasFixedSize(true)
+                        rvStaffRequestP.layoutManager =
+                            LinearLayoutManager(this@PendingRequestsActivity)
+                        rvStaffRequestP.adapter = adapterPending
                     }else{
                         mSwipeRefreshLayout!!.isRefreshing = false
                         progressBarStP.visibility = GONE
@@ -132,17 +138,19 @@ class PendingRequestsActivity : BaseActivity() {
                             progressBarStP.visibility = GONE
                             clStP.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(
-//                                ArticlesListData(it.id,it.title, it.date, it.images,it.type))
-                            rvStaffRequestP = findViewById(R.id.rvStaffRequestP)
-                            adapterPending = StaffRequestsListAdapter(stfrequestsListData,
-                                this@PendingRequestsActivity,
-                                "pending")
-                            rvStaffRequestP.setHasFixedSize(true)
-                            rvStaffRequestP.layoutManager =
-                                LinearLayoutManager(this@PendingRequestsActivity)
-                            rvStaffRequestP.adapter = adapterPending
+//                                             ArticlesListData(it.id,it.title, it.date, it.images,it.type))
                         }
                     }
+                    rvStaffRequestP = findViewById(R.id.rvStaffRequestP)
+                    Collections.sort(stfrequestsListData, DescendingComparator())
+
+                    adapterPending = StaffRequestsListAdapter(stfrequestsListData,
+                        this@PendingRequestsActivity,
+                        "pending")
+                    rvStaffRequestP.setHasFixedSize(true)
+                    rvStaffRequestP.layoutManager =
+                        LinearLayoutManager(this@PendingRequestsActivity)
+                    rvStaffRequestP.adapter = adapterPending
                 }else{
                     progressBarStP.visibility = GONE
                     clStP.visibility = VISIBLE
