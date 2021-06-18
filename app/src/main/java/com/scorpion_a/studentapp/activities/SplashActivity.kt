@@ -78,7 +78,10 @@ class SplashActivity : BaseActivity() {
                     }else if (account_type == "employee"){
                         startActivity(Intent(this@SplashActivity, StaffHomeActivity::class.java))
                         finish()
-                    }
+                    }else {
+                    startActivity(Intent(this@SplashActivity, HomeActivity::class.java))
+                    finish()
+                }
 //                    else if (account_type == "supervisor"){
 //                        startActivity(Intent(this@SplashActivity, SupervisorHomeActivity::class.java))
 //                        finish()

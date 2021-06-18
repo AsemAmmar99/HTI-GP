@@ -239,9 +239,9 @@ class LoginScreen : BaseActivity() {
 //                    } else if (account_type == "supervisor") {
 //                        startActivity(Intent(this@LoginScreen, SupervisorHomeActivity::class.java))
 //                        finish()
-//                    } else {
-//                        startActivity(Intent(this@LoginScreen, HomeActivity::class.java))
-//                        finish()
+                    } else {
+                        startActivity(Intent(this@LoginScreen, HomeActivity::class.java))
+                        finish()
                     }
                 } else {
                     progressBarLogin.visibility = View.GONE
