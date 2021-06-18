@@ -30,7 +30,9 @@ import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import kotlinx.android.synthetic.main.activity_confirm_request.*
 import kotlinx.android.synthetic.main.activity_confirm_request.tvDepartment
+import kotlinx.android.synthetic.main.activity_confirm_request.tvStatusValue
 import kotlinx.android.synthetic.main.activity_profile_page.header
+import kotlinx.android.synthetic.main.activity_student_profile.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -55,6 +57,10 @@ class ConfirmRequestActivity : BaseActivity() {
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
     var imagesArray :ArrayList<MultipartBody.Part>? = arrayListOf()
+    var en: String? = null
+    var ar: String? = null
+    var email: String? = null
+    var phone: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_request)
@@ -74,7 +80,11 @@ class ConfirmRequestActivity : BaseActivity() {
         rCount=intent.getStringExtra("count").toString().toInt()
 
         tvEditInfo.setOnClickListener {
-            val intent = Intent(it.context, StudentEditProfile::class.java)
+            val intent = Intent(this, StudentEditProfile::class.java)
+            intent.putExtra("ar", ar)
+            intent.putExtra("en", en)
+            intent.putExtra("email", email)
+            intent.putExtra("phone", phone)
             startActivity(intent)
         }
 
@@ -137,7 +147,10 @@ class ConfirmRequestActivity : BaseActivity() {
                         tvDepartmentValue.text = response.body().data?.department
                         tvStatusValue.text = response.body().data?.account_type
                         tvIdValue.text = response.body().data?.user_id
-
+                        ar = response.body().data?.name?.ar
+                        en = response.body().data?.name?.en
+                        phone = response.body().data?.phone
+                        email = response.body().data?.email
                             progressBarConfirm.visibility = View.GONE
                             clConfirmRequest.visibility = View.VISIBLE
                     }

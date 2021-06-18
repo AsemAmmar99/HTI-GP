@@ -57,9 +57,11 @@
             app:layout_constraintTop_toBottomOf="@id/ivProfilePict"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="Upload Image"
-            android:layout_marginTop="10dp"
+            android:text="@string/upload_the_image"
+            android:padding="10dp"
             android:textStyle="bold"
+            android:textColor="@color/light_black"
+
             />
 
     <TextView

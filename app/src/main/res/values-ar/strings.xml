@@ -238,4 +238,6 @@
     <string name="srhbmad">تم تحديد طلب الطالب بنجاح كطلب تم تسليمه.</string>
     <string name="taftr">من فضلك, أدخل سبب الرفض.</string>
     <string name="nml">لا يوجد حد أقصى.</string>
+    <string name="upload_the_image">ارفع الصورة</string>
+    <string name="pcyic">من فضلك, تأكد من اتصالك بالانترنت.</string>
 </resources>

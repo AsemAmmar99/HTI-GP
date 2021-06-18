@@ -237,4 +237,6 @@
     <string name="srhbmad">The Student\'s request has been successfully marked as delivered.</string>
     <string name="taftr">Please, type a reason for the rejection.</string>
     <string name="nml">No Max Limit.</string>
+    <string name="upload_the_image">Upload The Image</string>
+    <string name="pcyic">Please, check your internet connection.</string>
 </resources>

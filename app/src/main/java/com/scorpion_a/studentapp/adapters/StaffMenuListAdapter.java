@@ -68,7 +68,7 @@ public class StaffMenuListAdapter extends RecyclerView.Adapter<StaffMenuListAdap
                     case 2:
                         SharedPreferenceClass.clearSharedPrefrences(context);
                         context.startActivity(new Intent(context, LoginScreen.class));
-                        ((Activity)context).finish();
+                        ((Activity)context).finishAffinity();
                         break;
                 }
             }

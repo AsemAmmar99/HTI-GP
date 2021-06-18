@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.utils.Connection
 import org.imaginativeworld.oopsnointernet.ConnectionCallback
 import org.imaginativeworld.oopsnointernet.NoInternetDialog
@@ -27,9 +28,9 @@ open class BaseActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (!Connection.isNetworkAvailable(this)){
-          var snack=  Snackbar.make(getWindow().getDecorView().getRootView(), "Please check your internet connection", Snackbar.LENGTH_LONG)
+          var snack=  Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.pcyic), Snackbar.LENGTH_LONG)
             snack .setAction(
-                "OK", View.OnClickListener {
+                getString(R.string.ok), View.OnClickListener {
                     snack.dismiss()
                 }
             )

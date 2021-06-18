@@ -93,7 +93,7 @@ public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHo
                     case 5:
                         SharedPreferenceClass.clearSharedPrefrences(context);
                         context.startActivity(new Intent(context, LoginScreen.class));
-                        ((Activity)context).finish();
+                        ((Activity)context).finishAffinity();
                         break;
                 }
             }

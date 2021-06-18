@@ -156,7 +156,6 @@ class StudentProfile : BaseActivity() {
             intent.putExtra("email", tvEmailValueProfile.text.toString())
             intent.putExtra("phone", tvPhoneValue.text.toString())
             startActivity(intent)
-            finish()
         }
 
         ivProfilePict.setOnClickListener{
