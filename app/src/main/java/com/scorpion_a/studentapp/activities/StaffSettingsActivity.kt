@@ -86,12 +86,12 @@ class StaffSettingsActivity : BaseActivity() {
         mBuilder.setSingleChoiceItems(listItmes, -1) { dialog, which ->
             if (which == 0) {
                 Lang.setLocate("ar", this)
-                val intent = Intent(baseContext, HomeActivity::class.java)
+                val intent = Intent(baseContext, StaffHomeActivity::class.java)
                 startActivity(intent)
                 finish()
             } else if (which == 1) {
                 Lang.setLocate("en", this)
-                val intent = Intent(baseContext, HomeActivity::class.java)
+                val intent = Intent(baseContext, StaffHomeActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -148,7 +148,7 @@ class StaffSettingsActivity : BaseActivity() {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     MyPreferences(this).darkMode = 0
                     delegate.applyDayNight()
-                    val intent = Intent(baseContext, HomeActivity::class.java)
+                    val intent = Intent(baseContext, StaffHomeActivity::class.java)
                     startActivity(intent)
                     finish()
                     dialog.dismiss()
@@ -157,7 +157,7 @@ class StaffSettingsActivity : BaseActivity() {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     MyPreferences(this).darkMode = 1
                     delegate.applyDayNight()
-                    val intent = Intent(baseContext, HomeActivity::class.java)
+                    val intent = Intent(baseContext, StaffHomeActivity::class.java)
                     startActivity(intent)
                     finish()
                     dialog.dismiss()
@@ -166,7 +166,7 @@ class StaffSettingsActivity : BaseActivity() {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                     MyPreferences(this).darkMode = 2
                     delegate.applyDayNight()
-                    val intent = Intent(baseContext, HomeActivity::class.java)
+                    val intent = Intent(baseContext, StaffHomeActivity::class.java)
                     startActivity(intent)
                     finish()
                     dialog.dismiss()

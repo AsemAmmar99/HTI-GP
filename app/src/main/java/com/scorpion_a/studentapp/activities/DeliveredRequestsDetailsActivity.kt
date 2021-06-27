@@ -31,6 +31,7 @@ import kotlinx.android.synthetic.main.activity_delivered_requests_details.tvStud
 import kotlinx.android.synthetic.main.activity_delivered_requests_details.tvTotalPriceValue
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
+import kotlinx.android.synthetic.main.activity_rejected_requests_details.*
 
 class DeliveredRequestsDetailsActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
@@ -69,9 +70,9 @@ class DeliveredRequestsDetailsActivity : BaseActivity() {
         ivReceiptDeliverd.setAdapter(pagerAdapter)
         ivReceiptDeliverd.setPageMargin(20)
 
-
-
-
+        if (Lang.getLang(this) == "ar") {
+            ivReceiptDeliverd.setRotationY(180f)
+        }
 
 //        receiptImage.setOnClickListener {
 //            if (image.getParent() != null) (image.getParent() as ViewGroup).removeView(
