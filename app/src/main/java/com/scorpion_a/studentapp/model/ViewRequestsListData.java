@@ -14,11 +14,12 @@ public class ViewRequestsListData {
     private String total_price;
     private String created_at;
     private String student_id;
+    private String reject_reason;
     private Student student;
     private RequestType request_type;
     private ArrayList<String> receipt;
 
-    public ViewRequestsListData(String id, String name, String price, String status, String count, String total_price, String created_at, String student_id, Student student, RequestType request_type, ArrayList<String> receipt) {
+    public ViewRequestsListData(String id, String name, String price, String status, String count, String total_price, String created_at, String student_id, String reject_reason, Student student, RequestType request_type, ArrayList<String> receipt) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -27,6 +28,7 @@ public class ViewRequestsListData {
         this.total_price = total_price;
         this.created_at = created_at;
         this.student_id = student_id;
+        this.reject_reason = reject_reason;
         this.student = student;
         this.request_type = request_type;
         this.receipt = receipt;
@@ -118,5 +120,13 @@ public class ViewRequestsListData {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getReject_reason() {
+        return reject_reason;
+    }
+
+    public void setReject_reason(String reject_reason) {
+        this.reject_reason = reject_reason;
     }
 }

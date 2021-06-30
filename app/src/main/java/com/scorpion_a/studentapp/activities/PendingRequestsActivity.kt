@@ -1,6 +1,5 @@
 package com.scorpion_a.studentapp.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View.*
@@ -11,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.scorpion_a.studentapp.R
 import com.scorpion_a.studentapp.adapters.StaffRequestsListAdapter
-import com.scorpion_a.studentapp.model.ArticlesListData
-import com.scorpion_a.studentapp.model.StaffRequestsListData
 import com.scorpion_a.studentapp.model.ViewRequestsListData
 import com.scorpion_a.studentapp.model.responses.MyRequestsResponse
 import com.scorpion_a.studentapp.network.Service
@@ -75,7 +72,15 @@ class PendingRequestsActivity : BaseActivity() {
                                 stfrequestsListData?.add(ViewRequestsListData(it.id,
                                     it.name,
                                     it.price,
-                                    it.status,it.count,it.total_price,it.created_at,it.student_id,it.student,it.request_type,it.receipt))
+                                    it.status,
+                                    it.count,
+                                    it.total_price,
+                                    it.created_at,
+                                    it.student_id,
+                                    it.reject_reason,
+                                    it.student,
+                                    it.request_type,
+                                    it.receipt))
                                 progressBarStP.visibility = GONE
                                 clStP.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(
@@ -134,7 +139,15 @@ class PendingRequestsActivity : BaseActivity() {
                             stfrequestsListData?.add(ViewRequestsListData(it.id,
                                 it.name,
                                 it.price,
-                                it.status,it.count,it.total_price,it.created_at,it.student_id,it.student,it.request_type,it.receipt))
+                                it.status,
+                                it.count,
+                                it.total_price,
+                                it.created_at,
+                                it.student_id,
+                                it.reject_reason,
+                                it.student,
+                                it.request_type,
+                                it.receipt))
                             progressBarStP.visibility = GONE
                             clStP.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(

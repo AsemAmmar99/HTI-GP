@@ -56,7 +56,7 @@ class RejectedRequestsDetailsActivity : BaseActivity() {
         tvTotalPriceValue.text=Rejected.total_price+" LE"
         tvCDateValue.text=Rejected.created_at.split("T")[0]
         tvRequestStatusTitle.text=Rejected.status
-
+        tvRejectReasons.text=Rejected.reject_reason
         tvNameInArabicValue.text=Rejected.student.name.ar
         tvNameInEnglishValue.text=Rejected.student.name.en
         tvIdValue.text=Rejected.student_id

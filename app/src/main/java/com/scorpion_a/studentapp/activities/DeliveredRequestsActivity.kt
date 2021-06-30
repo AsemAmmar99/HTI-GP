@@ -74,7 +74,15 @@ class DeliveredRequestsActivity : BaseActivity() {
                                 stfrequestsListData?.add(ViewRequestsListData(it.id,
                                     it.name,
                                     it.price,
-                                    it.status,it.count,it.total_price,it.created_at,it.student_id,it.student,it.request_type,it.receipt))
+                                    it.status,
+                                    it.count,
+                                    it.total_price,
+                                    it.created_at,
+                                    it.student_id,
+                                    it.reject_reason,
+                                    it.student,
+                                    it.request_type,
+                                    it.receipt))
                                 progressBarStD.visibility = GONE
                                 clStD.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(
@@ -133,7 +141,15 @@ class DeliveredRequestsActivity : BaseActivity() {
                             stfrequestsListData?.add(ViewRequestsListData(it.id,
                                 it.name,
                                 it.price,
-                                it.status,it.count,it.total_price,it.created_at,it.student_id,it.student,it.request_type,it.receipt))
+                                it.status,
+                                it.count,
+                                it.total_price,
+                                it.created_at,
+                                it.student_id,
+                                it.reject_reason,
+                                it.student,
+                                it.request_type,
+                                it.receipt))
                             progressBarStD.visibility = GONE
                             clStD.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(

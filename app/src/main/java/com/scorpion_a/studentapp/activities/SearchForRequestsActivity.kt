@@ -2,23 +2,17 @@ package com.scorpion_a.studentapp.activities
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.view.View.*
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.scorpion_a.studentapp.R
-import com.scorpion_a.studentapp.adapters.EventsListAdapter
 import com.scorpion_a.studentapp.adapters.StaffRequestsListAdapter
-import com.scorpion_a.studentapp.model.ArticlesListData
-import com.scorpion_a.studentapp.model.StaffRequestsListData
 import com.scorpion_a.studentapp.model.ViewRequestsListData
 import com.scorpion_a.studentapp.model.responses.MyRequestsResponse
-import com.scorpion_a.studentapp.model.responses.UserDataResponce
 import com.scorpion_a.studentapp.network.Service
 import com.scorpion_a.studentapp.utils.Connection
 import com.scorpion_a.studentapp.utils.Lang
@@ -26,8 +20,6 @@ import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
 import kotlinx.android.synthetic.main.activity_profile_page.header
 import kotlinx.android.synthetic.main.activity_search_for_requests.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -81,7 +73,15 @@ class SearchForRequestsActivity : BaseActivity(){
                             stfrequestsListData?.add( ViewRequestsListData(it.id,
                                 it.name,
                                 it.price,
-                                it.status,it.count,it.total_price,it.created_at,it.student_id,it.student,it.request_type,it.receipt))
+                                it.status,
+                                it.count,
+                                it.total_price,
+                                it.created_at,
+                                it.student_id,
+                                it.reject_reason,
+                                it.student,
+                                it.request_type,
+                                it.receipt))
                             progressBarStS.visibility = GONE
                             clStS.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(
@@ -132,7 +132,15 @@ class SearchForRequestsActivity : BaseActivity(){
                             stfrequestsListData?.add( ViewRequestsListData(it.id,
                                 it.name,
                                 it.price,
-                                it.status,it.count,it.total_price,it.created_at,it.student_id,it.student,it.request_type,it.receipt))
+                                it.status,
+                                it.count,
+                                it.total_price,
+                                it.created_at,
+                                it.student_id,
+                                it.reject_reason,
+                                it.student,
+                                it.request_type,
+                                it.receipt))
                             progressBarStS.visibility = GONE
                             clStS.visibility = VISIBLE
 //                            eventsListData=   arrayOf<ArticlesListData>(
