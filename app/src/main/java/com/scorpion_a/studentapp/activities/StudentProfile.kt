@@ -183,7 +183,7 @@ class StudentProfile : BaseActivity() {
 //            )
 
             var requestFile: RequestBody =
-                RequestBody.create(MediaType.parse("application/json"), file)
+                RequestBody.create(MediaType.parse("application/octet-stream"), file)
             var body: MultipartBody.Part =
                 MultipartBody.Part.createFormData("image",
                     file?.name,
@@ -207,7 +207,7 @@ class StudentProfile : BaseActivity() {
 
 
             val call1 = client1.updateProfilePic("Bearer ${SharedPreferenceClass.loadString(this,"TOKEN")}"
-                ,body,methods
+                ,methods
             )
 
 

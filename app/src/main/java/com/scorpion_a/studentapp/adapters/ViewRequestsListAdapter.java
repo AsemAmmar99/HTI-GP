@@ -1,5 +1,6 @@
 package com.scorpion_a.studentapp.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +10,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.scorpion_a.studentapp.R;
 import com.scorpion_a.studentapp.model.ViewRequestsListData;
+import com.scorpion_a.studentapp.utils.Lang;
 
 import java.util.List;
 
 public class ViewRequestsListAdapter extends RecyclerView.Adapter<ViewRequestsListAdapter.ViewHolder> {
     private List< ViewRequestsListData> requestsdata;
+    private Context context;
 
     // RecyclerView recyclerView;
-    public ViewRequestsListAdapter(List< ViewRequestsListData> requestsdata) {
+    public ViewRequestsListAdapter(List< ViewRequestsListData> requestsdata, Context context) {
         this.requestsdata = requestsdata;
+        this.context = context;
     }
 
     @Override
@@ -32,7 +36,16 @@ public class ViewRequestsListAdapter extends RecyclerView.Adapter<ViewRequestsLi
     public void onBindViewHolder(ViewHolder holder, int position) {
         final ViewRequestsListData viewRequestsListData = requestsdata.get(position);
         holder.tvRequestNumber.setText(viewRequestsListData.getId());
-        holder.tvRequestDescription.setText(viewRequestsListData.getName());
+        if (viewRequestsListData.getRequest_type() != null){
+            if (viewRequestsListData.getRequest_type().getName() != null){
+        if (Lang.Companion.getLang(context).equals("en")){
+            holder.tvRequestDescription.setText(viewRequestsListData.getRequest_type().getName().getEn());
+        }else if (Lang.Companion.getLang(context).equals("ar")){
+            holder.tvRequestDescription.setText(viewRequestsListData.getRequest_type().getName().getAr());
+        }
+            }
+
+        }
         holder.tvRequestStatus.setText(viewRequestsListData.getStatus());
         holder.tvRequestTime.setText(viewRequestsListData.getCreated_at());
 //        holder.tvRequestCount.setText(requestsdata[position].getRequestsCount());

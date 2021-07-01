@@ -69,7 +69,7 @@ class MyRequestsActivity : BaseActivity() {
                         mSwipeRefreshLayout!!.isRefreshing = false
                         recyclerView= findViewById(R.id.rvViewRequests)
                         val adapter = ViewRequestsListAdapter(
-                            response.body().data
+                            response.body().data, this@MyRequestsActivity
                         )
                         progressBarMyReqs.visibility = View.GONE
                         clMyRequests.visibility = View.VISIBLE
@@ -111,7 +111,7 @@ class MyRequestsActivity : BaseActivity() {
                {
                    recyclerView= findViewById(R.id.rvViewRequests)
                    val adapter = ViewRequestsListAdapter(
-                       response.body().data
+                       response.body().data, this@MyRequestsActivity
                    )
                    progressBarMyReqs.visibility = View.GONE
                    clMyRequests.visibility = View.VISIBLE

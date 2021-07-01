@@ -76,7 +76,7 @@ interface Service {
 
  @Multipart
  @PATCH("user")
- @Headers("Accept: application/json", "Content-Type: application/json")
- fun updateProfilePic(@Header("Authorization") Authorization:String, @Part image: MultipartBody.Part, @Part("_method") _method: RequestBody): Call<UserDataResponce>
+ @Headers("Accept: application/json", "Content-Type: multipart/form-data")
+ fun updateProfilePic(@Header("Authorization") Authorization:String,  @Part("_method") _method: RequestBody): Call<UserDataResponce>
 
 }
