@@ -78,10 +78,16 @@ class SettingsActivity : BaseActivity() {
         )
 
         val listItmes = arrayOf(arab, english)
+        var checkedItem = -1
+        if(Lang.getLang(this) == "ar"){
+            checkedItem = 0
+        }else if (Lang.getLang(this) == "en"){
+            checkedItem = 1
+        }
 
         val mBuilder = AlertDialog.Builder(this)
         mBuilder.setTitle(title)
-        mBuilder.setSingleChoiceItems(listItmes, -1) { dialog, which ->
+        mBuilder.setSingleChoiceItems(listItmes, checkedItem) { dialog, which ->
             if (which == 0) {
                 Lang.setLocate("ar", this)
                 val intent = Intent(baseContext, HomeActivity::class.java)

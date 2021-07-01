@@ -239,4 +239,5 @@
     <string name="nml">No Max Limit.</string>
     <string name="upload_the_image">Upload The Image</string>
     <string name="pcyic">Please, check your internet connection.</string>
+    <string name="pptmf">Please, pay the money first to get the receipt and upload its photo.</string>
 </resources>

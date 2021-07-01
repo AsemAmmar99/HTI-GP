@@ -240,4 +240,5 @@
     <string name="nml">لا يوجد حد أقصى.</string>
     <string name="upload_the_image">ارفع الصورة</string>
     <string name="pcyic">من فضلك, تأكد من اتصالك بالانترنت.</string>
+    <string name="pptmf">من فضلك, قم بالدفع اولا للححصول على الوصل لرفع صورته.</string>
 </resources>

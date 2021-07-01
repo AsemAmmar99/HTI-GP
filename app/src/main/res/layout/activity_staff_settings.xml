@@ -39,29 +39,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvSNotifications"
-        android:text="@string/notifications"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/dark_blue"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/vLang"
-        android:background="@color/white"/>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="0.8dp"
-        android:id="@+id/vNotifications"
-        android:background="@color/dark_blue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSNotifications"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/tvSwitchSMode"
         android:text="@string/switch_mode"
         android:textSize="20dp"
@@ -70,7 +47,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/vNotifications"
+        app:layout_constraintTop_toBottomOf="@id/vLang"
         android:background="@color/white"/>
 
     <View
