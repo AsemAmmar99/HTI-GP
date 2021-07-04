@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -183,13 +182,13 @@ class StudentProfile : BaseActivity() {
 //            )
 
             var requestFile: RequestBody =
-                RequestBody.create(MediaType.parse("application/octet-stream"), file)
+                RequestBody.create(MediaType.parse("multipart/form-data"), file)
             var body: MultipartBody.Part =
                 MultipartBody.Part.createFormData("image",
                     file?.name,
                     requestFile)
 
-            var methods=RequestBody.create(MediaType.parse("application/json"), "PATCH")
+            var methods=RequestBody.create(MediaType.parse("multipart/form-data"), "PATCH")
 
             
             val retrofit1 = Retrofit.Builder()
@@ -207,7 +206,7 @@ class StudentProfile : BaseActivity() {
 
 
             val call1 = client1.updateProfilePic("Bearer ${SharedPreferenceClass.loadString(this,"TOKEN")}"
-                ,methods
+                , body, methods
             )
 
 
