@@ -14,54 +14,54 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.DeliveredRequestsDetailsActivity"></activity>
-        <activity android:name=".activities.NewsListActivity" />
-        <activity android:name=".activities.StaffSettingsActivity" />
+        <activity android:name=".activities.DeliveredRequestsDetailsActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.NewsListActivity" android:screenOrientation="portrait" />
+        <activity android:name=".activities.StaffSettingsActivity" android:screenOrientation="portrait" />
         <activity android:name=".activities.SupervisorHomeActivity" />
-        <activity android:name=".activities.RejectReasonActivity" />
-        <activity android:name=".activities.RejectedRequestsDetailsActivity" />
-        <activity android:name=".activities.AcceptedRequestsDetailsActivity" />
-        <activity android:name=".activities.SearchForRequestsActivity" />
-        <activity android:name=".activities.DeliveredRequestsActivity" />
-        <activity android:name=".activities.RejectedRequestsActivity" />
-        <activity android:name=".activities.PendingRequestsActivity" />
-        <activity android:name=".activities.AcceptedRequestsActivity" />
-        <activity android:name=".activities.StaffProfilePageActivity" />
+        <activity android:name=".activities.RejectReasonActivity" android:screenOrientation="portrait" />
+        <activity android:name=".activities.RejectedRequestsDetailsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".activities.AcceptedRequestsDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.SearchForRequestsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.DeliveredRequestsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.RejectedRequestsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.PendingRequestsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.AcceptedRequestsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.StaffProfilePageActivity" android:screenOrientation="portrait"/>
         <activity android:name=".fragments.StaffMenuFragment" />
-        <activity android:name=".activities.StaffHomeActivity" />
+        <activity android:name=".activities.StaffHomeActivity" android:screenOrientation="portrait"/>
         <activity android:name=".fragments.StaffHomeFragment" />
         <activity android:name=".activities.ResultsActivity" />
-        <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.MyRequestsActivity" />
-        <activity android:name=".activities.EventsListActivity" />
-        <activity android:name=".activities.RequestTutorialActivity" />
-        <activity android:name=".activities.PendingRequestsDetailsActivity" />
-        <activity android:name=".activities.AboutHTIActivity" />
-        <activity android:name=".activities.StudentEditProfile" />
-        <activity android:name=".activities.StudentProfile" />
-        <activity android:name=".activities.NotifyDetailsActivity" />
-        <activity android:name=".activities.ConfirmRequestActivity" />
+        <activity android:name=".activities.SettingsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.MyRequestsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.EventsListActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.RequestTutorialActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.PendingRequestsDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.AboutHTIActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.StudentEditProfile" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.StudentProfile" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.NotifyDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.ConfirmRequestActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.SupportActivity" />
-        <activity android:name=".activities.TutorialDetailsActivity" />
-        <activity android:name=".activities.TutorialActivity" />
+        <activity android:name=".activities.TutorialDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.TutorialActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.AppTechSupportActivity" />
-        <activity android:name=".activities.RequestDataActivity" />
-        <activity android:name=".activities.NewsDetailsActivity" />
+        <activity android:name=".activities.RequestDataActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.NewsDetailsActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.FAQsAnswersActivity" />
         <activity android:name=".activities.FAQSActivity" />
         <activity android:name=".activities.TestQuestionsActivity" />
         <activity android:name=".activities.NotificationReplyActivity" />
-        <activity android:name=".activities.SendRequestActivity" />
-        <activity android:name=".activities.NotificationDetailsActivity" />
+        <activity android:name=".activities.SendRequestActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.NotificationDetailsActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.TestYourselfActivity" />
         <activity android:name=".activities.RegProposalActivity" />
         <activity android:name=".activities.PrintoutActivity" />
         <activity android:name=".activities.EditPasswordActivity" />
         <activity android:name=".activities.EditProfileActivity" />
         <activity android:name=".activities.ProfilePageActivity" />
-        <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".activities.LoginScreen" />
-        <activity android:name=".activities.SplashActivity">
+        <activity android:name=".activities.HomeActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.LoginScreen" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.SplashActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

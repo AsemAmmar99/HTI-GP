@@ -2,7 +2,12 @@ package com.scorpion_a.studentapp.activities
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -17,6 +22,7 @@ import com.scorpion_a.studentapp.utils.Lang
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass
 import com.scorpion_a.studentapp.utils.Theme
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_confirm_request.*
 import kotlinx.android.synthetic.main.activity_profile_page.header
 import kotlinx.android.synthetic.main.activity_student_profile.*
 import okhttp3.MediaType
@@ -30,12 +36,17 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.ByteArrayOutputStream
 import java.io.File
 
 class StudentProfile : BaseActivity() {
     lateinit var toolbar: Toolbar
     var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     var file: File?=null
+    var fileUri:Uri?=null
+    var imagepath:String?=null
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
     override fun onCreate(savedInstanceState: Bundle?) {
         Lang.loadLocate(this)
         Theme.checkTheme(this, delegate)
@@ -45,6 +56,16 @@ class StudentProfile : BaseActivity() {
         toolbar.title= getString(R.string.profile_page)
         Connection.isNetworkAvailable(this)
 
+        sharedPreferences =
+            this.getSharedPreferences("images", MODE_PRIVATE)
+        editor = sharedPreferences.edit()
+
+        uploadimage.visibility=View.GONE
+//        if(sharedPreferences.getString("imagepath", null)?:""==null){
+//            ivProfilePict.setImageResource(R.drawable.avatar)
+//
+//        }else{
+//        ivProfilePict.setImageBitmap(decode(sharedPreferences.getString("imagepath", null)!!))}
         val retrofit = Retrofit.Builder()
             .baseUrl(Service.BaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -75,7 +96,13 @@ class StudentProfile : BaseActivity() {
                         tvPhoneValue.text=response.body().data?.phone
                         tvStudentNameArabic.text=response.body().data?.name?.ar
                         tvStudentNameEngProfile.text=response.body().data?.name?.en
-                        Picasso.with(baseContext).load(response.body().data?.image_path).into(ivProfilePict)
+                        if(sharedPreferences.getString("imagepath", null)?:""==null){
+//                            ivProfilePict.setImageResource(R.drawable.avatar)
+                            Picasso.with(baseContext).load("https://app.jabbarproject.com"+response.body().data?.image_path).placeholder(R.drawable.avatar).into(ivProfilePict)
+
+
+                        }else{
+                            ivProfilePict.setImageBitmap(decode(sharedPreferences.getString("imagepath", null)!!))}
                         tvEmailValueProfile.text=response.body().data?.email
                         tvIDValueProfile.text=response.body().data?.user_id
                         progressBarProfile.visibility = View.GONE
@@ -106,6 +133,7 @@ class StudentProfile : BaseActivity() {
         }
         progressBarProfile.visibility = View.VISIBLE
         clProfilePage.visibility = View.INVISIBLE
+        Log.i("ccall",call.request().toString())
         call.clone().enqueue(object : Callback<UserDataResponce> {
             override fun onResponse(
                 call: Call<UserDataResponce>,
@@ -120,7 +148,13 @@ class StudentProfile : BaseActivity() {
                     tvPhoneValue.text=response.body().data?.phone
                     tvStudentNameArabic.text=response.body().data?.name?.ar
                     tvStudentNameEngProfile.text=response.body().data?.name?.en
-                    Picasso.with(baseContext).load(response.body().data?.image_path).into(ivProfilePict)
+                    if(sharedPreferences.getString("imagepath", null)?:""==null){
+//                        ivProfilePict.setImageResource(R.drawable.avatar)
+                            Picasso.with(baseContext).load("https://app.jabbarproject.com"+response.body().data?.image_path).placeholder(R.drawable.avatar).into(ivProfilePict)
+
+
+                    }else{
+                        ivProfilePict.setImageBitmap(decode(sharedPreferences.getString("imagepath", null)!!))}
                     tvEmailValueProfile.text=response.body().data?.email
                     tvIDValueProfile.text=response.body().data?.user_id
                     progressBarProfile.visibility = View.GONE
@@ -175,12 +209,18 @@ class StudentProfile : BaseActivity() {
 
             httpClient.addInterceptor(logging) //
 
-//            val filePart = MultipartBody.Part.createFormData(
-//                "image",
-//                file!!.name,
-//                RequestBody.create(MediaType.parse("image/*"), file)
+            val filePart = MultipartBody.Part.createFormData(
+                "image",
+                file!!.name,
+                RequestBody.create(MediaType.parse("image/*"), file)
+            )
+
+//            val filePart: RequestBody = RequestBody.create(
+//                MediaType.parse(this.contentResolver.getType(fileUri!!)!!),
+//                file
 //            )
 
+//            var body = MultipartBody.Part.createFormData("file", file?.name, filePart)
             var requestFile: RequestBody =
                 RequestBody.create(MediaType.parse("multipart/form-data"), file)
             var body: MultipartBody.Part =
@@ -188,7 +228,7 @@ class StudentProfile : BaseActivity() {
                     file?.name,
                     requestFile)
 
-            var methods=RequestBody.create(MediaType.parse("multipart/form-data"), "PATCH")
+            var methods=RequestBody.create(MediaType.parse("application/json"), "PATCH")
 
             
             val retrofit1 = Retrofit.Builder()
@@ -205,8 +245,9 @@ class StudentProfile : BaseActivity() {
             val client1 = retrofit1.create(Service::class.java)
 
 
-            val call1 = client1.updateProfilePic("Bearer ${SharedPreferenceClass.loadString(this,"TOKEN")}"
-                , body, methods
+//            Log.i("callll",imagepath)
+            var call1 = client1.updateProfilePic("Bearer ${SharedPreferenceClass.loadString(this,"TOKEN")}",
+                sharedPreferences.getString("imagepath", null)!!
             )
 
 
@@ -257,12 +298,35 @@ class StudentProfile : BaseActivity() {
 
         }
     }
+    fun encode(imageUri: Uri): String {
+        val input = getContentResolver().openInputStream(imageUri)
+        val image = BitmapFactory.decodeStream(input, null, null)
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // Encode image to base64 string
+        val baos = ByteArrayOutputStream()
+        image?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        var imageBytes = baos.toByteArray()
+        val imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+        return imageString
+    }
+
+
+    fun decode(imageString: String): Bitmap? {
+
+        // Decode base64 string to image
+        val imageBytes = Base64.decode(imageString, Base64.DEFAULT)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+        return decodedImage
+//        imageview.setImageBitmap(decodedImage)
+    }
+
+
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && data?.getData()!=null) {
             //Image Uri will not be null for RESULT_OK
-            val fileUri = data?.data
+            fileUri = data?.data
             ivProfilePict.setImageURI(fileUri)
 
             //You can get File object from intent
@@ -272,6 +336,9 @@ class StudentProfile : BaseActivity() {
             //You can also get File Path from intent
             val filePath:String = ImagePicker.getFilePath(data)!!
 
+            imagepath=encode(data.data!!)
+            editor.putString("imagepath", encode(data.data!!))
+            editor.apply()
 
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()

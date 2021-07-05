@@ -3,6 +3,7 @@ package com.scorpion_a.studentapp.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ import com.scorpion_a.studentapp.activities.TutorialActivity;
 import com.scorpion_a.studentapp.model.MoreListData;
 import com.scorpion_a.studentapp.R;
 import com.scorpion_a.studentapp.utils.SharedPreferenceClass;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHolder> {
     private MoreListData[] moredata;
@@ -92,6 +95,8 @@ public class MoreListAdapter extends RecyclerView.Adapter<MoreListAdapter.ViewHo
 //                        break;
                     case 5:
                         SharedPreferenceClass.clearSharedPrefrences(context);
+                        SharedPreferences preferences = context.getSharedPreferences("images", MODE_PRIVATE);
+                        preferences.edit().clear().apply();
                         context.startActivity(new Intent(context, LoginScreen.class));
                         ((Activity)context).finishAffinity();
                         break;

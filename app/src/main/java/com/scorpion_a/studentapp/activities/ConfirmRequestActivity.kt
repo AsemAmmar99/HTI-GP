@@ -38,6 +38,7 @@ import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
+import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -61,6 +62,9 @@ class ConfirmRequestActivity : BaseActivity() {
     var ar: String? = null
     var email: String? = null
     var phone: String? = null
+    var image11:String?=null
+    var image22:String?=null
+    var image33:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_request)
@@ -112,6 +116,15 @@ class ConfirmRequestActivity : BaseActivity() {
 //                .start()
 //        }
 
+        val logging = HttpLoggingInterceptor()
+// set your desired log level
+// set your desired log level
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        val httpClient = OkHttpClient.Builder()
+
+        httpClient.addInterceptor(logging) //
+
         val retrofit = Retrofit.Builder()
             .baseUrl(Service.BaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -123,17 +136,21 @@ class ConfirmRequestActivity : BaseActivity() {
                 }").build()
                 chain.proceed(request)
             }.build())
+            .client(httpClient.build())
             .build()
 
         val client = retrofit.create(Service::class.java)
         val request_type_id = RequestBody.create(MediaType.parse("multipart/form-data"), intent.getStringExtra("id"))
         val rCount_ = RequestBody.create(MediaType.parse("multipart/form-data"), rCount.toString())
-        val call = client.submitRequest(request_type_id, rCount_,
-            imagesArray!!)
 
-        val callStudent = client.getUserData()
         progressBarConfirm.visibility = View.VISIBLE
         clConfirmRequest.visibility = View.INVISIBLE
+//        Log.i("request",call.request().toString())
+        val callStudent = client.getUserDataDo("Bearer ${
+            SharedPreferenceClass.loadString(
+                this,
+                "TOKEN")
+        }")
         callStudent.clone().enqueue(object : Callback<UserDataResponce> {
             override fun onResponse(
                 call: Call<UserDataResponce>,
@@ -181,14 +198,32 @@ class ConfirmRequestActivity : BaseActivity() {
 
 
         buConfirm.setOnClickListener {
-            if (imagesArray!!.size == 0){
+//            Log.i("call1",sharedPreferences.getString("imageFile1", null))
+//            Log.i("call2",sharedPreferences.getString("imageFile2", null))
+//            Log.i("call3",sharedPreferences.getString("imageFile3", null))
+            if ( sharedPreferences.getString("imageFile1", null)?:"" ==""){
                 Toast.makeText(this, getString(R.string.upal), Toast.LENGTH_SHORT).show()
             }else{
+            val call = client.submitRequestBase("Bearer ${
+                SharedPreferenceClass.loadString(
+                    this,
+                    "TOKEN")
+            }", intent.getStringExtra("id"), rCount.toString(),
+                if( sharedPreferences.getString("imageFile1", null)?:"" ==""){""}else{
+                sharedPreferences.getString("imageFile1", null)?:""},
+               if( sharedPreferences.getString("imageFile2", null)?:""==""){""}else
+                sharedPreferences.getString("imageFile2", null)?:"",
+                if(sharedPreferences.getString("imageFile3", null)?:""==""){""}else{
+                sharedPreferences.getString("imageFile3", null)?:""})
+
+
+//
                 progressBarConfirm.visibility = View.VISIBLE
                 clConfirmRequest.visibility = View.INVISIBLE
                 Log.i("id", (intent.getStringExtra("id")))
                 Log.i("count", rCount.toString())
                 Log.i("imageArray", imagesArray!!.toString())
+                Log.i("callimage",call.request().toString())
                 call.clone().enqueue(object : Callback<SubmitRequestResponse> {
                     override fun onResponse(
                         call: Call<SubmitRequestResponse>?,
@@ -198,7 +233,7 @@ class ConfirmRequestActivity : BaseActivity() {
 //                        Log.d("TAG", "response.body().data.id" + response.body().data.id);
                             progressBarConfirm.visibility = View.GONE
                             clConfirmRequest.visibility = View.VISIBLE
-//                        onRequestSent(it.context, response.body().data.id)
+                        onRequestSent(it.context, response.body().data.id)
                         } else {
                             progressBarConfirm.visibility = View.GONE
                             clConfirmRequest.visibility = View.VISIBLE
@@ -277,6 +312,7 @@ class ConfirmRequestActivity : BaseActivity() {
                 ////
                 editor.putString("imageFile1", encode(data?.data!!))
                 editor.putBoolean("image1", false)
+                image11=encode(data.data!!)
                 editor.apply()
             }else if (sharedPreferences.getBoolean("image2", true)){
 //                val fileUri2 = data?.data
@@ -294,6 +330,9 @@ class ConfirmRequestActivity : BaseActivity() {
                 ////
                 editor.putString("imageFile2", encode(data?.data!!))
                 editor.putBoolean("image2", false)
+                image22=encode(data.data!!)
+                Log.i("call1",encode(data.data!!))
+
                 editor.apply()
                 ivReceipt1.setImageBitmap(decode(sharedPreferences.getString("imageFile1", null)!!))
             }else if (sharedPreferences.getBoolean("image3", true)){
@@ -312,6 +351,8 @@ class ConfirmRequestActivity : BaseActivity() {
                 editor.putString("imageFile3", encode(data?.data!!))
                 editor.putBoolean("image3", false)
                 editor.apply()
+                image33=encode(data.data!!)
+
                 ivReceipt1.setImageBitmap(decode(sharedPreferences.getString("imageFile1", null)!!))
                 ivReceipt2.setImageBitmap(decode(sharedPreferences.getString("imageFile2", null)!!))
             }else{
@@ -344,6 +385,8 @@ class ConfirmRequestActivity : BaseActivity() {
         val imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT)
         return imageString
     }
+
+
 
     fun decode(imageString: String): Bitmap? {
 

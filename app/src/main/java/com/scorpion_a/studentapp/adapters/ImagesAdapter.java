@@ -56,7 +56,9 @@ public class ImagesAdapter extends PagerAdapter {
 
         Picasso.with(context)
                 .load("https://app.jabbarproject.com/" +image.get(position)
-                ).into(imageView);
+
+                )    .placeholder(R.drawable.htilogo)
+                .into(imageView);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +67,7 @@ public class ImagesAdapter extends PagerAdapter {
                 nagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 nagDialog.setContentView(R.layout.image_pager_item);
                 ImageView imageView1 = (ImageView)nagDialog.findViewById(R.id.ivImage);
+
 
                 Glide
                         .with(context)

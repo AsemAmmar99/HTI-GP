@@ -30,6 +30,10 @@ interface Service {
     fun getUserData(
     ):Call<UserDataResponce>
 
+ @GET("user")
+ fun getUserDataDo(@Header("Authorization") Authorization: String,
+ ):Call<UserDataResponce>
+
     @GET("requests")
     @Headers("Accept: application/json", "Content-Type: application/json"/*,"Locale: ar"*/)
     fun getRequestsData(
@@ -44,8 +48,17 @@ interface Service {
     @POST("requests")
     @Headers("Accept: application/json", "Content-Type: application/json")
 //    fun submitRequest(@Part request: RequestRequests): Call<SubmitRequestResponse>
-    fun submitRequest(@Part("request_type_id") request_type_id: RequestBody,@Part("count") count: RequestBody,
+    fun submitRequest(@Header ("Authorization") Authorization: String, @Part("request_type_id") request_type_id: RequestBody, @Part("count") count: RequestBody,
                       @Part("receipt[]")receipt: ArrayList<MultipartBody.Part>): Call<SubmitRequestResponse>
+
+ @POST("requests-an")
+ @FormUrlEncoded
+ fun submitRequestBase(@Header ("Authorization") Authorization: String,@Field("request_type_id") request_type_id:String,
+                       @Field("count") count:String,
+  @Field("image_1") image_1:String,
+                       @Field("image_2") image_2:String,
+                       @Field("image_3") image_3:String): Call<SubmitRequestResponse>
+
 
     @PUT("user")
     @Headers("Accept: application/json", "Content-Type: application/json")
@@ -74,13 +87,14 @@ interface Service {
  @Headers("Accept: application/json", "Content-Type: application/json")
  fun doneReq(@Path("id") id:String,@Body _method: String): Call<ActionsResponce>
 
- @Multipart
- @PATCH("user")
+ @POST("user")
+ @FormUrlEncoded
  @Headers("Accept: application/json", "Content-Type: application/json")
  fun updateProfilePic(
   @Header("Authorization") Authorization: String,
-  @Part image: MultipartBody.Part,
-  @Part("_method") _method: RequestBody
+  @Field("image") image:String
+//  @Part image: MultipartBody.Part
+//  @Part("_method") _method: RequestBody
  ): Call<UserDataResponce>
 
 }
