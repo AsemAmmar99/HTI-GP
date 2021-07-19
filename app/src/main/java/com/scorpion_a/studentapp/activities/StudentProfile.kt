@@ -154,7 +154,12 @@ class StudentProfile : BaseActivity() {
 
 
                     }else{
-                        ivProfilePict.setImageBitmap(decode(sharedPreferences.getString("imagepath", null)!!))}
+                        if (sharedPreferences.getString("imagepath",
+                                null)!=null) {
+                            ivProfilePict.setImageBitmap(decode(sharedPreferences.getString("imagepath",
+                                null)!!))
+                        }
+                    }
                     tvEmailValueProfile.text=response.body().data?.email
                     tvIDValueProfile.text=response.body().data?.user_id
                     progressBarProfile.visibility = View.GONE
